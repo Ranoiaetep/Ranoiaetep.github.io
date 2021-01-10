@@ -1,0 +1,32 @@
+<!-- Features -->
+  <section class="features-clean" id="{{ site.data.sitetext.features.section | default: "features" }}">
+    <div class="container">
+      <div class="intro">
+      	<h2 class="text-center">
+      		<p class="features-clean" {{ site.data.sitetext.features.title | default: "Features" | markdownify }}
+        </h2>
+        {% if site.data.sitetext.features.text %}
+    	  	<p class="text-center features-clean" {{ site.data.sitetext.features.text | markdownify }}
+    	  {% endif %}
+      </div>
+
+      <div class="row features">
+      {% for features in site.data.sitetext.features.list %}
+        <div class="col-sm-6 col-lg-4 item" data-aos="fade-up" data-aos-duration="750" data-aos-delay="150" data-aos-once="true">
+          <i class="{{ features.icon }} icon features-clean"></i>
+          <h3 class="name">
+          	<p class="features-clean" {{ features.title | markdownify }}
+          </h3>
+          {% if features.desc %}
+          	<div class="description">
+          		<p class="features-clean" {{ features.desc | markdownify }}
+          	</div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      </div>
+      
+    </div>
+  </section>
+<!-- End Features -->
+
