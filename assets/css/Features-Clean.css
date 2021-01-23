@@ -1,0 +1,111 @@
+.features-clean {
+  color: #313437;
+  background-color: #fff;
+}
+
+p.features-clean::selection {
+  background: #119DFA;
+  color: white;
+}
+
+i.features-clean::selection {
+  background: #119DFA;
+}
+
+@media (max-width:767px) {
+  .features-clean {
+    padding-bottom: 10px;
+  }
+}
+
+.features-clean h2 {
+  font-weight: bold;
+  margin-bottom: 40px;
+  padding-top: 40px;
+  color: inherit;
+}
+
+@media (max-width:767px) {
+  .features-clean h2 {
+    margin-bottom: 25px;
+    padding-top: 25px;
+    font-size: 24px;
+  }
+}
+
+.features-clean .intro {
+  font-size: 16px;
+  max-width: 500px;
+  margin: 0 auto 60px;
+}
+
+@media (max-width:767px) {
+  .features-clean .intro {
+    margin-bottom: 40px;
+  }
+}
+
+.features-clean .item {
+  min-height: 100px;
+  padding-left: 80px;
+  margin-bottom: 40px;
+}
+
+@media (max-width:767px) {
+  .features-clean .item {
+    min-height: 0;
+  }
+}
+
+.features-clean .item .name {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: inherit;
+}
+
+.features-clean .item .description {
+  font-size: 15px;
+  margin-bottom: 0;
+  color: #7d8285;
+}
+
+.features-clean .item .icon {
+  font-size: 40px;
+  color: #119DFA;
+  float: left;
+  margin-left: -65px;
+}
+
+
+
+.portfolio{}
+
+p.portfolio::selection {
+  background: #05FAD9;
+}
+
+h2.portfolio::selection {
+  background: #05FAD9;
+}
+
+h3.portfolio::selection {
+  background: #05FAD9;
+}
+
+h4.portfolio::selection {
+  background: #05FAD9;
+}
+
+a.portfolio::selection {
+  background: #05FAD9;
+}
+
+i.portfolio::selection {
+  background: #05FAD9;
+}
+
+img.portfolio::selection {
+  background: #05FAD9;
+}
