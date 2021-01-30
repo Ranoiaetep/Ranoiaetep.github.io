@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - WidgetBundleBuilder</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#methods">Methods</a><ul><li class="function"><a href="#widgetbundlebuilder.buildblock()">build​Block()</a></li><li class="function"><a href="#widgetbundlebuilder.buildblock(_:)">build​Block(_:​)</a></li><li class="function"><a href="#widgetbundlebuilder.buildblock(_:_:)">build​Block(_:​_:​)</a></li><li class="function"><a href="#widgetbundlebuilder.buildblock(_:_:_:)">build​Block(_:​_:​_:​)</a></li><li class="function"><a href="#widgetbundlebuilder.buildblock(_:_:_:_:)">build​Block(_:​_:​_:​_:​)</a></li><li class="function"><a href="#widgetbundlebuilder.buildblock(_:_:_:_:_:)">build​Block(_:​_:​_:​_:​_:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Widget​Bundle​Builder</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">_functionBuilder</span> <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">WidgetBundleBuilder</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A custom attribute that constructs a widget bundle's body.</p>
+
+</div>
+<div class="discussion">
+    <p>Use the <code>@WidgetBundleBuilder</code> attribute to group multiple widgets listed
+in the <code>WidgetBundle/body-swift.property</code> property of a widget bundle.
+For example, the following code defines a widget bundle that consists of
+two widgets.</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">main</span>
+<span class="keyword">struct</span> <span class="type">GameWidgets</span>: <a href="/WidgetBundle"><span class="type">WidgetBundle</span></a> {
+   <span class="attribute">@</span><span class="type">WidgetBundleBuilder</span>
+   <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a> {
+       <span class="variable">GameStatusWidget</span>()
+       <span class="variable">CharacterDetailWidget</span>()
+   }
+}
+</code></pre></body></html>
+</div>
+
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="widgetbundlebuilder.buildblock()">
+    <h3>
+        <code>build​Block()</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>() -&gt; <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Builds an empty Widget from an block containing no statements, <code>{ }</code>.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="widgetbundlebuilder.buildblock(_:)">
+    <h3>
+        <code>build​Block(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">Content</span>&gt;(<span class="keyword">_</span> <span class="variable">content</span>: <span class="type">Content</span>) -&gt; <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a> <span class="keyword">where</span> <span class="type">Content</span>: <a href="/Widget"><span class="type">Widget</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Builds a single Widget written as a child view (e..g, <code>{ MyWidget() }</code>)
+through unmodified.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="widgetbundlebuilder.buildblock(_:_:)">
+    <h3>
+        <code>build​Block(_:​_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">C0</span>, <span class="variable">C1</span>&gt;(<span class="keyword">_</span> <span class="variable">c0</span>: <span class="type">C0</span>, <span class="keyword">_</span> <span class="variable">c1</span>: <span class="type">C1</span>) -&gt; <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a> <span class="keyword">where</span> <span class="type">C0</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C1</span>: <a href="/Widget"><span class="type">Widget</span></a></code></pre></body></html>
+</div>
+<div role="article" class="function" id="widgetbundlebuilder.buildblock(_:_:_:)">
+    <h3>
+        <code>build​Block(_:​_:​_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">C0</span>, <span class="variable">C1</span>, <span class="variable">C2</span>&gt;(<span class="keyword">_</span> <span class="variable">c0</span>: <span class="type">C0</span>, <span class="keyword">_</span> <span class="variable">c1</span>: <span class="type">C1</span>, <span class="keyword">_</span> <span class="variable">c2</span>: <span class="type">C2</span>) -&gt; <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a> <span class="keyword">where</span> <span class="type">C0</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C1</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C2</span>: <a href="/Widget"><span class="type">Widget</span></a></code></pre></body></html>
+</div>
+<div role="article" class="function" id="widgetbundlebuilder.buildblock(_:_:_:_:)">
+    <h3>
+        <code>build​Block(_:​_:​_:​_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">C0</span>, <span class="variable">C1</span>, <span class="variable">C2</span>, <span class="variable">C3</span>&gt;(<span class="keyword">_</span> <span class="variable">c0</span>: <span class="type">C0</span>, <span class="keyword">_</span> <span class="variable">c1</span>: <span class="type">C1</span>, <span class="keyword">_</span> <span class="variable">c2</span>: <span class="type">C2</span>, <span class="keyword">_</span> <span class="variable">c3</span>: <span class="type">C3</span>) -&gt; <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a> <span class="keyword">where</span> <span class="type">C0</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C1</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C2</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C3</span>: <a href="/Widget"><span class="type">Widget</span></a></code></pre></body></html>
+</div>
+<div role="article" class="function" id="widgetbundlebuilder.buildblock(_:_:_:_:_:)">
+    <h3>
+        <code>build​Block(_:​_:​_:​_:​_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">buildBlock</span>&lt;<span class="variable">C0</span>, <span class="variable">C1</span>, <span class="variable">C2</span>, <span class="variable">C3</span>, <span class="variable">C4</span>&gt;(<span class="keyword">_</span> <span class="variable">c0</span>: <span class="type">C0</span>, <span class="keyword">_</span> <span class="variable">c1</span>: <span class="type">C1</span>, <span class="keyword">_</span> <span class="variable">c2</span>: <span class="type">C2</span>, <span class="keyword">_</span> <span class="variable">c3</span>: <span class="type">C3</span>, <span class="keyword">_</span> <span class="variable">c4</span>: <span class="type">C4</span>) -&gt; <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a> <span class="keyword">where</span> <span class="type">C0</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C1</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C2</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C3</span>: <a href="/Widget"><span class="type">Widget</span></a>, <span class="type">C4</span>: <a href="/Widget"><span class="type">Widget</span></a></code></pre></body></html>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:09-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

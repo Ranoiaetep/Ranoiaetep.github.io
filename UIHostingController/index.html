@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - UIHostingController</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#uihostingcontroller.init(rootview:)">init(root​View:​)</a></li><li class="initializer"><a href="#uihostingcontroller.init?(coder:rootview:)">init?(coder:​root​View:​)</a></li><li class="initializer"><a href="#uihostingcontroller.init?(coder:)">init?(coder:​)</a></li><li class="initializer"><a href="#uihostingcontroller.init(nibname:bundle:)">init(nib​Name:​bundle:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#uihostingcontroller.keycommands">key​Commands</a></li><li class="variable"><a href="#uihostingcontroller.rootview">root​View</a></li><li class="variable"><a href="#uihostingcontroller.preferredstatusbarstyle">preferred​Status​Bar​Style</a></li><li class="variable"><a href="#uihostingcontroller.prefersstatusbarhidden">prefers​Status​Bar​Hidden</a></li><li class="variable"><a href="#uihostingcontroller.preferredstatusbarupdateanimation">preferred​Status​Bar​Update​Animation</a></li><li class="variable"><a href="#uihostingcontroller.childforstatusbarhidden">child​For​Status​Bar​Hidden</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#uihostingcontroller.viewwillappear(_:)">view​Will​Appear(_:​)</a></li><li class="function"><a href="#uihostingcontroller.viewdidappear(_:)">view​Did​Appear(_:​)</a></li><li class="function"><a href="#uihostingcontroller.viewwilldisappear(_:)">view​Will​Disappear(_:​)</a></li><li class="function"><a href="#uihostingcontroller.viewwilllayoutsubviews()">view​Will​Layout​Subviews()</a></li><li class="function"><a href="#uihostingcontroller.sizethatfits(in:)">size​That​Fits(in:​)</a></li><li class="function"><a href="#uihostingcontroller.preferredcontentsizedidchange(forchildcontentcontainer:)">preferred​Content​Size​Did​Change(for​Child​Content​Container:​)</a></li><li class="function"><a href="#uihostingcontroller.viewwilltransition(to:with:)">view​Will​Transition(to:​with:​)</a></li><li class="function"><a href="#uihostingcontroller.willmove(toparent:)">will​Move(to​Parent:​)</a></li><li class="function"><a href="#uihostingcontroller.didmove(toparent:)">did​Move(to​Parent:​)</a></li><li class="function"><a href="#uihostingcontroller.target(foraction:withsender:)">target(for​Action:​with​Sender:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Class</small>
+    <code class="name">UIHosting​Controller</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">open</span> <span class="keyword">class</span> <span class="type">UIHostingController</span>&lt;<span class="variable">Content</span>&gt;: <span class="type">UIViewController</span> <span class="keyword">where</span> <span class="type">Content</span>: <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A UIKit view controller that manages a SwiftUI view hierarchy.</p>
+
+</div>
+<div class="discussion">
+    <p>Create a <code>UIHostingController</code> object when you want to integrate SwiftUI
+views into a UIKit view hierarchy. At creation time, specify the SwiftUI
+view you want to use as the root view for this view controller; you can
+change that view later using the <code>SwiftUI/UIHostingController/rootView</code>
+property. Use the hosting controller like you would any other view
+controller, by presenting it or embedding it as a child view controller
+in your interface.</p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- UIHostingController -->
+<g id="node1" class="node class current">
+<title>UIHostingController</title>
+<g id="a_node1"><a xlink:href="/UIHostingController" xlink:title="UIHostingController">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">UIHostingController</text>
+</a>
+</g>
+</g>
+<!-- UIViewController -->
+<g id="node2" class="node unknown">
+<title>UIViewController</title>
+<path fill="none" stroke="black" d="M528,-36C528,-36 336,-36 336,-36 330,-36 324,-30 324,-24 324,-24 324,-12 324,-12 324,-6 330,0 336,0 336,0 528,0 528,0 534,0 540,-6 540,-12 540,-12 540,-24 540,-24 540,-30 534,-36 528,-36"/>
+<text text-anchor="middle" x="432" y="-14.3" font-family="Menlo" font-size="14.00">UIViewController</text>
+</g>
+<!-- UIHostingController&#45;&gt;UIViewController -->
+<g id="edge1" class="edge conformsTo">
+<title>UIHostingController&#45;&gt;UIViewController</title>
+<path fill="none" stroke="black" d="M432,-71.7C432,-63.98 432,-54.71 432,-46.11"/>
+<polygon fill="black" stroke="black" points="435.5,-46.1 432,-36.1 428.5,-46.1 435.5,-46.1"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for UIHostingController.</figcaption>
+</figure>
+        <h3>Conforms To</h3>
+<dl>
+    <dt class="unknown"><code>UIViewController</code></dt>
+</dl>
+</section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="uihostingcontroller.init(rootview:)">
+    <h3>
+        <code>init(root​View:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">rootView</span>: <span class="type">Content</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a hosting controller object that wraps the specified SwiftUI
+view.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>root​View</th>
+    <td><code class="type">Content</code></td>
+    <td><p>The root view of the SwiftUI view hierarchy that you want to manage using the hosting view controller.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>A <code>UIHostingController</code> object initialized with the specified SwiftUI view.</p>
+
+</div>
+<div role="article" class="initializer" id="uihostingcontroller.init?(coder:rootview:)">
+    <h3>
+        <code>init?(coder:​root​View:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>?(<span class="variable">coder</span> <span class="variable">aDecoder</span>: <span class="type">NSCoder</span>, <span class="variable">rootView</span>: <span class="type">Content</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a hosting controller object from an archive and the specified
+SwiftUI view.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>coder</th>
+    <td><code class="type">NSCoder</code></td>
+    <td><p>The decoder to use during initialization.</p>
+</td>
+</tr>
+<tr>
+    <th>root​View</th>
+    <td><code class="type">Content</code></td>
+    <td><p>The root view of the SwiftUI view hierarchy that you want to manage using this view controller.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>A <code>UIViewController</code> object that you can present from your interface.</p>
+
+</div>
+<div role="article" class="initializer" id="uihostingcontroller.init?(coder:)">
+    <h3>
+        <code>init?(coder:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">required</span> <span class="attribute">dynamic</span> <span class="keyword">public</span> <span class="keyword">init</span>?(<span class="variable">coder</span> <span class="variable">aDecoder</span>: <span class="type">NSCoder</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a hosting controller object from the contents of the specified
+archive.</p>
+
+</div>
+<div class="discussion">
+    <p>The default implementation of this method throws an exception. To create
+your view controller from an archive, override this method and
+initialize the superclass using the <code>init(coder:rootView:)</code> method
+instead.</p>
+
+<p>-Parameter coder: The decoder to use during initialization.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="uihostingcontroller.init(nibname:bundle:)">
+    <h3>
+        <code>init(nib​Name:​bundle:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">nibName</span> <span class="variable">nibNameOrNil</span>: <span class="type">String</span>?, <span class="variable">bundle</span> <span class="variable">nibBundleOrNil</span>: <span class="type">Bundle</span>?)</code></pre></body></html>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="uihostingcontroller.keycommands">
+    <h3>
+        <code>key​Commands</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">keyCommands</span>: [<span class="type">UIKeyCommand</span>]?</code></pre></body></html>
+</div>
+<div role="article" class="variable" id="uihostingcontroller.rootview">
+    <h3>
+        <code>root​View</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">rootView</span>: <span class="type">Content</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The root view of the SwiftUI view hierarchy managed by this view
+controller.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="uihostingcontroller.preferredstatusbarstyle">
+    <h3>
+        <code>preferred​Status​Bar​Style</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">preferredStatusBarStyle</span>: <span class="type">UIStatusBarStyle</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The preferred status bar style for the view controller.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="uihostingcontroller.prefersstatusbarhidden">
+    <h3>
+        <code>prefers​Status​Bar​Hidden</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">prefersStatusBarHidden</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that indicates whether the view controller prefers the
+status bar to be hidden or shown.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="uihostingcontroller.preferredstatusbarupdateanimation">
+    <h3>
+        <code>preferred​Status​Bar​Update​Animation</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">preferredStatusBarUpdateAnimation</span>: <span class="type">UIStatusBarAnimation</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The animation style to use when hiding or showing the status bar for
+this view controller.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="uihostingcontroller.childforstatusbarhidden">
+    <h3>
+        <code>child​For​Status​Bar​Hidden</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">childForStatusBarHidden</span>: <span class="type">UIViewController</span>?</code></pre></body></html>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="uihostingcontroller.viewwillappear(_:)">
+    <h3>
+        <code>view​Will​Appear(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">viewWillAppear</span>(<span class="keyword">_</span> <span class="variable">animated</span>: <span class="type">Bool</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Notifies the view controller that its view is about to be added to a
+view hierarchy.</p>
+
+</div>
+<div class="discussion">
+    <p>SwiftUI calls this method before adding the hosting controller's root
+view to the view hierarchy. You can override this method to perform
+custom tasks asssociated with the appearance of the view. If you
+override this method, you must call <code>super</code> at some point in your
+implementation.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>animated</th>
+    <td><code class="type">Bool</code></td>
+    <td><p>If <code>true</code>, the view is being added using an animation.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="uihostingcontroller.viewdidappear(_:)">
+    <h3>
+        <code>view​Did​Appear(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">viewDidAppear</span>(<span class="keyword">_</span> <span class="variable">animated</span>: <span class="type">Bool</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Notifies the view controller that its view has been added to a
+view hierarchy.</p>
+
+</div>
+<div class="discussion">
+    <p>SwiftUI calls this method after adding the hosting controller's root
+view to the view hierarchy. You can override this method to perform
+custom tasks asssociated with the appearance of the view. If you
+override this method, you must call <code>super</code> at some point in your
+implementation.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>animated</th>
+    <td><code class="type">Bool</code></td>
+    <td><p>If <code>true</code>, the view is being added using an animation.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="uihostingcontroller.viewwilldisappear(_:)">
+    <h3>
+        <code>view​Will​Disappear(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">viewWillDisappear</span>(<span class="keyword">_</span> <span class="variable">animated</span>: <span class="type">Bool</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Notifies the view controller that its view will be removed from a
+view hierarchy.</p>
+
+</div>
+<div class="discussion">
+    <p>SwiftUI calls this method before removing the hosting controller's root
+view from the view hierarchy. You can override this method to perform
+custom tasks asssociated with the disappearance of the view. If you
+override this method, you must call <code>super</code> at some point in your
+implementation.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>animated</th>
+    <td><code class="type">Bool</code></td>
+    <td><p>If <code>true</code>, the view is being removed using an animation.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="uihostingcontroller.viewwilllayoutsubviews()">
+    <h3>
+        <code>view​Will​Layout​Subviews()</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">viewWillLayoutSubviews</span>()</code></pre></body></html>
+</div>
+<div role="article" class="function" id="uihostingcontroller.sizethatfits(in:)">
+    <h3>
+        <code>size​That​Fits(in:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">sizeThatFits</span>(<span class="variable">in</span> <span class="variable">size</span>: <span class="type">CGSize</span>) -&gt; <span class="type">CGSize</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Calculates and returns the most appropriate size for the current view.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>size</th>
+    <td><code class="type">CGSize</code></td>
+    <td><p>The proposed new size for the view.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>The size that offers the best fit for the root view and its contents.</p>
+
+</div>
+<div role="article" class="function" id="uihostingcontroller.preferredcontentsizedidchange(forchildcontentcontainer:)">
+    <h3>
+        <code>preferred​Content​Size​Did​Change(for​Child​Content​Container:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">preferredContentSizeDidChange</span>(<span class="variable">forChildContentContainer</span> <span class="variable">container</span>: <span class="type">UIContentContainer</span>)</code></pre></body></html>
+</div>
+<div role="article" class="function" id="uihostingcontroller.viewwilltransition(to:with:)">
+    <h3>
+        <code>view​Will​Transition(to:​with:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">viewWillTransition</span>(<span class="variable">to</span> <span class="variable">size</span>: <span class="type">CGSize</span>, <span class="variable">with</span> <span class="variable">coordinator</span>: <span class="type">UIViewControllerTransitionCoordinator</span>)</code></pre></body></html>
+</div>
+<div role="article" class="function" id="uihostingcontroller.willmove(toparent:)">
+    <h3>
+        <code>will​Move(to​Parent:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">willMove</span>(<span class="variable">toParent</span> <span class="variable">parent</span>: <span class="type">UIViewController</span>?)</code></pre></body></html>
+</div>
+<div role="article" class="function" id="uihostingcontroller.didmove(toparent:)">
+    <h3>
+        <code>did​Move(to​Parent:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">didMove</span>(<span class="variable">toParent</span> <span class="variable">parent</span>: <span class="type">UIViewController</span>?)</code></pre></body></html>
+</div>
+<div role="article" class="function" id="uihostingcontroller.target(foraction:withsender:)">
+    <h3>
+        <code>target(for​Action:​with​Sender:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">objc</span> <span class="attribute">override</span> <span class="attribute">dynamic</span> <span class="attribute">open</span> <span class="keyword">func</span> <span class="function">target</span>(<span class="variable">forAction</span> <span class="variable">action</span>: <span class="type">Selector</span>, <span class="variable">withSender</span> <span class="variable">sender</span>: <span class="keyword">Any</span>?) -&gt; <span class="keyword">Any</span>?</code></pre></body></html>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:07-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

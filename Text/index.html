@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - Text</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Nested Types</a></li><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#text.body">Body</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#text.init(verbatim:)">init(verbatim:​)</a></li><li class="initializer"><a href="#text.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#text.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#text.init(_:formatter:)">init(_:​formatter:​)</a></li><li class="initializer"><a href="#text.init(_:formatter:)">init(_:​formatter:​)</a></li><li class="initializer"><a href="#text.init(_:style:)">init(_:​style:​)</a></li><li class="initializer"><a href="#text.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#text.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#text.init(_:tablename:bundle:comment:)">init(_:​table​Name:​bundle:​comment:​)</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#text.==(a:b:)">==(a:​b:​)</a></li><li class="function"><a href="#text.+(lhs:rhs:)">+(lhs:​rhs:​)</a></li><li class="function"><a href="#text.foregroundcolor(_:)">foreground​Color(_:​)</a></li><li class="function"><a href="#text.font(_:)">font(_:​)</a></li><li class="function"><a href="#text.fontweight(_:)">font​Weight(_:​)</a></li><li class="function"><a href="#text.bold()">bold()</a></li><li class="function"><a href="#text.italic()">italic()</a></li><li class="function"><a href="#text.strikethrough(_:color:)">strikethrough(_:​color:​)</a></li><li class="function"><a href="#text.underline(_:color:)">underline(_:​color:​)</a></li><li class="function"><a href="#text.kerning(_:)">kerning(_:​)</a></li><li class="function"><a href="#text.tracking(_:)">tracking(_:​)</a></li><li class="function"><a href="#text.baselineoffset(_:)">baseline​Offset(_:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Text</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="attribute">@</span><span class="attribute">frozen</span> <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Text</span>: <span class="type">Equatable</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A view that displays one or more lines of read-only text.</p>
+
+</div>
+<div class="discussion">
+    <p>A text view draws a string in your app's user interface using a
+<code>Font/body</code> font that's appropriate for the current platform. You can
+choose a different standard font, like <code>Font/title</code> or <code>Font/caption</code>,
+using the <code>View/font(_:)</code> view modifier.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Hamlet</span><span class="string literal">"</span>)
+    .<span class="type">font</span>(.<span class="variable">title</span>)
+</code></pre></body></html>
+<p><img src="SwiftUI-Text-title.png" alt="A text view showing the name &quot;Hamlet&quot; in a title font." /></p>
+
+<p>If you need finer control over the styling of the text, you can use the same
+modifier to configure a system font or choose a custom font. You can also
+apply view modifiers like <code>Text/bold()</code> or <code>Text/italic()</code> to further
+adjust the formatting.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">by William Shakespeare</span><span class="string literal">"</span>)
+    .<span class="type">font</span>(.<span class="variable">system</span>(<span class="variable">size</span>: <span class="number literal">12</span>, <span class="variable">weight</span>: .<span class="variable">light</span>, <span class="variable">design</span>: .<span class="variable">serif</span>))
+    .<span class="type">italic</span>()
+</code></pre></body></html>
+<p><img src="SwiftUI-Text-font.png" alt="A text view showing by William Shakespeare in a 12 point, light, italic, serif font." /></p>
+
+<p>A text view always uses exactly the amount of space it needs to display its
+rendered contents, but you can affect the view's layout. For example, you
+can use the <code>View/frame(width:height:alignment:)</code> modifier to propose
+specific dimensions to the view. If the view accepts the proposal but the
+text doesn't fit into the available space, the view uses a combination of
+wrapping, tightening, scaling, and truncation to make it fit. With a width
+of <code>100</code> points but no constraint on the height, a text view might wrap a
+long string:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">To be, or not to be, that is the question:</span><span class="string literal">"</span>)
+    .<span class="type">frame</span>(<span class="variable">width</span>: <span class="number literal">100</span>)
+</code></pre></body></html>
+<p><img src="SwiftUI-Text-split.png" alt="A text view showing a quote from Hamlet split over three lines." /></p>
+
+<p>Use modifiers like <code>View/lineLimit(_:)</code>, <code>View/allowsTightening(_:)</code>,
+<code>View/minimumScaleFactor(_:)</code>, and <code>View/truncationMode(_:)</code> to
+configure how the view handles space constraints. For example, combining a
+fixed width and a line limit of <code>1</code> results in truncation for text that
+doesn't fit in that space:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Brevity is the soul of wit.</span><span class="string literal">"</span>)
+    .<span class="type">frame</span>(<span class="variable">width</span>: <span class="number literal">100</span>)
+    .<span class="type">lineLimit</span>(<span class="number literal">1</span>)
+</code></pre></body></html>
+<p><img src="SwiftUI-Text-truncated.png" alt="A text view showing a truncated quote from Hamlet starting Brevity is t and ending with three dots." /></p>
+
+<h3>Localizing Strings</h3>
+
+<p>If you initialize a text view with a string literal, the view uses the
+<code>Text/init(_:tableName:bundle:comment:)</code> initializer, which interprets the
+string as a localization key and searches for the key in the table you
+specify, or in the default table if you don't specify one.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">pencil</span><span class="string literal">"</span>) <span class="comment">// Searches the default table in the main bundle.</span>
+</code></pre></body></html>
+<p>For an app localized in both English and Spanish, the above view displays
+&quot;pencil&quot; and &quot;lápiz&quot; for English and Spanish users, respectively. If the
+view can't perform localization, it displays the key instead. For example,
+if the same app lacks Danish localization, the view displays &quot;pencil&quot; for
+users in that locale. Similarly, an app that lacks any localization
+information displays &quot;pencil&quot; in any locale.</p>
+
+<p>To explicitly bypass localization for a string literal, use the
+<code>Text/init(verbatim:)</code> initializer.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="variable">verbatim</span>: <span class="string literal">"</span><span class="string literal">pencil</span><span class="string literal">"</span>) <span class="comment">// Displays the string "pencil" in any locale.</span>
+</code></pre></body></html>
+<p>If you intialize a text view with a variable value, the view uses the
+<code>Text/init(_:)-9d1g4</code> initializer, which doesn't localize the string. However,
+you can request localization by creating a <code>LocalizedStringKey</code> instance
+first, which triggers the <code>Text/init(_:tableName:bundle:comment:)</code>
+initializer instead:</p>
+
+<html><body><pre class="highlight"><code><span class="comment">// Don't localize a string variable...</span>
+<span class="variable">Text</span>(<span class="variable">writingImplement</span>)
+
+<span class="comment">// ...unless you explicitly convert it to a localized string key.</span>
+<span class="variable">Text</span>(<span class="variable">LocalizedStringKey</span>(<span class="variable">writingImplement</span>))
+</code></pre></body></html>
+<p>When localizing a string variable, you can use the default table by omitting
+the optional initialization parameters — as in the above example — just like
+you might for a string literal.</p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- Text -->
+<g id="node1" class="node structure current">
+<title>Text</title>
+<g id="a_node1"><a xlink:href="/Text" xlink:title="Text">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">Text</text>
+</a>
+</g>
+</g>
+<!-- View -->
+<g id="node2" class="node protocol">
+<title>View</title>
+<g id="a_node2"><a xlink:href="/View" xlink:title="View">
+<path fill="none" stroke="black" d="M303,-36C303,-36 111,-36 111,-36 105,-36 99,-30 99,-24 99,-24 99,-12 99,-12 99,-6 105,0 111,0 111,0 303,0 303,0 309,0 315,-6 315,-12 315,-12 315,-24 315,-24 315,-30 309,-36 303,-36"/>
+<text text-anchor="middle" x="207" y="-14.3" font-family="Menlo" font-size="14.00">View</text>
+</a>
+</g>
+</g>
+<!-- Text&#45;&gt;View -->
+<g id="edge1" class="edge conformsTo">
+<title>Text&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M377.25,-71.97C345.4,-62.06 305.08,-49.51 271.67,-39.12"/>
+<polygon fill="black" stroke="black" points="272.59,-35.74 262,-36.11 270.51,-42.42 272.59,-35.74"/>
+</g>
+<!-- Equatable -->
+<g id="node3" class="node unknown">
+<title>Equatable</title>
+<path fill="none" stroke="black" d="M753,-36C753,-36 561,-36 561,-36 555,-36 549,-30 549,-24 549,-24 549,-12 549,-12 549,-6 555,0 561,0 561,0 753,0 753,0 759,0 765,-6 765,-12 765,-12 765,-24 765,-24 765,-30 759,-36 753,-36"/>
+<text text-anchor="middle" x="657" y="-14.3" font-family="Menlo" font-size="14.00">Equatable</text>
+</g>
+<!-- Text&#45;&gt;Equatable -->
+<g id="edge2" class="edge conformsTo">
+<title>Text&#45;&gt;Equatable</title>
+<path fill="none" stroke="black" d="M486.75,-71.97C518.6,-62.06 558.92,-49.51 592.33,-39.12"/>
+<polygon fill="black" stroke="black" points="593.49,-42.42 602,-36.11 591.41,-35.74 593.49,-42.42"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for Text.</figcaption>
+</figure>
+        <h3>Nested Types</h3>
+<dl>
+    <dt class="structure"><code><a href="/Text_DateStyle">Text.DateStyle</a></code></dt>
+<dd><p>A predefined style used to display a <code>Date</code>.</p>
+</dd>
+<dt class="enumeration"><code><a href="/Text_TruncationMode">Text.TruncationMode</a></code></dt>
+<dd><p>The type of truncation to apply to a line of text when it's too long to
+fit in the available space.</p>
+</dd>
+<dt class="enumeration"><code><a href="/Text_Case">Text.Case</a></code></dt>
+<dd><p>A scheme for transforming the capitalization of characters within text.</p>
+</dd>
+</dl>
+<h3>Conforms To</h3>
+<dl>
+    <dt class="protocol"><code><a href="/View">View</a></code></dt>
+<dd><p>A type that represents part of your app's user interface and provides
+modifiers that you use to configure views.</p>
+</dd>
+<dt class="unknown"><code>Equatable</code></dt>
+</dl>
+</section>
+    <section id="nested type aliases">
+        <h2>Nested Type Aliases</h2>
+
+        <div role="article" class="typealias" id="text.body">
+    <h3>
+        <code>Body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">Body</span> = <span class="type">Never</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The type of view representing the body of this view.</p>
+
+</div>
+<div class="discussion">
+    <p>When you create a custom view, Swift infers this type from your
+implementation of the required <code>body</code> property.</p>
+
+</div>
+</div>
+    </section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="text.init(verbatim:)">
+    <h3>
+        <code>init(verbatim:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">verbatim</span> <span class="variable">content</span>: <span class="type">String</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a text view that displays a string literal without localization.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this initializer to create a text view with a string literal without
+performing localization:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="variable">verbatim</span>: <span class="string literal">"</span><span class="string literal">pencil</span><span class="string literal">"</span>) <span class="comment">// Displays the string "pencil" in any locale.</span>
+</code></pre></body></html>
+<p>If you want to localize a string literal before displaying it, use the
+<code>Text/init(_:tableName:bundle:comment:)</code> initializer instead. If you
+want to display a string variable, use the <code>Text/init(_:)-9d1g4</code>
+initializer, which also bypasses localization.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>content</th>
+    <td><code class="type">String</code></td>
+    <td><p>A string to display without localization.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="text.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">S</span>&gt;(<span class="keyword">_</span> <span class="variable">content</span>: <span class="type">S</span>) <span class="keyword">where</span> <span class="type">S</span>: <span class="type">StringProtocol</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a text view that displays a stored string without localization.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this initializer to create a text view that displays — without
+localization — the text in a string variable.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="variable">someString</span>) <span class="comment">// Displays the contents of `someString` without localization.</span>
+</code></pre></body></html>
+<p>SwiftUI doesn't call the <code>init(_:)</code> method when you initialize a text
+view with a string literal as the input. Instead, a string literal
+triggers the <code>Text/init(_:tableName:bundle:comment:)</code> method — which
+treats the input as a <code>LocalizedStringKey</code> instance — and attempts to
+perform localization.</p>
+
+<p>By default, SwiftUI assumes that you don't want to localize stored
+strings, but if you do, you can first create a localized string key from
+the value, and initialize the text view with that. Using a key as input
+triggers the <code>Text/init(_:tableName:bundle:comment:)</code> method instead.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>content</th>
+    <td><code class="type">S</code></td>
+    <td><p>The string value to display without localization.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="text.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, <span class="keyword">tvOS</span> <span class="number literal">14.0</span>, <span class="keyword">watchOS</span> <span class="number literal">7.0</span>, *) <span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">image</span>: <a href="/Image"><span class="type">Image</span></a>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates an instance that wraps an <code>Image</code>, suitable for concatenating
+with other <code>Text</code></p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="text.init(_:formatter:)">
+    <h3>
+        <code>init(_:​formatter:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">Subject</span>&gt;(<span class="keyword">_</span> <span class="variable">subject</span>: <span class="type">Subject</span>, <span class="variable">formatter</span>: <span class="type">Formatter</span>) <span class="keyword">where</span> <span class="type">Subject</span>: <span class="type">ReferenceConvertible</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a text view that displays the formatted representation of a value.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this initializer to create a text view that will format <code>subject</code>
+using <code>formatter</code>.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="text.init(_:formatter:)">
+    <h3>
+        <code>init(_:​formatter:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">Subject</span>&gt;(<span class="keyword">_</span> <span class="variable">subject</span>: <span class="type">Subject</span>, <span class="variable">formatter</span>: <span class="type">Formatter</span>) <span class="keyword">where</span> <span class="type">Subject</span>: <span class="type">NSObject</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a text view that displays the formatted representation of a value.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this initializer to create a text view that will format <code>subject</code>
+using <code>formatter</code>.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="text.init(_:style:)">
+    <h3>
+        <code>init(_:​style:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">date</span>: <span class="type">Date</span>, <span class="variable">style</span>: <a href="/Text"><span class="type">Text</span></a>.<span class="type">DateStyle</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates an instance that displays localized dates and times using a specific style.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>date</th>
+    <td><code class="type">Date</code></td>
+    <td><p>The target date to display.</p>
+</td>
+</tr>
+<tr>
+    <th>style</th>
+    <td><code class="type">Text.​Date​Style</code></td>
+    <td><p>The style used when displaying a date.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="text.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">dates</span>: <span class="type">ClosedRange</span>&lt;<span class="type">Date</span>&gt;)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates an instance that displays a localized range between two dates.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>dates</th>
+    <td><code class="type">Closed​Range&lt;Date&gt;</code></td>
+    <td><p>The range of dates to display</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="text.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">interval</span>: <span class="type">DateInterval</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates an instance that displays a localized time interval.</p>
+
+</div>
+<div class="discussion">
+    <html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="variable">DateInterval</span>(<span class="variable">start</span>: <span class="type">event</span>.<span class="type">startDate</span>, <span class="variable">duration</span>: <span class="type">event</span>.<span class="type">duration</span>))
+</code></pre></body></html>
+<p>Example output:
+9:30AM - 3:30PM</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>interval</th>
+    <td><code class="type">Date​Interval</code></td>
+    <td><p>The date interval to display</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="text.init(_:tablename:bundle:comment:)">
+    <h3>
+        <code>init(_:​table​Name:​bundle:​comment:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">key</span>: <a href="/LocalizedStringKey"><span class="type">LocalizedStringKey</span></a>, <span class="variable">tableName</span>: <span class="type">String</span>? = <span class="keyword">nil</span>, <span class="variable">bundle</span>: <span class="type">Bundle</span>? = <span class="keyword">nil</span>, <span class="variable">comment</span>: <span class="type">StaticString</span>? = <span class="keyword">nil</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a text view that displays localized content identified by a key.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this initializer to look for the <code>key</code> parameter in a localization
+table and display the associated string value in the initialized text
+view. If the initializer can't find the key in the table, or if no table
+exists, the text view displays the string representation of the key
+instead.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">pencil</span><span class="string literal">"</span>) <span class="comment">// Localizes the key if possible, or displays "pencil" if not.</span>
+</code></pre></body></html>
+<p>When you initialize a text view with a string literal, the view triggers
+this initializer because it assumes you want the string localized, even
+when you don't explicitly specify a table, as in the above example. If
+you haven't provided localization for a particular string, you still get
+reasonable behavior, because the initializer displays the key, which
+typically contains the unlocalized string.</p>
+
+<p>If you initialize a text view with a string variable rather than a
+string literal, the view triggers the <code>Text/init(_:)-9d1g4</code>
+initializer instead, because it assumes that you don't want localization
+in that case. If you do want to localize the value stored in a string
+variable, you can choose to call the <code>init(_:tableName:bundle:comment:)</code>
+initializer by first creating a <code>LocalizedStringKey</code> instance from the
+string variable:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="variable">LocalizedStringKey</span>(<span class="variable">someString</span>)) <span class="comment">// Localizes the contents of `someString`.</span>
+</code></pre></body></html>
+<p>If you have a string literal that you don't want to localize, use the
+<code>Text/init(verbatim:)</code> initializer instead.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>key</th>
+    <td><code class="type">Localized​String​Key</code></td>
+    <td><p>The key for a string in the table identified by <code>tableName</code>.</p>
+</td>
+</tr>
+<tr>
+    <th>table​Name</th>
+    <td><code class="type">String?</code></td>
+    <td><p>The name of the string table to search. If <code>nil</code>, use the table in the <code>Localizable.strings</code> file.</p>
+</td>
+</tr>
+<tr>
+    <th>bundle</th>
+    <td><code class="type">Bundle?</code></td>
+    <td><p>The bundle containing the strings file. If <code>nil</code>, use the main bundle.</p>
+</td>
+</tr>
+<tr>
+    <th>comment</th>
+    <td><code class="type">Static​String?</code></td>
+    <td><p>Contextual information about this key-value pair.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="text.==(a:b:)">
+    <h3>
+        <code>==(a:​b:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> ==(<span class="variable">a</span>: <a href="/Text"><span class="type">Text</span></a>, <span class="variable">b</span>: <a href="/Text"><span class="type">Text</span></a>) -&gt; <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns a Boolean value indicating whether two values are equal.</p>
+
+</div>
+<div class="discussion">
+    <p>Equality is the inverse of inequality. For any values <code>a</code> and <code>b</code>,
+<code>a == b</code> implies that <code>a != b</code> is <code>false</code>.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>lhs</th>
+    <td></td>
+    <td><p>A value to compare.</p>
+</td>
+</tr>
+<tr>
+    <th>rhs</th>
+    <td></td>
+    <td><p>Another value to compare.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="text.+(lhs:rhs:)">
+    <h3>
+        <code>+(lhs:​rhs:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> +(<span class="variable">lhs</span>: <a href="/Text"><span class="type">Text</span></a>, <span class="variable">rhs</span>: <a href="/Text"><span class="type">Text</span></a>) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Concatenates the text in two text views in a new text view.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>lhs</th>
+    <td><code class="type">Text</code></td>
+    <td><p>The first text view with text to combine.</p>
+</td>
+</tr>
+<tr>
+    <th>rhs</th>
+    <td><code class="type">Text</code></td>
+    <td><p>The second text view with text to combine.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>A new text view containing the combined contents of the two input text views.</p>
+
+</div>
+<div role="article" class="function" id="text.foregroundcolor(_:)">
+    <h3>
+        <code>foreground​Color(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">foregroundColor</span>(<span class="keyword">_</span> <span class="variable">color</span>: <a href="/Color"><span class="type">Color</span></a>?) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Sets the color of the text displayed by this view.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this method to change the color of the text rendered by a text view.</p>
+
+<p>For example, you can display the names of the colors red, green, and
+blue in their respective colors:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">HStack</span> {
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Red</span><span class="string literal">"</span>).<span class="type">foregroundColor</span>(.<span class="variable">red</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Green</span><span class="string literal">"</span>).<span class="type">foregroundColor</span>(.<span class="variable">green</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Blue</span><span class="string literal">"</span>).<span class="type">foregroundColor</span>(.<span class="variable">blue</span>)
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-Text-foregroundColor.png" alt="Three text views arranged horizontally, each containing the name of a color displayed in that color." /></p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>color</th>
+    <td><code class="type">Color?</code></td>
+    <td><p>The color to use when displaying this text.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>A text view that uses the color value you supply.</p>
+
+</div>
+<div role="article" class="function" id="text.font(_:)">
+    <h3>
+        <code>font(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">font</span>(<span class="keyword">_</span> <span class="variable">font</span>: <a href="/Font"><span class="type">Font</span></a>?) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Sets the default font for text in the view.</p>
+
+</div>
+<div class="discussion">
+    <p>Use <code>font(_:)</code> to apply a specific font to an individual
+Text View, or all of the text views in a container.</p>
+
+<p>In the example below, the first text field has a font set directly,
+while the font applied to the following container applies to all of the
+text views inside that container:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">VStack</span> {
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Font applied to a text view.</span><span class="string literal">"</span>)
+        .<span class="type">font</span>(.<span class="variable">largeTitle</span>)
+
+    <span class="variable">VStack</span> {
+        <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">These two text views have the same font</span><span class="string literal">"</span>)
+        <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">applied to their parent view.</span><span class="string literal">"</span>)
+    }
+    .<span class="type">font</span>(.<span class="variable">system</span>(<span class="variable">size</span>: <span class="number literal">16</span>, <span class="variable">weight</span>: .<span class="variable">light</span>, <span class="variable">design</span>: .<span class="variable">default</span>))
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-view-font.png" alt="Applying a font to a single text view or a view container" /></p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>font</th>
+    <td><code class="type">Font?</code></td>
+    <td><p>The font to use when displaying this text.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>Text that uses the font you specify.</p>
+
+</div>
+<div role="article" class="function" id="text.fontweight(_:)">
+    <h3>
+        <code>font​Weight(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">fontWeight</span>(<span class="keyword">_</span> <span class="variable">weight</span>: <a href="/Font"><span class="type">Font</span></a>.<span class="type">Weight</span>?) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Sets the font weight of the text.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>weight</th>
+    <td><code class="type">Font.​Weight?</code></td>
+    <td><p>One of the available font weights.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>Text that uses the font weight you specify.</p>
+
+</div>
+<div role="article" class="function" id="text.bold()">
+    <h3>
+        <code>bold()</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">bold</span>() -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Applies a bold font weight to the text.</p>
+
+</div>
+  <h4>Returns</h4>
+  <p>Bold text.</p>
+
+</div>
+<div role="article" class="function" id="text.italic()">
+    <h3>
+        <code>italic()</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">italic</span>() -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Applies italics to the text.</p>
+
+</div>
+  <h4>Returns</h4>
+  <p>Italic text.</p>
+
+</div>
+<div role="article" class="function" id="text.strikethrough(_:color:)">
+    <h3>
+        <code>strikethrough(_:​color:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">strikethrough</span>(<span class="keyword">_</span> <span class="variable">active</span>: <span class="type">Bool</span> = <span class="keyword">true</span>, <span class="variable">color</span>: <a href="/Color"><span class="type">Color</span></a>? = <span class="keyword">nil</span>) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Applies a strikethrough to the text.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>active</th>
+    <td><code class="type">Bool</code></td>
+    <td><p>A Boolean value that indicates whether the text has a strikethrough applied.</p>
+</td>
+</tr>
+<tr>
+    <th>color</th>
+    <td><code class="type">Color?</code></td>
+    <td><p>The color of the strikethrough. If <code>color</code> is <code>nil</code>, the strikethrough uses the default foreground color.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>Text with a line through its center.</p>
+
+</div>
+<div role="article" class="function" id="text.underline(_:color:)">
+    <h3>
+        <code>underline(_:​color:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">underline</span>(<span class="keyword">_</span> <span class="variable">active</span>: <span class="type">Bool</span> = <span class="keyword">true</span>, <span class="variable">color</span>: <a href="/Color"><span class="type">Color</span></a>? = <span class="keyword">nil</span>) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Applies an underline to the text.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>active</th>
+    <td><code class="type">Bool</code></td>
+    <td><p>A Boolean value that indicates whether the text has an underline.</p>
+</td>
+</tr>
+<tr>
+    <th>color</th>
+    <td><code class="type">Color?</code></td>
+    <td><p>The color of the underline. If <code>color</code> is <code>nil</code>, the underline uses the default foreground color.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>Text with a line running along its baseline.</p>
+
+</div>
+<div role="article" class="function" id="text.kerning(_:)">
+    <h3>
+        <code>kerning(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">kerning</span>(<span class="keyword">_</span> <span class="variable">kerning</span>: <span class="type">CGFloat</span>) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Sets the spacing, or kerning, between characters.</p>
+
+</div>
+<div class="discussion">
+    <p>Kerning defines the offset, in points, that a text view should shift
+characters from the default spacing. Use positive kerning to widen the
+spacing between characters. Use negative kerning to tighten the spacing
+between characters.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">VStack</span>(<span class="variable">alignment</span>: .<span class="variable">leading</span>) {
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">ABCDEF</span><span class="string literal">"</span>).<span class="type">kerning</span>(-<span class="number literal">3</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">ABCDEF</span><span class="string literal">"</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">ABCDEF</span><span class="string literal">"</span>).<span class="type">kerning</span>(<span class="number literal">3</span>)
+}
+</code></pre></body></html>
+<p>The last character in the first case, which uses negative kerning,
+experiences cropping because the kerning affects the trailing edge of
+the text view as well.</p>
+
+<p><img src="SwiftUI-Text-kerning-1.png" alt="Three text views showing character groups, with progressively increasing spacing between the characters in each group." /></p>
+
+<p>Kerning attempts to maintain ligatures. For example, the Hoefler Text
+font uses a ligature for the letter combination <em>ffl</em>, as in the word
+<em>raffle</em>, shown here with a small negative and a small positive kerning:</p>
+
+<p><img src="SwiftUI-Text-kerning-2.png" alt="Two text views showing the word raffle in the Hoefler Text font, the first with small negative and the second with small positive kerning. The letter combination ffl has the same shape in both variants because it acts as a ligature." /></p>
+
+<p>The <em>ffl</em> letter combination keeps a constant shape as the other letters
+move together or apart. Beyond a certain point in either direction,
+however, kerning does disable nonessential ligatures.</p>
+
+<p><img src="SwiftUI-Text-kerning-3.png" alt="Two text views showing the word raffle in the Hoefler Text font, the first with large negative and the second with large positive kerning. The letter combination ffl does not act as a ligature in either case." /></p>
+
+<aside class="important">
+    <p>If you add both the <code>Text/tracking(_:)</code> and <code>Text/kerning(_:)</code> modifiers to a view, the view applies the tracking and ignores the kerning.</p>
+
+</aside>
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>kerning</th>
+    <td><code class="type">CGFloat</code></td>
+    <td><p>The spacing to use between individual characters in this text.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>Text with the specified amount of kerning.</p>
+
+</div>
+<div role="article" class="function" id="text.tracking(_:)">
+    <h3>
+        <code>tracking(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">tracking</span>(<span class="keyword">_</span> <span class="variable">tracking</span>: <span class="type">CGFloat</span>) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Sets the tracking for the text.</p>
+
+</div>
+<div class="discussion">
+    <p>Tracking adds space, measured in points, between the characters in the
+text view. A positive value increases the spacing between characters,
+while a negative value brings the characters closer together.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">VStack</span>(<span class="variable">alignment</span>: .<span class="variable">leading</span>) {
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">ABCDEF</span><span class="string literal">"</span>).<span class="type">tracking</span>(-<span class="number literal">3</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">ABCDEF</span><span class="string literal">"</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">ABCDEF</span><span class="string literal">"</span>).<span class="type">tracking</span>(<span class="number literal">3</span>)
+}
+</code></pre></body></html>
+<p>The code above uses an unusually large amount of tracking to make it
+easy to see the effect.</p>
+
+<p><img src="SwiftUI-Text-tracking.png" alt="Three text views showing character groups with progressively increasing spacing between the characters in each group." /></p>
+
+<p>The effect of tracking resembles that of the <code>Text/kerning(_:)</code>
+modifier, but adds or removes trailing whitespace, rather than changing
+character offsets. Also, using any nonzero amount of tracking disables
+nonessential ligatures, whereas kerning attempts to maintain ligatures.</p>
+
+<aside class="important">
+    <p>If you add both the <code>Text/tracking(_:)</code> and <code>Text/kerning(_:)</code> modifiers to a view, the view applies the tracking and ignores the kerning.</p>
+
+</aside>
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>tracking</th>
+    <td><code class="type">CGFloat</code></td>
+    <td><p>The amount of additional space, in points, that the view should add to each character cluster after layout.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>Text with the specified amount of tracking.</p>
+
+</div>
+<div role="article" class="function" id="text.baselineoffset(_:)">
+    <h3>
+        <code>baseline​Offset(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">baselineOffset</span>(<span class="keyword">_</span> <span class="variable">baselineOffset</span>: <span class="type">CGFloat</span>) -&gt; <a href="/Text"><span class="type">Text</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Sets the vertical offset for the text relative to its baseline.</p>
+
+</div>
+<div class="discussion">
+    <p>Change the baseline offset to move the text in the view (in points) up
+or down relative to its baseline. The bounds of the view expand to
+contain the moved text.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">HStack</span>(<span class="variable">alignment</span>: .<span class="variable">top</span>) {
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Hello</span><span class="string literal">"</span>)
+        .<span class="type">baselineOffset</span>(-<span class="number literal">10</span>)
+        .<span class="type">border</span>(<span class="variable">Color</span>.<span class="type">red</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Hello</span><span class="string literal">"</span>)
+        .<span class="type">border</span>(<span class="variable">Color</span>.<span class="type">green</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Hello</span><span class="string literal">"</span>)
+        .<span class="type">baselineOffset</span>(<span class="number literal">10</span>)
+        .<span class="type">border</span>(<span class="variable">Color</span>.<span class="type">blue</span>)
+}
+.<span class="type">background</span>(<span class="variable">Color</span>(<span class="variable">white</span>: <span class="number literal">0.9</span>))
+</code></pre></body></html>
+<p>By drawing a border around each text view, you can see how the text
+moves, and how that affects the view.</p>
+
+<p><img src="SwiftUI-Text-baselineOffset.png" alt="Three text views, each with the word &quot;Hello&quot; outlined by a border and aligned along the top edges. The first and last are larger than the second, with padding inside the border above the word &quot;Hello&quot; in the first case, and padding inside the border below the word in the last case." /></p>
+
+<p>The first view, with a negative offset, grows downward to handle the
+lowered text. The last view, with a positive offset, grows upward. The
+enclosing <code>HStack</code> instance, shown in gray, ensures all the text views
+remain aligned at their top edge, regardless of the offset.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>baseline​Offset</th>
+    <td><code class="type">CGFloat</code></td>
+    <td><p>The amount to shift the text vertically (up or down) relative to its baseline.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>Text that's above or below its baseline.</p>
+
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:14-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

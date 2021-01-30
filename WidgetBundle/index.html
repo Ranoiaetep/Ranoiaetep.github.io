@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - WidgetBundle</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="variable"><a href="#widgetbundle.body">body</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">Widget​Bundle</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">WidgetBundle</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A container used to expose multiple widgets from a single widget extension.</p>
+
+</div>
+<div class="discussion">
+    <p>To support multiple types of widgets, add the <code>@main</code> attribute to a
+structure that conforms to <code>WidgetBundle</code>. For example, a game might have
+one widget to display summary information about the game and a second
+widget to display detailed information about individual characters.</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">main</span>
+<span class="keyword">struct</span> <span class="type">GameWidgets</span>: <span class="type">WidgetBundle</span> {
+   <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a> {
+       <span class="variable">GameStatusWidget</span>()
+       <span class="variable">CharacterDetailWidget</span>()
+   }
+}
+</code></pre></body></html>
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="variable" id="widgetbundle.body">
+    <h3>
+        <code>body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">Self</span>.<span class="type">Body</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Declares the group of widgets that an app supports.</p>
+
+</div>
+<div class="discussion">
+    <p>The order that the widgets appear in this property determines the order
+they are shown to the user when adding a widget. The following example
+shows how to use a widget bundle builder to define a body showing
+a game status widget first and a character detail widget second:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">main</span>
+<span class="keyword">struct</span> <span class="type">GameWidgets</span>: <a href="/WidgetBundle"><span class="type">WidgetBundle</span></a> {
+   <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/Widget"><span class="type">Widget</span></a> {
+       <span class="variable">GameStatusWidget</span>()
+       <span class="variable">CharacterDetailWidget</span>()
+   }
+}
+</code></pre></body></html>
+</div>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:03-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

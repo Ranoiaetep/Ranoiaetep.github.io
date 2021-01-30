@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ViewModifier</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Types Conforming to View​Modifier</a></li></ul></li><li><a href="#requirements">Requirements</a><ul><li class="function"><a href="#viewmodifier.body(content:)">body(content:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">View​Modifier</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">ViewModifier</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A modifier that you apply to a view or another view modifier, producing a
+different version of the original value.</p>
+
+</div>
+<div class="discussion">
+    <p>Adopt the <code>ViewModifier</code> protocol when you want to create a reusable
+modifier that you can apply to any view. The example below combines several
+modifiers to create a new modifier that you can use to create blue caption
+text surrounded by a rounded rectangle:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">BorderedCaption</span>: <span class="type">ViewModifier</span> {
+    <span class="keyword">func</span> <span class="function">body</span>(<span class="variable">content</span>: <span class="type">Content</span>) -&gt; <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">content</span>
+            .<span class="type">font</span>(.<span class="variable">caption2</span>)
+            .<span class="type">padding</span>(<span class="number literal">10</span>)
+            .<span class="type">overlay</span>(
+                <span class="variable">RoundedRectangle</span>(<span class="variable">cornerRadius</span>: <span class="number literal">15</span>)
+                    .<span class="type">stroke</span>(<span class="variable">lineWidth</span>: <span class="number literal">1</span>)
+            )
+            .<span class="type">foregroundColor</span>(<span class="variable">Color</span>.<span class="type">blue</span>)
+    }
+}
+</code></pre></body></html>
+<p>You can apply <code>modifier(_:)</code> directly to a view, but a more common and
+idiomatic approach uses <code>modifier(_:)</code> to define an extension to
+<code>View</code> itself that incorporates the view modifier:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">extension</span> <a href="/View"><span class="type">View</span></a> {
+    <span class="keyword">func</span> <span class="function">borderedCaption</span>() -&gt; <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">modifier</span>(<span class="variable">BorderedCaption</span>())
+    }
+}
+</code></pre></body></html>
+<p>You can then apply the bordered caption to any view, similar to this:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Image</span>(<span class="variable">systemName</span>: <span class="string literal">"</span><span class="string literal">bus</span><span class="string literal">"</span>)
+    .<span class="type">resizable</span>()
+    .<span class="type">frame</span>(<span class="variable">width</span>:<span class="number literal">50</span>, <span class="variable">height</span>:<span class="number literal">50</span>)
+<span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Downtown Bus</span><span class="string literal">"</span>)
+    .<span class="type">borderedCaption</span>()
+</code></pre></body></html>
+<p><img src="SwiftUI-View-ViewModifier.png" alt="A screenshot showing the image of a bus with a caption reading Downtown Bus. A view extension, using custom a modifier, renders the caption in blue text surrounded by a rounded rectangle." /></p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="1265pt" height="268pt"
+ viewBox="0.00 0.00 1265.32 268.35" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 264.35)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-264.35 1261.32,-264.35 1261.32,4 -4,4"/>
+<!-- ViewModifier -->
+<g id="node1" class="node protocol current">
+<title>ViewModifier</title>
+<g id="a_node1"><a xlink:href="/ViewModifier" xlink:title="ViewModifier">
+<path fill="none" stroke="black" stroke-width="3" d="M747.04,-138.57C747.04,-138.57 555.04,-138.57 555.04,-138.57 549.04,-138.57 543.04,-132.57 543.04,-126.57 543.04,-126.57 543.04,-114.57 543.04,-114.57 543.04,-108.57 549.04,-102.57 555.04,-102.57 555.04,-102.57 747.04,-102.57 747.04,-102.57 753.04,-102.57 759.04,-108.57 759.04,-114.57 759.04,-114.57 759.04,-126.57 759.04,-126.57 759.04,-132.57 753.04,-138.57 747.04,-138.57"/>
+<text text-anchor="middle" x="651.04" y="-116.87" font-family="Menlo" font-size="14.00">ViewModifier</text>
+</a>
+</g>
+</g>
+<!-- GeometryEffect -->
+<g id="node2" class="node protocol">
+<title>GeometryEffect</title>
+<g id="a_node2"><a xlink:href="/GeometryEffect" xlink:title="GeometryEffect">
+<path fill="none" stroke="black" d="M1088.01,-44.75C1088.01,-44.75 896.01,-44.75 896.01,-44.75 890.01,-44.75 884.01,-38.75 884.01,-32.75 884.01,-32.75 884.01,-20.75 884.01,-20.75 884.01,-14.75 890.01,-8.75 896.01,-8.75 896.01,-8.75 1088.01,-8.75 1088.01,-8.75 1094.01,-8.75 1100.01,-14.75 1100.01,-20.75 1100.01,-20.75 1100.01,-32.75 1100.01,-32.75 1100.01,-38.75 1094.01,-44.75 1088.01,-44.75"/>
+<text text-anchor="middle" x="992.01" y="-23.05" font-family="Menlo" font-size="14.00">GeometryEffect</text>
+</a>
+</g>
+</g>
+<!-- GeometryEffect&#45;&gt;ViewModifier -->
+<g id="edge4" class="edge conformsTo">
+<title>GeometryEffect&#45;&gt;ViewModifier</title>
+<path fill="none" stroke="black" d="M926.27,-44.84C869.08,-60.57 786.2,-83.38 726.36,-99.85"/>
+<polygon fill="black" stroke="black" points="725.3,-96.51 716.58,-102.53 727.15,-103.26 725.3,-96.51"/>
+</g>
+<!-- EnvironmentalModifier -->
+<g id="node3" class="node protocol">
+<title>EnvironmentalModifier</title>
+<g id="a_node3"><a xlink:href="/EnvironmentalModifier" xlink:title="EnvironmentalModifier">
+<path fill="none" stroke="black" d="M459.36,-36C459.36,-36 267.36,-36 267.36,-36 261.36,-36 255.36,-30 255.36,-24 255.36,-24 255.36,-12 255.36,-12 255.36,-6 261.36,0 267.36,0 267.36,0 459.36,0 459.36,0 465.36,0 471.36,-6 471.36,-12 471.36,-12 471.36,-24 471.36,-24 471.36,-30 465.36,-36 459.36,-36"/>
+<text text-anchor="middle" x="363.36" y="-14.3" font-family="Menlo" font-size="14.00">EnvironmentalModifier</text>
+</a>
+</g>
+</g>
+<!-- EnvironmentalModifier&#45;&gt;ViewModifier -->
+<g id="edge5" class="edge conformsTo">
+<title>EnvironmentalModifier&#45;&gt;ViewModifier</title>
+<path fill="none" stroke="black" d="M414.13,-36.1C463.49,-53.7 538.45,-80.43 590.8,-99.09"/>
+<polygon fill="black" stroke="black" points="589.7,-102.41 600.3,-102.48 592.05,-95.82 589.7,-102.41"/>
+</g>
+<!-- AccessibilityAttachmentModifier -->
+<g id="node4" class="node structure">
+<title>AccessibilityAttachmentModifier</title>
+<g id="a_node4"><a xlink:href="/AccessibilityAttachmentModifier" xlink:title="AccessibilityAttachmentModifier">
+<path fill="none" stroke="black" d="M260,-170.58C260,-170.58 12,-170.58 12,-170.58 6,-170.58 0,-164.58 0,-158.58 0,-158.58 0,-146.58 0,-146.58 0,-140.58 6,-134.58 12,-134.58 12,-134.58 260,-134.58 260,-134.58 266,-134.58 272,-140.58 272,-146.58 272,-146.58 272,-158.58 272,-158.58 272,-164.58 266,-170.58 260,-170.58"/>
+<text text-anchor="middle" x="136" y="-148.88" font-family="Menlo" font-size="14.00">AccessibilityAttachmentModifier</text>
+</a>
+</g>
+</g>
+<!-- AccessibilityAttachmentModifier&#45;&gt;ViewModifier -->
+<g id="edge3" class="edge conformsTo">
+<title>AccessibilityAttachmentModifier&#45;&gt;ViewModifier</title>
+<path fill="none" stroke="black" d="M272.33,-144.11C353.33,-139.07 455.06,-132.75 532.68,-127.93"/>
+<polygon fill="black" stroke="black" points="533.22,-131.4 542.98,-127.29 532.78,-124.41 533.22,-131.4"/>
+</g>
+<!-- EmptyModifier -->
+<g id="node5" class="node structure">
+<title>EmptyModifier</title>
+<g id="a_node5"><a xlink:href="/EmptyModifier" xlink:title="EmptyModifier">
+<path fill="none" stroke="black" d="M1245.32,-182.76C1245.32,-182.76 1053.32,-182.76 1053.32,-182.76 1047.32,-182.76 1041.32,-176.76 1041.32,-170.76 1041.32,-170.76 1041.32,-158.76 1041.32,-158.76 1041.32,-152.76 1047.32,-146.76 1053.32,-146.76 1053.32,-146.76 1245.32,-146.76 1245.32,-146.76 1251.32,-146.76 1257.32,-152.76 1257.32,-158.76 1257.32,-158.76 1257.32,-170.76 1257.32,-170.76 1257.32,-176.76 1251.32,-182.76 1245.32,-182.76"/>
+<text text-anchor="middle" x="1149.32" y="-161.06" font-family="Menlo" font-size="14.00">EmptyModifier</text>
+</a>
+</g>
+</g>
+<!-- EmptyModifier&#45;&gt;ViewModifier -->
+<g id="edge1" class="edge conformsTo">
+<title>EmptyModifier&#45;&gt;ViewModifier</title>
+<path fill="none" stroke="black" d="M1041.2,-155.17C961.11,-148.06 852.02,-138.39 769.56,-131.08"/>
+<polygon fill="black" stroke="black" points="769.65,-127.57 759.38,-130.18 769.03,-134.55 769.65,-127.57"/>
+</g>
+<!-- AnimatableModifier -->
+<g id="node6" class="node protocol">
+<title>AnimatableModifier</title>
+<g id="a_node6"><a xlink:href="/AnimatableModifier" xlink:title="AnimatableModifier">
+<path fill="none" stroke="black" d="M721.86,-260.35C721.86,-260.35 529.86,-260.35 529.86,-260.35 523.86,-260.35 517.86,-254.35 517.86,-248.35 517.86,-248.35 517.86,-236.35 517.86,-236.35 517.86,-230.35 523.86,-224.35 529.86,-224.35 529.86,-224.35 721.86,-224.35 721.86,-224.35 727.86,-224.35 733.86,-230.35 733.86,-236.35 733.86,-236.35 733.86,-248.35 733.86,-248.35 733.86,-254.35 727.86,-260.35 721.86,-260.35"/>
+<text text-anchor="middle" x="625.86" y="-238.65" font-family="Menlo" font-size="14.00">AnimatableModifier</text>
+</a>
+</g>
+</g>
+<!-- AnimatableModifier&#45;&gt;ViewModifier -->
+<g id="edge2" class="edge conformsTo">
+<title>AnimatableModifier&#45;&gt;ViewModifier</title>
+<path fill="none" stroke="black" d="M629.63,-224.12C633.75,-204.21 640.39,-172.07 645.19,-148.88"/>
+<polygon fill="black" stroke="black" points="648.65,-149.43 647.25,-138.92 641.79,-148.01 648.65,-149.43"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for ViewModifier.</figcaption>
+</figure>
+        <h3>Types Conforming to <code>View​Modifier</code></h3>
+<dl>
+    <dt class="structure"><code><a href="/AccessibilityAttachmentModifier">AccessibilityAttachmentModifier</a></code></dt>
+<dd></dd>
+<dt class="protocol"><code><a href="/AnimatableModifier">AnimatableModifier</a></code></dt>
+<dd><p>A modifier that can create another modifier with animation.</p>
+</dd>
+<dt class="structure"><code><a href="/EmptyModifier">EmptyModifier</a></code></dt>
+<dd><p>An empty, or identity, modifier, used during development to switch
+modifiers at compile time.</p>
+</dd>
+<dt class="protocol"><code><a href="/EnvironmentalModifier">EnvironmentalModifier</a></code></dt>
+<dd><p>A modifier that must resolve to a concrete modifier in an environment before
+use.</p>
+</dd>
+<dt class="protocol"><code><a href="/GeometryEffect">GeometryEffect</a></code></dt>
+<dd><p>An effect that changes the visual appearance of a view, largely without
+changing its ancestors or descendants.</p>
+</dd>
+</dl>
+</section>
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="function" id="viewmodifier.body(content:)">
+    <h3>
+        <code>body(content:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">body</span>(<span class="variable">content</span>: <span class="keyword">Self</span>.<span class="type">Content</span>) -&gt; <span class="keyword">Self</span>.<span class="type">Body</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Gets the current body of the caller.</p>
+
+</div>
+<div class="discussion">
+    <p><code>content</code> is a proxy for the view that will have the modifier
+represented by <code>Self</code> applied to it.</p>
+
+</div>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:16-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

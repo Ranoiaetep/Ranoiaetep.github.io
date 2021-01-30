@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - StateObject</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#stateobject.init(wrappedvalue:)">init(wrapped​Value:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#stateobject.wrappedvalue">wrapped​Value</a></li><li class="variable"><a href="#stateobject.projectedvalue">projected​Value</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">State​Object</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, <span class="keyword">tvOS</span> <span class="number literal">14.0</span>, <span class="keyword">watchOS</span> <span class="number literal">7.0</span>, *) <span class="attribute">@</span><span class="attribute">frozen</span> <span class="attribute">@</span><span class="attribute">propertyWrapper</span> <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">StateObject</span>&lt;<span class="variable">ObjectType</span>&gt;: <a href="/DynamicProperty"><span class="type">DynamicProperty</span></a> <span class="keyword">where</span> <span class="type">ObjectType</span>: <span class="type">ObservableObject</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A property wrapper type that instantiates an observable object.</p>
+
+</div>
+<div class="discussion">
+    <p>Create a state object in a <code>SwiftUI/View</code>, <code>SwiftUI/App</code>, or
+<code>SwiftUI/Scene</code> by applying the <code>@StateObject</code> attribute to a property
+declaration and providing an initial value that conforms to the
+<a href="doc://com.apple.documentation/documentation/Combine/ObservableObject">doc://com.apple.documentation/documentation/Combine/ObservableObject</a>
+protocol:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="type">StateObject</span> <span class="keyword">var</span> <span class="variable">model</span> = <span class="variable">DataModel</span>()
+</code></pre></body></html>
+<p>SwiftUI creates a new instance of the object only once for each instance of
+the structure that declares the object. When published properties of the
+observable object change, SwiftUI updates the parts of any view that depend
+on those properties:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="variable">model</span>.<span class="type">title</span>) <span class="comment">// Updates the view any time `title` changes.</span>
+</code></pre></body></html>
+<p>You can pass the state object into a property that has the
+<code>SwiftUI/ObservedObject</code> attribute. You can alternatively add the object
+to the environment of a view hierarchy by applying the
+<code>SwiftUI/View/environmentObject(_:)</code> modifier:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">ContentView</span>()
+    .<span class="type">environmentObject</span>(<span class="variable">model</span>)
+</code></pre></body></html>
+<p>If you create an environment object as shown in the code above, you can
+read the object inside <code>ContentView</code> or any of its descendants
+using the <code>SwiftUI/EnvironmentObject</code> attribute:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><a href="/EnvironmentObject"><span class="type">EnvironmentObject</span></a> <span class="keyword">var</span> <span class="variable">model</span>: <span class="type">DataModel</span>
+</code></pre></body></html>
+<p>Get a <code>SwiftUI/Binding</code> to one of the state object's properties using the
+<code>$</code> operator. Use a binding when you want to create a two-way connection to
+one of the object's properties. For example, you can let a
+<code>SwiftUI/Toggle</code> control a Boolean value called <code>isEnabled</code> stored in the
+model:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Toggle</span>(<span class="string literal">"</span><span class="string literal">Enabled</span><span class="string literal">"</span>, <span class="variable">isOn</span>: <span class="type">$model</span>.<span class="type">isEnabled</span>)
+</code></pre></body></html>
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- StateObject -->
+<g id="node1" class="node structure current">
+<title>StateObject</title>
+<g id="a_node1"><a xlink:href="/StateObject" xlink:title="StateObject">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">StateObject</text>
+</a>
+</g>
+</g>
+<!-- DynamicProperty -->
+<g id="node2" class="node protocol">
+<title>DynamicProperty</title>
+<g id="a_node2"><a xlink:href="/DynamicProperty" xlink:title="DynamicProperty">
+<path fill="none" stroke="black" d="M528,-36C528,-36 336,-36 336,-36 330,-36 324,-30 324,-24 324,-24 324,-12 324,-12 324,-6 330,0 336,0 336,0 528,0 528,0 534,0 540,-6 540,-12 540,-12 540,-24 540,-24 540,-30 534,-36 528,-36"/>
+<text text-anchor="middle" x="432" y="-14.3" font-family="Menlo" font-size="14.00">DynamicProperty</text>
+</a>
+</g>
+</g>
+<!-- StateObject&#45;&gt;DynamicProperty -->
+<g id="edge1" class="edge conformsTo">
+<title>StateObject&#45;&gt;DynamicProperty</title>
+<path fill="none" stroke="black" d="M432,-71.7C432,-63.98 432,-54.71 432,-46.11"/>
+<polygon fill="black" stroke="black" points="435.5,-46.1 432,-36.1 428.5,-46.1 435.5,-46.1"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for StateObject.</figcaption>
+</figure>
+        <h3>Conforms To</h3>
+<dl>
+    <dt class="protocol"><code><a href="/DynamicProperty">DynamicProperty</a></code></dt>
+<dd><p>An interface for a stored variable that updates an external property of a
+view.</p>
+</dd>
+</dl>
+</section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="stateobject.init(wrappedvalue:)">
+    <h3>
+        <code>init(wrapped​Value:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">wrappedValue</span> <span class="variable">thunk</span>: <span class="attribute">@</span><span class="attribute">autoclosure</span> <span class="attribute">@</span><span class="attribute">escaping</span> () -&gt; <span class="type">ObjectType</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a new state object with an initial wrapped value.</p>
+
+</div>
+<div class="discussion">
+    <p>You don’t call this initializer directly. Instead, declare a property
+with the <code>@StateObject</code> attribute in a <code>SwiftUI/View</code>,
+<code>SwiftUI/App</code>, or <code>SwiftUI/Scene</code>, and provide an initial value:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">MyView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><a href="/StateObject"><span class="type">StateObject</span></a> <span class="keyword">var</span> <span class="variable">model</span> = <span class="variable">DataModel</span>()
+
+    <span class="comment">// ...</span>
+}
+</code></pre></body></html>
+<p>SwiftUI creates only one instance of the state object for each
+container instance that you declare. In the code above, SwiftUI
+creates <code>model</code> only the first time it initializes a particular instance
+of <code>MyView</code>. On the other hand, each different instance of <code>MyView</code>
+receives a distinct copy of the data model.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>thunk</th>
+    <td><code class="type">@autoclosure @escaping () -&gt; Object​Type</code></td>
+    <td><p>An initial value for the state object.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="stateobject.wrappedvalue">
+    <h3>
+        <code>wrapped​Value</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">wrappedValue</span>: <span class="type">ObjectType</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The underlying value referenced by the state object.</p>
+
+</div>
+<div class="discussion">
+    <p>The wrapped value property provides primary access to the value's data.
+However, you don't access <code>wrappedValue</code> directly. Instead, use the
+property variable created with the <code>@StateObject</code> attribute:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><a href="/StateObject"><span class="type">StateObject</span></a> <span class="keyword">var</span> <span class="variable">contact</span> = <span class="variable">Contact</span>()
+
+<span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+    <span class="variable">Text</span>(<span class="variable">contact</span>.<span class="type">name</span>) <span class="comment">// Accesses contact's wrapped value.</span>
+}
+</code></pre></body></html>
+<p>When you change a property of the wrapped value, you can access the new
+value immediately. However, SwiftUI updates views displaying the value
+asynchronously, so the user interface might not update immediately.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="stateobject.projectedvalue">
+    <h3>
+        <code>projected​Value</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">projectedValue</span>: <a href="/ObservedObject"><span class="type">ObservedObject</span></a>&lt;<span class="type">ObjectType</span>&gt;.<span class="type">Wrapper</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A projection of the state object that creates bindings to its
+properties.</p>
+
+</div>
+<div class="discussion">
+    <p>Use the projected value to pass a binding value down a view hierarchy.
+To get the projected value, prefix the property variable with <code>$</code>. For
+example, you can get a binding to a model's <code>isEnabled</code> Boolean so that
+a <code>SwiftUI/Toggle</code> view can control the value:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">MyView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><a href="/StateObject"><span class="type">StateObject</span></a> <span class="keyword">var</span> <span class="variable">model</span> = <span class="variable">DataModel</span>()
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Toggle</span>(<span class="string literal">"</span><span class="string literal">Enabled</span><span class="string literal">"</span>, <span class="variable">isOn</span>: <span class="type">$model</span>.<span class="type">isEnabled</span>)
+    }
+}
+</code></pre></body></html>
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:06-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

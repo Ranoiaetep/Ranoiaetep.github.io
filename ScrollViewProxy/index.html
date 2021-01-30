@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ScrollViewProxy</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#methods">Methods</a><ul><li class="function"><a href="#scrollviewproxy.scrollto(_:anchor:)">scroll​To(_:​anchor:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Scroll​View​Proxy</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, <span class="keyword">tvOS</span> <span class="number literal">14.0</span>, <span class="keyword">watchOS</span> <span class="number literal">7.0</span>, *) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">ScrollViewProxy</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A proxy value allowing the scrollable views within a view hierarchy
+to be scrolled programmatically.</p>
+
+</div>
+
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="scrollviewproxy.scrollto(_:anchor:)">
+    <h3>
+        <code>scroll​To(_:​anchor:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">scrollTo</span>&lt;<span class="variable">ID</span>&gt;(<span class="keyword">_</span> <span class="variable">id</span>: <span class="type">ID</span>, <span class="variable">anchor</span>: <a href="/UnitPoint"><span class="type">UnitPoint</span></a>? = <span class="keyword">nil</span>) <span class="keyword">where</span> <span class="type">ID</span>: <span class="type">Hashable</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Scans all scroll views contained by the proxy for the first
+with a child view with identifier <code>id</code>, and then scrolls to
+that view.</p>
+
+</div>
+<div class="discussion">
+    <p>If <code>anchor</code> is nil the container of the identified view will be
+scrolled the minimum amount to make the identified view wholly
+visible.</p>
+
+<p>If <code>anchor</code> is non-nil it defines the points in the identified
+view and the scroll view that will be aligned, e.g. <code>.top</code>
+aligns the top of the identified view to the top of the scroll
+view, <code>.bottom</code> aligns the bottom of the identified view to the
+bottom of the scroll view, and so on.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:09-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - TextField</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#textfield.body">Body</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#textfield.body">body</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Text​Field</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">TextField</span>&lt;<span class="variable">Label</span>&gt;: <a href="/View"><span class="type">View</span></a> <span class="keyword">where</span> <a href="/Label"><span class="type">Label</span></a>: <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A control that displays an editable text interface.</p>
+
+</div>
+<div class="discussion">
+    <p>You create a text field with a label and a binding to a value. If the
+value is a string, the text field updates this value continuously as the
+user types or otherwise edits the text in the field. For non-string types,
+it updates the value when the user commits their edits, such as by pressing
+the Return key.</p>
+
+<p>The text field also allows you to provide two closures that customize its
+behavior. The <code>onEditingChanged</code> property informs your app when the user
+begins or ends editing the text. The <code>onCommit</code> property executes when the
+user commits their edits.</p>
+
+<p>The following example shows a text field to accept a username, and a
+<code>Text</code> view below it that shadows the continuously-updated value
+of <code>username</code>. The <code>Text</code> view changes color as the user begins and ends
+editing, and committing the text calls an internal <code>valdiate(name:)</code> method.</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">username</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal"/><span class="string literal">"</span>
+<span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">isEditing</span> = <span class="keyword">false</span>
+
+<span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+    <span class="variable">TextField</span>(
+        <span class="string literal">"</span><span class="string literal">User name (email address)</span><span class="string literal">"</span>,
+         <span class="variable">text</span>: <span class="type">$username</span>
+    ) { <span class="variable">isEditing</span> <span class="keyword">in</span>
+        <span class="keyword">self</span>.<span class="type">isEditing</span> = <span class="variable">isEditing</span>
+    } <span class="variable">onCommit</span>: {
+        <span class="variable">validate</span>(<span class="variable">name</span>: <span class="type">username</span>)
+    }
+    .<span class="type">autocapitalization</span>(.<span class="variable">none</span>)
+    .<span class="type">disableAutocorrection</span>(<span class="keyword">true</span>)
+    .<span class="type">border</span>(<span class="variable">Color</span>(<span class="variable">UIColor</span>.<span class="type">separator</span>))
+    <span class="variable">Text</span>(<span class="variable">username</span>)
+        .<span class="type">foregroundColor</span>(<span class="variable">isEditing</span> ? .<span class="variable">red</span> : .<span class="variable">blue</span>)
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-TextField-echoText.png" alt="A text field showing the typed email mruiz2@icloud.com, with a text view below it also showing this value." /></p>
+
+<p>The bound value doesn't have to be a string. By using a
+<a href="doc://com.apple.documentation/documentation/Foundation/Formatter">doc://com.apple.documentation/documentation/Foundation/Formatter</a>,
+you can bind the text field to a non-string type, using the formatter
+to convert the typed text into an instance of the bound type. The following
+example uses a
+<a href="doc://com.apple.documentation/documentation/Foundation/PersonNameComponentsFormatter">doc://com.apple.documentation/documentation/Foundation/PersonNameComponentsFormatter</a>
+to convert the name typed in the text field to a
+<a href="doc://com.apple.documentation/documentation/Foundation/PersonNameComponents">doc://com.apple.documentation/documentation/Foundation/PersonNameComponents</a>
+instance. A <code>Text</code> view below the text field shows the debug description
+string of this instance.</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">nameComponents</span> = <span class="variable">PersonNameComponents</span>()
+
+<span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+    <span class="keyword">let</span> <span class="variable">nameFormatter</span> = <span class="variable">PersonNameComponentsFormatter</span>()
+    <span class="variable">TextField</span>(
+        <span class="string literal">"</span><span class="string literal">Proper name</span><span class="string literal">"</span>,
+         <span class="variable">value</span>: <span class="type">$nameComponents</span>,
+         <span class="variable">formatter</span>: <span class="type">nameFormatter</span>,
+         <span class="variable">onCommit</span>: {
+            <span class="variable">validate</span>(<span class="variable">components</span>: <span class="type">nameComponents</span>)
+         })
+        .<span class="type">disableAutocorrection</span>(<span class="keyword">true</span>)
+        .<span class="type">border</span>(<span class="variable">Color</span>(<span class="variable">UIColor</span>.<span class="type">separator</span>))
+    <span class="variable">Text</span>(<span class="variable">nameComponents</span>.<span class="type">debugDescription</span>)
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-TextField-nameComponents.png" alt="A text field showing the typed name Maria Ruiz, with a text view below it showing the string givenName:Maria familyName:Ruiz." /></p>
+
+<h3>Styling Text Fields</h3>
+
+<p>SwiftUI provides a default text field style that reflects an appearance and
+behavior appropriate to the platform. The default style also takes the
+current context into consideration, like whether the text field is in a
+container that presents text fields with a special style. Beyond this, you
+can customize the appearance and interaction of text fields using the
+<code>View/textFieldStyle(_:)</code> modifier, passing in an instance of
+<code>TextFieldStyle</code>. The following example applies the
+<code>RoundedBorderTextFieldStyle</code> to both text fields within a <code>VStack</code>.</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">givenName</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal"/><span class="string literal">"</span>
+<span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">familyName</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal"/><span class="string literal">"</span>
+
+<span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+    <span class="variable">VStack</span> {
+        <span class="variable">TextField</span>(
+            <span class="string literal">"</span><span class="string literal">Given Name</span><span class="string literal">"</span>,
+             <span class="variable">text</span>: <span class="type">$givenName</span>)
+            .<span class="type">disableAutocorrection</span>(<span class="keyword">true</span>)
+        <span class="variable">TextField</span>(
+            <span class="string literal">"</span><span class="string literal">Family Name</span><span class="string literal">"</span>,
+            <span class="variable">text</span>: <span class="type">$familyName</span>)
+            .<span class="type">disableAutocorrection</span>(<span class="keyword">true</span>)
+    }
+    .<span class="type">textFieldStyle</span>(<span class="variable">RoundedBorderTextFieldStyle</span>())
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-TextField-roundedBorderStyle.png" alt="Two vertically-stacked text fields, with the prompt text Given Name and Family Name, both with rounded borders." /></p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- TextField -->
+<g id="node1" class="node structure current">
+<title>TextField</title>
+<g id="a_node1"><a xlink:href="/TextField" xlink:title="TextField">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">TextField</text>
+</a>
+</g>
+</g>
+<!-- View -->
+<g id="node2" class="node protocol">
+<title>View</title>
+<g id="a_node2"><a xlink:href="/View" xlink:title="View">
+<path fill="none" stroke="black" d="M528,-36C528,-36 336,-36 336,-36 330,-36 324,-30 324,-24 324,-24 324,-12 324,-12 324,-6 330,0 336,0 336,0 528,0 528,0 534,0 540,-6 540,-12 540,-12 540,-24 540,-24 540,-30 534,-36 528,-36"/>
+<text text-anchor="middle" x="432" y="-14.3" font-family="Menlo" font-size="14.00">View</text>
+</a>
+</g>
+</g>
+<!-- TextField&#45;&gt;View -->
+<g id="edge1" class="edge conformsTo">
+<title>TextField&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M432,-71.7C432,-63.98 432,-54.71 432,-46.11"/>
+<polygon fill="black" stroke="black" points="435.5,-46.1 432,-36.1 428.5,-46.1 435.5,-46.1"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for TextField.</figcaption>
+</figure>
+        <h3>Conforms To</h3>
+<dl>
+    <dt class="protocol"><code><a href="/View">View</a></code></dt>
+<dd><p>A type that represents part of your app's user interface and provides
+modifiers that you use to configure views.</p>
+</dd>
+</dl>
+</section>
+    <section id="nested type aliases">
+        <h2>Nested Type Aliases</h2>
+
+        <div role="article" class="typealias" id="textfield.body">
+    <h3>
+        <code>Body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">Body</span> = <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The type of view representing the body of this view.</p>
+
+</div>
+<div class="discussion">
+    <p>When you create a custom view, Swift infers this type from your
+implementation of the required <code>body</code> property.</p>
+
+</div>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="textfield.body">
+    <h3>
+        <code>body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The content and behavior of the view.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:05-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

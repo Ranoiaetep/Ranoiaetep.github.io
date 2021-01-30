@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - Stepper</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#stepper.body">Body</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#stepper.init(onincrement:ondecrement:oneditingchanged:label:)">init(on​Increment:​on​Decrement:​on​Editing​Changed:​label:​)</a></li><li class="initializer"><a href="#stepper.init(value:step:oneditingchanged:label:)">init(value:​step:​on​Editing​Changed:​label:​)</a></li><li class="initializer"><a href="#stepper.init(value:in:step:oneditingchanged:label:)">init(value:​in:​step:​on​Editing​Changed:​label:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#stepper.body">body</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Stepper</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Stepper</span>&lt;<span class="variable">Label</span>&gt;: <a href="/View"><span class="type">View</span></a> <span class="keyword">where</span> <a href="/Label"><span class="type">Label</span></a>: <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A control that performs increment and decrement actions.</p>
+
+</div>
+<div class="discussion">
+    <p>Use a stepper control when you want the user to have granular control while
+incrementing or decrementing a value. For example, you can use a stepper
+to:</p>
+
+<ul>
+<li>
+<p>Change a value up or down by <code>1</code>.</p>
+</li>
+<li>
+<p>Operate strictly over a prescribed range.</p>
+</li>
+<li>
+<p>Step by specific amounts over a stepper's range of possible values.</p>
+</li>
+</ul>
+
+<p>The example below uses an array that holds a number of <code>Color</code> values,
+a local state variable, <code>value</code>, to set the control's background
+color, and title label. When the user clicks or taps on the stepper's
+increment or decrement buttons SwiftUI executes the relevant
+closure that updates <code>value</code>, wrapping the <code>value</code> to prevent overflow.
+SwiftUI then re-renders the view, updating the text and background
+color to match the current index:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">StepperView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">value</span> = <span class="number literal">0</span>
+    <span class="keyword">let</span> <span class="variable">colors</span>: [<a href="/Color"><span class="type">Color</span></a>] = [.<span class="variable">orange</span>, .<span class="variable">red</span>, .<span class="variable">gray</span>, .<span class="variable">blue</span>,
+                           .<span class="variable">green</span>, .<span class="variable">purple</span>, .<span class="variable">pink</span>]
+
+    <span class="keyword">func</span> <span class="function">incrementStep</span>() {
+        <span class="variable">value</span> += <span class="number literal">1</span>
+        <span class="keyword">if</span> <span class="variable">value</span> &gt;= <span class="variable">colors</span>.<span class="type">count</span> { <span class="variable">value</span> = <span class="number literal">0</span> }
+    }
+
+    <span class="keyword">func</span> <span class="function">decrementStep</span>() {
+        <span class="variable">value</span> -= <span class="number literal">1</span>
+        <span class="keyword">if</span> <span class="variable">value</span> &lt; <span class="number literal">0</span> { <span class="variable">value</span> = <span class="variable">colors</span>.<span class="type">count</span> - <span class="number literal">1</span> }
+    }
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Stepper</span>(<span class="variable">onIncrement</span>: <span class="type">incrementStep</span>,
+            <span class="variable">onDecrement</span>: <span class="type">decrementStep</span>) {
+            <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Value: </span>\<span class="string literal">(</span><span class="variable">value</span><span class="string literal">)</span><span class="string literal"> Color: </span>\<span class="string literal">(</span><span class="variable">colors</span>[<span class="variable">value</span>].<span class="type">description</span><span class="string literal">)</span><span class="string literal"/><span class="string literal">"</span>)
+        }
+        .<span class="type">padding</span>(<span class="number literal">5</span>)
+        .<span class="type">background</span>(<span class="variable">colors</span>[<span class="variable">value</span>])
+    }
+</code></pre></body></html>
+<p>}</p>
+
+<p><img src="SwiftUI-Stepper-increment-decrement-closures.png" alt="A view displaying a stepper that uses a text view for stepper's title and that changes the background color of its view when incremented or decremented. The view selects the new background color from a predefined array of colors using the stepper's value as the index." /></p>
+
+<p>The following example shows a stepper that displays the effect of
+incrementing or decrementing a value with the step size of <code>step</code> with
+the bounds defined by <code>range</code>:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">StepperView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">value</span> = <span class="number literal">0</span>
+    <span class="keyword">let</span> <span class="variable">step</span> = <span class="number literal">5</span>
+    <span class="keyword">let</span> <span class="variable">range</span> = <span class="number literal">1</span>...<span class="number literal">50</span>
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Stepper</span>(<span class="variable">value</span>: <span class="type">$value</span>,
+                <span class="variable">in</span>: <span class="type">range</span>,
+                <span class="variable">step</span>: <span class="type">step</span>) {
+            <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Current: </span>\<span class="string literal">(</span><span class="variable">value</span><span class="string literal">)</span><span class="string literal"> in </span>\<span class="string literal">(</span><span class="variable">range</span>.<span class="type">description</span><span class="string literal">)</span><span class="string literal"> </span><span class="string literal">"</span> +
+                 <span class="string literal">"</span><span class="string literal">stepping by </span>\<span class="string literal">(</span><span class="variable">step</span><span class="string literal">)</span><span class="string literal"/><span class="string literal">"</span>)
+        }
+            .<span class="type">padding</span>(<span class="number literal">10</span>)
+    }
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-Stepper-value-step-range.png" alt="A view displaying a stepper with a step size of five, and a prescribed range of 1 though 50." /></p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- Stepper -->
+<g id="node1" class="node structure current">
+<title>Stepper</title>
+<g id="a_node1"><a xlink:href="/Stepper" xlink:title="Stepper">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">Stepper</text>
+</a>
+</g>
+</g>
+<!-- View -->
+<g id="node2" class="node protocol">
+<title>View</title>
+<g id="a_node2"><a xlink:href="/View" xlink:title="View">
+<path fill="none" stroke="black" d="M528,-36C528,-36 336,-36 336,-36 330,-36 324,-30 324,-24 324,-24 324,-12 324,-12 324,-6 330,0 336,0 336,0 528,0 528,0 534,0 540,-6 540,-12 540,-12 540,-24 540,-24 540,-30 534,-36 528,-36"/>
+<text text-anchor="middle" x="432" y="-14.3" font-family="Menlo" font-size="14.00">View</text>
+</a>
+</g>
+</g>
+<!-- Stepper&#45;&gt;View -->
+<g id="edge1" class="edge conformsTo">
+<title>Stepper&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M432,-71.7C432,-63.98 432,-54.71 432,-46.11"/>
+<polygon fill="black" stroke="black" points="435.5,-46.1 432,-36.1 428.5,-46.1 435.5,-46.1"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for Stepper.</figcaption>
+</figure>
+        <h3>Conforms To</h3>
+<dl>
+    <dt class="protocol"><code><a href="/View">View</a></code></dt>
+<dd><p>A type that represents part of your app's user interface and provides
+modifiers that you use to configure views.</p>
+</dd>
+</dl>
+</section>
+    <section id="nested type aliases">
+        <h2>Nested Type Aliases</h2>
+
+        <div role="article" class="typealias" id="stepper.body">
+    <h3>
+        <code>Body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">Body</span> = <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The type of view representing the body of this view.</p>
+
+</div>
+<div class="discussion">
+    <p>When you create a custom view, Swift infers this type from your
+implementation of the required <code>body</code> property.</p>
+
+</div>
+</div>
+    </section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="stepper.init(onincrement:ondecrement:oneditingchanged:label:)">
+    <h3>
+        <code>init(on​Increment:​on​Decrement:​on​Editing​Changed:​label:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">onIncrement</span>: (() -&gt; <span class="type">Void</span>)?, <span class="variable">onDecrement</span>: (() -&gt; <span class="type">Void</span>)?, <span class="variable">onEditingChanged</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Bool</span>) -&gt; <span class="type">Void</span> = { <span class="keyword">_</span> <span class="keyword">in</span> }, <span class="variable">label</span>: () -&gt; <a href="/Label"><span class="type">Label</span></a>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a stepper instance that performs the closures you provide when
+the user increments or decrements the stepper.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this initializer to create a control with a custom title that
+executes closures you provide when the user clicks or taps the
+stepper's increment or decrement buttons.</p>
+
+<p>The example below uses an array that holds a number of <code>Color</code> values,
+a local state variable, <code>value</code>, to set the control's background
+color, and title label. When the user clicks or taps on the stepper's
+increment or decrement buttons SwiftUI executes the relevant
+closure that updates <code>value</code>, wrapping the <code>value</code> to prevent overflow.
+SwiftUI then re-renders the view, updating the text and background
+color to match the current index:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">StepperView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">value</span> = <span class="number literal">0</span>
+    <span class="keyword">let</span> <span class="variable">colors</span>: [<a href="/Color"><span class="type">Color</span></a>] = [.<span class="variable">orange</span>, .<span class="variable">red</span>, .<span class="variable">gray</span>, .<span class="variable">blue</span>, .<span class="variable">green</span>,
+                           .<span class="variable">purple</span>, .<span class="variable">pink</span>]
+
+    <span class="keyword">func</span> <span class="function">incrementStep</span>() {
+        <span class="variable">value</span> += <span class="number literal">1</span>
+        <span class="keyword">if</span> <span class="variable">value</span> &gt;= <span class="variable">colors</span>.<span class="type">count</span> { <span class="variable">value</span> = <span class="number literal">0</span> }
+    }
+
+    <span class="keyword">func</span> <span class="function">decrementStep</span>() {
+        <span class="variable">value</span> -= <span class="number literal">1</span>
+        <span class="keyword">if</span> <span class="variable">value</span> &lt; <span class="number literal">0</span> { <span class="variable">value</span> = <span class="variable">colors</span>.<span class="type">count</span> - <span class="number literal">1</span> }
+    }
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Stepper</span>(<span class="variable">onIncrement</span>: <span class="type">incrementStep</span>,
+            <span class="variable">onDecrement</span>: <span class="type">decrementStep</span>) {
+            <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Value: </span>\<span class="string literal">(</span><span class="variable">value</span><span class="string literal">)</span><span class="string literal"> Color: </span>\<span class="string literal">(</span><span class="variable">colors</span>[<span class="variable">value</span>].<span class="type">description</span><span class="string literal">)</span><span class="string literal"/><span class="string literal">"</span>)
+        }
+        .<span class="type">padding</span>(<span class="number literal">5</span>)
+        .<span class="type">background</span>(<span class="variable">colors</span>[<span class="variable">value</span>])
+    }
+</code></pre></body></html>
+<p>}</p>
+
+<p><img src="SwiftUI-Stepper-increment-decrement-closures.png" alt="A view displaying a stepper that uses a text view for stepper's title and that changes the background color of its view when incremented or decremented. The view selects the new background color from a predefined array of colors using the stepper's value as the index." /></p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>on​Increment</th>
+    <td><code class="type">(() -&gt; Void)?</code></td>
+    <td><p>The closure to execute when the user clicks or taps the control's plus button.</p>
+</td>
+</tr>
+<tr>
+    <th>on​Decrement</th>
+    <td><code class="type">(() -&gt; Void)?</code></td>
+    <td><p>The closure to execute when the user clicks or taps the control's minus button.</p>
+</td>
+</tr>
+<tr>
+    <th>on​Editing​Changed</th>
+    <td><code class="type">@escaping (Bool) -&gt; Void</code></td>
+    <td><p>A closure called when editing begins and ends. For example, on iOS, the user may touch and hold the increment or decrement buttons on a <code>Stepper</code> which causes the execution of the <code>onEditingChanged</code> closure at the start and end of the gesture.</p>
+</td>
+</tr>
+<tr>
+    <th>label</th>
+    <td><code class="type">() -&gt; Label</code></td>
+    <td><p>A view describing the purpose of this stepper.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="stepper.init(value:step:oneditingchanged:label:)">
+    <h3>
+        <code>init(value:​step:​on​Editing​Changed:​label:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">V</span>&gt;(<span class="variable">value</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">V</span>&gt;, <span class="variable">step</span>: <span class="type">V</span>.<span class="type">Stride</span> = <span class="number literal">1</span>, <span class="variable">onEditingChanged</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Bool</span>) -&gt; <span class="type">Void</span> = { <span class="keyword">_</span> <span class="keyword">in</span> }, <span class="variable">label</span>: () -&gt; <a href="/Label"><span class="type">Label</span></a>) <span class="keyword">where</span> <span class="type">V</span>: <span class="type">Strideable</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a stepper configured to increment or decrement a binding to a
+value using a step value you provide.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this initializer to create a stepper that increments or decrements
+a bound value by a specific amount each time the user
+clicks or taps the stepper's increment or decrement buttons.</p>
+
+<p>In the example below, a stepper increments or decrements <code>value</code> by the
+<code>step</code> value of 5 at each click or tap of the control's increment or
+decrement button:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">StepperView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">value</span> = <span class="number literal">1</span>
+    <span class="keyword">let</span> <span class="variable">step</span> = <span class="number literal">5</span>
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Stepper</span>(<span class="variable">value</span>: <span class="type">$value</span>,
+                <span class="variable">step</span>: <span class="type">step</span>) {
+            <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Current value: </span>\<span class="string literal">(</span><span class="variable">value</span><span class="string literal">)</span><span class="string literal">, step: </span>\<span class="string literal">(</span><span class="variable">step</span><span class="string literal">)</span><span class="string literal"/><span class="string literal">"</span>)
+        }
+            .<span class="type">padding</span>(<span class="number literal">10</span>)
+    }
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-Stepper-value-step.png" alt="A view displaying a stepper that increments or decrements a value by a specified amount each time the user clicks or taps the stepper's increment or decrement buttons." /></p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>value</th>
+    <td><code class="type">Binding&lt;V&gt;</code></td>
+    <td><p>The <code>Binding</code> to a value that you provide.</p>
+</td>
+</tr>
+<tr>
+    <th>step</th>
+    <td><code class="type">V.​Stride</code></td>
+    <td><p>The amount to increment or decrement <code>value</code> each time the user clicks or taps the stepper's increment or decrement buttons. Defaults to <code>1</code>.</p>
+</td>
+</tr>
+<tr>
+    <th>on​Editing​Changed</th>
+    <td><code class="type">@escaping (Bool) -&gt; Void</code></td>
+    <td><p>A closure that's called when editing begins and ends. For example, on iOS, the user may touch and hold the increment or decrement buttons on a stepper which causes the execution of the <code>onEditingChanged</code> closure at the start and end of the gesture.</p>
+</td>
+</tr>
+<tr>
+    <th>label</th>
+    <td><code class="type">() -&gt; Label</code></td>
+    <td><p>A view describing the purpose of this stepper.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="stepper.init(value:in:step:oneditingchanged:label:)">
+    <h3>
+        <code>init(value:​in:​step:​on​Editing​Changed:​label:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">V</span>&gt;(<span class="variable">value</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">V</span>&gt;, <span class="variable">in</span> <span class="variable">bounds</span>: <span class="type">ClosedRange</span>&lt;<span class="type">V</span>&gt;, <span class="variable">step</span>: <span class="type">V</span>.<span class="type">Stride</span> = <span class="number literal">1</span>, <span class="variable">onEditingChanged</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Bool</span>) -&gt; <span class="type">Void</span> = { <span class="keyword">_</span> <span class="keyword">in</span> }, <span class="variable">label</span>: () -&gt; <a href="/Label"><span class="type">Label</span></a>) <span class="keyword">where</span> <span class="type">V</span>: <span class="type">Strideable</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a stepper configured to increment or decrement a binding to a
+value using a step value and within a range of values you provide.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this initializer to create a stepper that increments or decrements
+a binding to value by the step size you provide within the given bounds.
+By setting the bounds, you ensure that the value never goes below or
+above the lowest or highest value, respectively.</p>
+
+<p>The example below shows a stepper that displays the effect of
+incrementing or decrementing a value with the step size of <code>step</code>
+with the bounds defined by <code>range</code>:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">StepperView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">value</span> = <span class="number literal">0</span>
+    <span class="keyword">let</span> <span class="variable">step</span> = <span class="number literal">5</span>
+    <span class="keyword">let</span> <span class="variable">range</span> = <span class="number literal">1</span>...<span class="number literal">50</span>
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Stepper</span>(<span class="variable">value</span>: <span class="type">$value</span>,
+                <span class="variable">in</span>: <span class="type">range</span>,
+                <span class="variable">step</span>: <span class="type">step</span>) {
+            <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Current: </span>\<span class="string literal">(</span><span class="variable">value</span><span class="string literal">)</span><span class="string literal"> in </span>\<span class="string literal">(</span><span class="variable">range</span>.<span class="type">description</span><span class="string literal">)</span><span class="string literal"> </span><span class="string literal">"</span> +
+                 <span class="string literal">"</span><span class="string literal">stepping by </span>\<span class="string literal">(</span><span class="variable">step</span><span class="string literal">)</span><span class="string literal"/><span class="string literal">"</span>)
+        }
+            .<span class="type">padding</span>(<span class="number literal">10</span>)
+    }
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-Stepper-value-step-range.png" alt="A view displaying a stepper with a step size of five, and a prescribed range of 1 though 50." /></p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>value</th>
+    <td><code class="type">Binding&lt;V&gt;</code></td>
+    <td><p>A <code>Binding</code> to a value that you provide.</p>
+</td>
+</tr>
+<tr>
+    <th>bounds</th>
+    <td><code class="type">Closed​Range&lt;V&gt;</code></td>
+    <td><p>A closed range that describes the upper and lower bounds permitted by the stepper.</p>
+</td>
+</tr>
+<tr>
+    <th>step</th>
+    <td><code class="type">V.​Stride</code></td>
+    <td><p>The amount to increment or decrement the stepper when the user clicks or taps the stepper's increment or decrement buttons, respectively.</p>
+</td>
+</tr>
+<tr>
+    <th>on​Editing​Changed</th>
+    <td><code class="type">@escaping (Bool) -&gt; Void</code></td>
+    <td><p>A closure that's called when editing begins and ends. For example, on iOS, the user may touch and hold the increment or decrement buttons on a stepper which causes the execution of the <code>onEditingChanged</code> closure at the start and end of the gesture.</p>
+</td>
+</tr>
+<tr>
+    <th>label</th>
+    <td><code class="type">() -&gt; Label</code></td>
+    <td><p>A view describing the purpose of this stepper.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="stepper.body">
+    <h3>
+        <code>body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The content and behavior of the view.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:09-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

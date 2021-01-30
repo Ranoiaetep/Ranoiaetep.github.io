@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - View</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Types Conforming to View</a></li></ul></li><li><a href="#requirements">Requirements</a><ul><li class="variable"><a href="#view.body">body</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">View</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">View</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A type that represents part of your app's user interface and provides
+modifiers that you use to configure views.</p>
+
+</div>
+<div class="discussion">
+    <p>You create custom views by declaring types that conform to the <code>View</code>
+protocol. Implement the required <code>View/body-swift.property</code> computed
+property to provide the content for your custom view.</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">MyView</span>: <span class="type">View</span> {
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <span class="type">View</span> {
+        <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Hello, World!</span><span class="string literal">"</span>)
+    }
+}
+</code></pre></body></html>
+<p>Assemble the view's body by combining one or more of the primitive views
+provided by SwiftUI, like the <code>Text</code> instance in the example above, plus
+other custom views that you define, into a hierarchy of views.</p>
+
+<p>The <code>View</code> protocol provides a large set of modifiers, defined as protocol
+methods with default implementations, that you use to position and configure
+views in the layout of your app. Modifiers typically work by wrapping the
+view instance on which you call them in another view with the specified
+characteristics. For example, adding the <code>View/opacity(_:)</code> modifier to a
+text view returns a new view with some amount of transparency:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Hello, World!</span><span class="string literal">"</span>)
+    .<span class="type">opacity</span>(<span class="number literal">0.5</span>) <span class="comment">// Display partially transparent text.</span>
+</code></pre></body></html>
+<p>The effects of a modifier typically propagate to any child views that don't
+explicitly override the modifier. For example, a <code>VStack</code> instance on its
+own acts only to vertically stack other views, and has no text to display.
+Therefore, a <code>View/font(_:)</code> modifier that you apply to the stack has no
+effect on the stack itself. Yet the font modifier does apply to any of the
+stack's child views, some of which might display text. On the other hand,
+you can locally override the stack's modifier by adding another to a
+specific child view:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">VStack</span> {
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Title</span><span class="string literal">"</span>)
+        .<span class="type">font</span>(.<span class="variable">headline</span>) <span class="comment">// Override the font of this one view.</span>
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">First body line.</span><span class="string literal">"</span>)
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Second body line.</span><span class="string literal">"</span>)
+}
+.<span class="type">font</span>(.<span class="variable">body</span>) <span class="comment">// Set a default for text in the stack.</span>
+</code></pre></body></html>
+<p>You commonly chain modifiers, each wrapping the result of the previous one.
+For example, you can wrap a text view in an invisible box with a given width
+using the <code>View/frame(width:height:alignment:)</code> modifier to influence its
+layout, and then use the <code>View/border(_:width:)</code> modifier to draw an
+outline around that:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Title</span><span class="string literal">"</span>)
+    .<span class="type">frame</span>(<span class="variable">width</span>: <span class="number literal">100</span>)
+    .<span class="type">border</span>(<span class="variable">Color</span>.<span class="type">gray</span>)
+</code></pre></body></html>
+<p>The order in which you apply modifiers matters. For example, the border that
+results from the above code outlines the full width of the frame.</p>
+
+<p><img src="SwiftUI-View-1.png" alt="A screenshot of a text view displaying the string &quot;Title&quot;, outlined by a gray rectangle that's wider than the string it encloses, leaving empty space inside the rectangle on either side of the string. A caption reads, &quot;Apply the frame first.&quot;" /></p>
+
+<p>If you instead apply the border first, it outlines the text view, which
+never takes more space than it needs to render its contents.</p>
+
+<html><body><pre class="highlight"><code><span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Title</span><span class="string literal">"</span>)
+    .<span class="type">border</span>(<span class="variable">Color</span>.<span class="type">gray</span>) <span class="comment">// Apply the border first this time.</span>
+    .<span class="type">frame</span>(<span class="variable">width</span>: <span class="number literal">100</span>)
+</code></pre></body></html>
+<p>Wrapping that view in another invisible one with a fixed 100 point width
+affects the layout of the composite view, but has no effect on the border.</p>
+
+<p><img src="SwiftUI-View-2.png" alt="A screenshot of a text view displaying the string &quot;Title&quot;, outlined by a gray rectangle that hugs the text. A caption reads, &quot;Apply the border first.&quot;" /></p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="1809pt" height="361pt"
+ viewBox="0.00 0.00 1808.88 360.98" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 356.98)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-356.98 1804.88,-356.98 1804.88,4 -4,4"/>
+<!-- View -->
+<g id="node1" class="node protocol current">
+<title>View</title>
+<g id="a_node1"><a xlink:href="/View" xlink:title="View">
+<path fill="none" stroke="black" stroke-width="3" d="M998.98,-195.44C998.98,-195.44 806.98,-195.44 806.98,-195.44 800.98,-195.44 794.98,-189.44 794.98,-183.44 794.98,-183.44 794.98,-171.44 794.98,-171.44 794.98,-165.44 800.98,-159.44 806.98,-159.44 806.98,-159.44 998.98,-159.44 998.98,-159.44 1004.98,-159.44 1010.98,-165.44 1010.98,-171.44 1010.98,-171.44 1010.98,-183.44 1010.98,-183.44 1010.98,-189.44 1004.98,-195.44 998.98,-195.44"/>
+<text text-anchor="middle" x="902.98" y="-173.74" font-family="Menlo" font-size="14.00">View</text>
+</a>
+</g>
+</g>
+<!-- OutlineSubgroupChildren -->
+<g id="node2" class="node structure">
+<title>OutlineSubgroupChildren</title>
+<g id="a_node2"><a xlink:href="/OutlineSubgroupChildren" xlink:title="OutlineSubgroupChildren">
+<path fill="none" stroke="black" d="M1463.89,-144.85C1463.89,-144.85 1271.89,-144.85 1271.89,-144.85 1265.89,-144.85 1259.89,-138.85 1259.89,-132.85 1259.89,-132.85 1259.89,-120.85 1259.89,-120.85 1259.89,-114.85 1265.89,-108.85 1271.89,-108.85 1271.89,-108.85 1463.89,-108.85 1463.89,-108.85 1469.89,-108.85 1475.89,-114.85 1475.89,-120.85 1475.89,-120.85 1475.89,-132.85 1475.89,-132.85 1475.89,-138.85 1469.89,-144.85 1463.89,-144.85"/>
+<text text-anchor="middle" x="1367.89" y="-123.15" font-family="Menlo" font-size="14.00">OutlineSubgroupChildren</text>
+</a>
+</g>
+</g>
+<!-- OutlineSubgroupChildren&#45;&gt;View -->
+<g id="edge39" class="edge conformsTo">
+<title>OutlineSubgroupChildren&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1259.77,-138.61C1188.41,-146.38 1094.9,-156.56 1021.52,-164.54"/>
+<polygon fill="black" stroke="black" points="1020.86,-161.09 1011.3,-165.66 1021.62,-168.05 1020.86,-161.09"/>
+</g>
+<!-- List -->
+<g id="node3" class="node structure">
+<title>List</title>
+<g id="a_node3"><a xlink:href="/List" xlink:title="List">
+<path fill="none" stroke="black" d="M855.43,-37.08C855.43,-37.08 663.43,-37.08 663.43,-37.08 657.43,-37.08 651.43,-31.08 651.43,-25.08 651.43,-25.08 651.43,-13.08 651.43,-13.08 651.43,-7.08 657.43,-1.08 663.43,-1.08 663.43,-1.08 855.43,-1.08 855.43,-1.08 861.43,-1.08 867.43,-7.08 867.43,-13.08 867.43,-13.08 867.43,-25.08 867.43,-25.08 867.43,-31.08 861.43,-37.08 855.43,-37.08"/>
+<text text-anchor="middle" x="759.43" y="-15.38" font-family="Menlo" font-size="14.00">List</text>
+</a>
+</g>
+</g>
+<!-- List&#45;&gt;View -->
+<g id="edge15" class="edge conformsTo">
+<title>List&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M775.9,-37.25C801.29,-65.26 850.11,-119.12 879.3,-151.31"/>
+<polygon fill="black" stroke="black" points="876.96,-153.94 886.27,-159 882.14,-149.24 876.96,-153.94"/>
+</g>
+<!-- ProgressViewStyleConfiguration.CurrentValueLabel -->
+<g id="node4" class="node structure">
+<title>ProgressViewStyleConfiguration.CurrentValueLabel</title>
+<g id="a_node4"><a xlink:href="/ProgressViewStyleConfiguration_CurrentValueLabel" xlink:title="ProgressViewStyleConfiguration.CurrentValueLabel">
+<path fill="none" stroke="black" d="M721.13,-335.3C721.13,-335.3 332.13,-335.3 332.13,-335.3 326.13,-335.3 320.13,-329.3 320.13,-323.3 320.13,-323.3 320.13,-311.3 320.13,-311.3 320.13,-305.3 326.13,-299.3 332.13,-299.3 332.13,-299.3 721.13,-299.3 721.13,-299.3 727.13,-299.3 733.13,-305.3 733.13,-311.3 733.13,-311.3 733.13,-323.3 733.13,-323.3 733.13,-329.3 727.13,-335.3 721.13,-335.3"/>
+<text text-anchor="middle" x="526.63" y="-313.6" font-family="Menlo" font-size="14.00">ProgressViewStyleConfiguration.CurrentValueLabel</text>
+</a>
+</g>
+</g>
+<!-- ProgressViewStyleConfiguration.CurrentValueLabel&#45;&gt;View -->
+<g id="edge13" class="edge conformsTo">
+<title>ProgressViewStyleConfiguration.CurrentValueLabel&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M575.44,-299.16C644.54,-273.48 770.66,-226.61 844.62,-199.13"/>
+<polygon fill="black" stroke="black" points="846.1,-202.32 854.25,-195.55 843.66,-195.75 846.1,-202.32"/>
+</g>
+<!-- SubscriptionView -->
+<g id="node5" class="node structure">
+<title>SubscriptionView</title>
+<g id="a_node5"><a xlink:href="/SubscriptionView" xlink:title="SubscriptionView">
+<path fill="none" stroke="black" d="M1271.54,-140.5C1271.54,-140.5 1079.54,-140.5 1079.54,-140.5 1073.54,-140.5 1067.54,-134.5 1067.54,-128.5 1067.54,-128.5 1067.54,-116.5 1067.54,-116.5 1067.54,-110.5 1073.54,-104.5 1079.54,-104.5 1079.54,-104.5 1271.54,-104.5 1271.54,-104.5 1277.54,-104.5 1283.54,-110.5 1283.54,-116.5 1283.54,-116.5 1283.54,-128.5 1283.54,-128.5 1283.54,-134.5 1277.54,-140.5 1271.54,-140.5"/>
+<text text-anchor="middle" x="1175.54" y="-118.8" font-family="Menlo" font-size="14.00">SubscriptionView</text>
+</a>
+</g>
+</g>
+<!-- SubscriptionView&#45;&gt;View -->
+<g id="edge61" class="edge conformsTo">
+<title>SubscriptionView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1085.92,-140.56C1059.25,-145.94 1029.87,-151.86 1002.6,-157.36"/>
+<polygon fill="black" stroke="black" points="1001.77,-153.96 992.66,-159.37 1003.16,-160.82 1001.77,-153.96"/>
+</g>
+<!-- RadialGradient -->
+<g id="node6" class="node structure">
+<title>RadialGradient</title>
+<g id="a_node6"><a xlink:href="/RadialGradient" xlink:title="RadialGradient">
+<path fill="none" stroke="black" d="M637.93,-165.47C637.93,-165.47 445.93,-165.47 445.93,-165.47 439.93,-165.47 433.93,-159.47 433.93,-153.47 433.93,-153.47 433.93,-141.47 433.93,-141.47 433.93,-135.47 439.93,-129.47 445.93,-129.47 445.93,-129.47 637.93,-129.47 637.93,-129.47 643.93,-129.47 649.93,-135.47 649.93,-141.47 649.93,-141.47 649.93,-153.47 649.93,-153.47 649.93,-159.47 643.93,-165.47 637.93,-165.47"/>
+<text text-anchor="middle" x="541.93" y="-143.77" font-family="Menlo" font-size="14.00">RadialGradient</text>
+</a>
+</g>
+</g>
+<!-- RadialGradient&#45;&gt;View -->
+<g id="edge58" class="edge conformsTo">
+<title>RadialGradient&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M650.26,-156.46C692.65,-159.98 741.41,-164.03 784.72,-167.63"/>
+<polygon fill="black" stroke="black" points="784.48,-171.12 794.73,-168.46 785.06,-164.14 784.48,-171.12"/>
+</g>
+<!-- EmptyView -->
+<g id="node7" class="node structure">
+<title>EmptyView</title>
+<g id="a_node7"><a xlink:href="/EmptyView" xlink:title="EmptyView">
+<path fill="none" stroke="black" d="M537.41,-69.26C537.41,-69.26 345.41,-69.26 345.41,-69.26 339.41,-69.26 333.41,-63.26 333.41,-57.26 333.41,-57.26 333.41,-45.26 333.41,-45.26 333.41,-39.26 339.41,-33.26 345.41,-33.26 345.41,-33.26 537.41,-33.26 537.41,-33.26 543.41,-33.26 549.41,-39.26 549.41,-45.26 549.41,-45.26 549.41,-57.26 549.41,-57.26 549.41,-63.26 543.41,-69.26 537.41,-69.26"/>
+<text text-anchor="middle" x="441.41" y="-47.56" font-family="Menlo" font-size="14.00">EmptyView</text>
+</a>
+</g>
+</g>
+<!-- EmptyView&#45;&gt;View -->
+<g id="edge35" class="edge conformsTo">
+<title>EmptyView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M507.54,-69.34C592.11,-92.46 738.25,-132.41 827.21,-156.73"/>
+<polygon fill="black" stroke="black" points="826.4,-160.14 836.97,-159.4 828.25,-153.38 826.4,-160.14"/>
+</g>
+<!-- Toggle -->
+<g id="node8" class="node structure">
+<title>Toggle</title>
+<g id="a_node8"><a xlink:href="/Toggle" xlink:title="Toggle">
+<path fill="none" stroke="black" d="M1523.25,-83.03C1523.25,-83.03 1331.25,-83.03 1331.25,-83.03 1325.25,-83.03 1319.25,-77.03 1319.25,-71.03 1319.25,-71.03 1319.25,-59.03 1319.25,-59.03 1319.25,-53.03 1325.25,-47.03 1331.25,-47.03 1331.25,-47.03 1523.25,-47.03 1523.25,-47.03 1529.25,-47.03 1535.25,-53.03 1535.25,-59.03 1535.25,-59.03 1535.25,-71.03 1535.25,-71.03 1535.25,-77.03 1529.25,-83.03 1523.25,-83.03"/>
+<text text-anchor="middle" x="1427.25" y="-61.33" font-family="Menlo" font-size="14.00">Toggle</text>
+</a>
+</g>
+</g>
+<!-- Toggle&#45;&gt;View -->
+<g id="edge37" class="edge conformsTo">
+<title>Toggle&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1343.02,-83.1C1248.43,-103.38 1095.34,-136.2 996.95,-157.3"/>
+<polygon fill="black" stroke="black" points="996.05,-153.91 987.01,-159.43 997.52,-160.75 996.05,-153.91"/>
+</g>
+<!-- Menu -->
+<g id="node9" class="node structure">
+<title>Menu</title>
+<g id="a_node9"><a xlink:href="/Menu" xlink:title="Menu">
+<path fill="none" stroke="black" d="M853.25,-63.89C853.25,-63.89 661.25,-63.89 661.25,-63.89 655.25,-63.89 649.25,-57.89 649.25,-51.89 649.25,-51.89 649.25,-39.89 649.25,-39.89 649.25,-33.89 655.25,-27.89 661.25,-27.89 661.25,-27.89 853.25,-27.89 853.25,-27.89 859.25,-27.89 865.25,-33.89 865.25,-39.89 865.25,-39.89 865.25,-51.89 865.25,-51.89 865.25,-57.89 859.25,-63.89 853.25,-63.89"/>
+<text text-anchor="middle" x="757.25" y="-42.19" font-family="Menlo" font-size="14.00">Menu</text>
+</a>
+</g>
+</g>
+<!-- Menu&#45;&gt;View -->
+<g id="edge41" class="edge conformsTo">
+<title>Menu&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M777.21,-63.91C802.58,-86.8 846.5,-126.46 875.15,-152.32"/>
+<polygon fill="black" stroke="black" points="873.03,-155.12 882.8,-159.22 877.72,-149.92 873.03,-155.12"/>
+</g>
+<!-- Group -->
+<g id="node10" class="node structure">
+<title>Group</title>
+<g id="a_node10"><a xlink:href="/Group" xlink:title="Group">
+<path fill="none" stroke="black" d="M1295.17,-52.97C1295.17,-52.97 1103.17,-52.97 1103.17,-52.97 1097.17,-52.97 1091.17,-46.97 1091.17,-40.97 1091.17,-40.97 1091.17,-28.97 1091.17,-28.97 1091.17,-22.97 1097.17,-16.97 1103.17,-16.97 1103.17,-16.97 1295.17,-16.97 1295.17,-16.97 1301.17,-16.97 1307.17,-22.97 1307.17,-28.97 1307.17,-28.97 1307.17,-40.97 1307.17,-40.97 1307.17,-46.97 1301.17,-52.97 1295.17,-52.97"/>
+<text text-anchor="middle" x="1199.17" y="-31.27" font-family="Menlo" font-size="14.00">Group</text>
+</a>
+</g>
+</g>
+<!-- Group&#45;&gt;View -->
+<g id="edge4" class="edge conformsTo">
+<title>Group&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1161.66,-53.01C1107.73,-78.96 1008.34,-126.77 949.71,-154.97"/>
+<polygon fill="black" stroke="black" points="948.15,-151.83 940.66,-159.32 951.19,-158.14 948.15,-151.83"/>
+</g>
+<!-- Image -->
+<g id="node11" class="node structure">
+<title>Image</title>
+<g id="a_node11"><a xlink:href="/Image" xlink:title="Image">
+<path fill="none" stroke="black" d="M1004.12,-72.51C1004.12,-72.51 812.12,-72.51 812.12,-72.51 806.12,-72.51 800.12,-66.51 800.12,-60.51 800.12,-60.51 800.12,-48.51 800.12,-48.51 800.12,-42.51 806.12,-36.51 812.12,-36.51 812.12,-36.51 1004.12,-36.51 1004.12,-36.51 1010.12,-36.51 1016.12,-42.51 1016.12,-48.51 1016.12,-48.51 1016.12,-60.51 1016.12,-60.51 1016.12,-66.51 1010.12,-72.51 1004.12,-72.51"/>
+<text text-anchor="middle" x="908.12" y="-50.81" font-family="Menlo" font-size="14.00">Image</text>
+</a>
+</g>
+</g>
+<!-- Image&#45;&gt;View -->
+<g id="edge60" class="edge conformsTo">
+<title>Image&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M907.36,-72.65C906.52,-92.81 905.15,-125.61 904.17,-149.15"/>
+<polygon fill="black" stroke="black" points="900.66,-149.09 903.74,-159.23 907.66,-149.39 900.66,-149.09"/>
+</g>
+<!-- ToggleStyleConfiguration.Label -->
+<g id="node12" class="node structure">
+<title>ToggleStyleConfiguration.Label</title>
+<g id="a_node12"><a xlink:href="/ToggleStyleConfiguration_Label" xlink:title="ToggleStyleConfiguration.Label">
+<path fill="none" stroke="black" d="M252,-193.81C252,-193.81 12,-193.81 12,-193.81 6,-193.81 0,-187.81 0,-181.81 0,-181.81 0,-169.81 0,-169.81 0,-163.81 6,-157.81 12,-157.81 12,-157.81 252,-157.81 252,-157.81 258,-157.81 264,-163.81 264,-169.81 264,-169.81 264,-181.81 264,-181.81 264,-187.81 258,-193.81 252,-193.81"/>
+<text text-anchor="middle" x="132" y="-172.11" font-family="Menlo" font-size="14.00">ToggleStyleConfiguration.Label</text>
+</a>
+</g>
+</g>
+<!-- ToggleStyleConfiguration.Label&#45;&gt;View -->
+<g id="edge8" class="edge conformsTo">
+<title>ToggleStyleConfiguration.Label&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M264.1,-176.09C410.3,-176.4 643.79,-176.89 784.34,-177.19"/>
+<polygon fill="black" stroke="black" points="784.71,-180.69 794.72,-177.21 784.73,-173.69 784.71,-180.69"/>
+</g>
+<!-- Divider -->
+<g id="node13" class="node structure">
+<title>Divider</title>
+<g id="a_node13"><a xlink:href="/Divider" xlink:title="Divider">
+<path fill="none" stroke="black" d="M1727.63,-149.55C1727.63,-149.55 1535.63,-149.55 1535.63,-149.55 1529.63,-149.55 1523.63,-143.55 1523.63,-137.55 1523.63,-137.55 1523.63,-125.55 1523.63,-125.55 1523.63,-119.55 1529.63,-113.55 1535.63,-113.55 1535.63,-113.55 1727.63,-113.55 1727.63,-113.55 1733.63,-113.55 1739.63,-119.55 1739.63,-125.55 1739.63,-125.55 1739.63,-137.55 1739.63,-137.55 1739.63,-143.55 1733.63,-149.55 1727.63,-149.55"/>
+<text text-anchor="middle" x="1631.63" y="-127.85" font-family="Menlo" font-size="14.00">Divider</text>
+</a>
+</g>
+</g>
+<!-- Divider&#45;&gt;View -->
+<g id="edge57" class="edge conformsTo">
+<title>Divider&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1523.33,-138.37C1388.83,-146.84 1160.21,-161.24 1021.25,-170"/>
+<polygon fill="black" stroke="black" points="1020.74,-166.52 1010.98,-170.64 1021.18,-173.51 1020.74,-166.52"/>
+</g>
+<!-- Text -->
+<g id="node14" class="node structure">
+<title>Text</title>
+<g id="a_node14"><a xlink:href="/Text" xlink:title="Text">
+<path fill="none" stroke="black" d="M1560.59,-209.22C1560.59,-209.22 1368.59,-209.22 1368.59,-209.22 1362.59,-209.22 1356.59,-203.22 1356.59,-197.22 1356.59,-197.22 1356.59,-185.22 1356.59,-185.22 1356.59,-179.22 1362.59,-173.22 1368.59,-173.22 1368.59,-173.22 1560.59,-173.22 1560.59,-173.22 1566.59,-173.22 1572.59,-179.22 1572.59,-185.22 1572.59,-185.22 1572.59,-197.22 1572.59,-197.22 1572.59,-203.22 1566.59,-209.22 1560.59,-209.22"/>
+<text text-anchor="middle" x="1464.59" y="-187.52" font-family="Menlo" font-size="14.00">Text</text>
+</a>
+</g>
+</g>
+<!-- Text&#45;&gt;View -->
+<g id="edge34" class="edge conformsTo">
+<title>Text&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1356.3,-188.57C1260.31,-186.21 1120.41,-182.78 1021.46,-180.35"/>
+<polygon fill="black" stroke="black" points="1021.49,-176.85 1011.41,-180.1 1021.32,-183.85 1021.49,-176.85"/>
+</g>
+<!-- NavigationLink -->
+<g id="node15" class="node structure">
+<title>NavigationLink</title>
+<g id="a_node15"><a xlink:href="/NavigationLink" xlink:title="NavigationLink">
+<path fill="none" stroke="black" d="M977.66,-311.14C977.66,-311.14 785.66,-311.14 785.66,-311.14 779.66,-311.14 773.66,-305.14 773.66,-299.14 773.66,-299.14 773.66,-287.14 773.66,-287.14 773.66,-281.14 779.66,-275.14 785.66,-275.14 785.66,-275.14 977.66,-275.14 977.66,-275.14 983.66,-275.14 989.66,-281.14 989.66,-287.14 989.66,-287.14 989.66,-299.14 989.66,-299.14 989.66,-305.14 983.66,-311.14 977.66,-311.14"/>
+<text text-anchor="middle" x="881.66" y="-289.44" font-family="Menlo" font-size="14.00">NavigationLink</text>
+</a>
+</g>
+</g>
+<!-- NavigationLink&#45;&gt;View -->
+<g id="edge29" class="edge conformsTo">
+<title>NavigationLink&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M884.99,-275.06C888.42,-256.49 893.79,-227.33 897.78,-205.7"/>
+<polygon fill="black" stroke="black" points="901.23,-206.25 899.61,-195.78 894.35,-204.98 901.23,-206.25"/>
+</g>
+<!-- ProgressViewStyleConfiguration.Label -->
+<g id="node16" class="node structure">
+<title>ProgressViewStyleConfiguration.Label</title>
+<g id="a_node16"><a xlink:href="/ProgressViewStyleConfiguration_Label" xlink:title="ProgressViewStyleConfiguration.Label">
+<path fill="none" stroke="black" d="M1239.81,-84.28C1239.81,-84.28 949.81,-84.28 949.81,-84.28 943.81,-84.28 937.81,-78.28 937.81,-72.28 937.81,-72.28 937.81,-60.28 937.81,-60.28 937.81,-54.28 943.81,-48.28 949.81,-48.28 949.81,-48.28 1239.81,-48.28 1239.81,-48.28 1245.81,-48.28 1251.81,-54.28 1251.81,-60.28 1251.81,-60.28 1251.81,-72.28 1251.81,-72.28 1251.81,-78.28 1245.81,-84.28 1239.81,-84.28"/>
+<text text-anchor="middle" x="1094.81" y="-62.58" font-family="Menlo" font-size="14.00">ProgressViewStyleConfiguration.Label</text>
+</a>
+</g>
+</g>
+<!-- ProgressViewStyleConfiguration.Label&#45;&gt;View -->
+<g id="edge6" class="edge conformsTo">
+<title>ProgressViewStyleConfiguration.Label&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1063.56,-84.39C1030.68,-103.44 978.81,-133.5 942.96,-154.27"/>
+<polygon fill="black" stroke="black" points="941.11,-151.3 934.22,-159.34 944.62,-157.36 941.11,-151.3"/>
+</g>
+<!-- HStack -->
+<g id="node17" class="node structure">
+<title>HStack</title>
+<g id="a_node17"><a xlink:href="/HStack" xlink:title="HStack">
+<path fill="none" stroke="black" d="M1414,-63.32C1414,-63.32 1222,-63.32 1222,-63.32 1216,-63.32 1210,-57.32 1210,-51.32 1210,-51.32 1210,-39.32 1210,-39.32 1210,-33.32 1216,-27.32 1222,-27.32 1222,-27.32 1414,-27.32 1414,-27.32 1420,-27.32 1426,-33.32 1426,-39.32 1426,-39.32 1426,-51.32 1426,-51.32 1426,-57.32 1420,-63.32 1414,-63.32"/>
+<text text-anchor="middle" x="1318" y="-41.62" font-family="Menlo" font-size="14.00">HStack</text>
+</a>
+</g>
+</g>
+<!-- HStack&#45;&gt;View -->
+<g id="edge32" class="edge conformsTo">
+<title>HStack&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1261.17,-63.42C1185.01,-87.66 1050.11,-130.61 969.37,-156.31"/>
+<polygon fill="black" stroke="black" points="968.27,-152.99 959.8,-159.36 970.39,-159.66 968.27,-152.99"/>
+</g>
+<!-- Form -->
+<g id="node18" class="node structure">
+<title>Form</title>
+<g id="a_node18"><a xlink:href="/Form" xlink:title="Form">
+<path fill="none" stroke="black" d="M379.38,-286.47C379.38,-286.47 187.38,-286.47 187.38,-286.47 181.38,-286.47 175.38,-280.47 175.38,-274.47 175.38,-274.47 175.38,-262.47 175.38,-262.47 175.38,-256.47 181.38,-250.47 187.38,-250.47 187.38,-250.47 379.38,-250.47 379.38,-250.47 385.38,-250.47 391.38,-256.47 391.38,-262.47 391.38,-262.47 391.38,-274.47 391.38,-274.47 391.38,-280.47 385.38,-286.47 379.38,-286.47"/>
+<text text-anchor="middle" x="283.38" y="-264.77" font-family="Menlo" font-size="14.00">Form</text>
+</a>
+</g>
+</g>
+<!-- Form&#45;&gt;View -->
+<g id="edge46" class="edge conformsTo">
+<title>Form&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M391.66,-252.56C501.6,-236.41 671.36,-211.47 784.75,-194.81"/>
+<polygon fill="black" stroke="black" points="785.48,-198.24 794.86,-193.33 784.46,-191.32 785.48,-198.24"/>
+</g>
+<!-- DisclosureGroup -->
+<g id="node19" class="node structure">
+<title>DisclosureGroup</title>
+<g id="a_node19"><a xlink:href="/DisclosureGroup" xlink:title="DisclosureGroup">
+<path fill="none" stroke="black" d="M279.06,-233.59C279.06,-233.59 87.06,-233.59 87.06,-233.59 81.06,-233.59 75.06,-227.59 75.06,-221.59 75.06,-221.59 75.06,-209.59 75.06,-209.59 75.06,-203.59 81.06,-197.59 87.06,-197.59 87.06,-197.59 279.06,-197.59 279.06,-197.59 285.06,-197.59 291.06,-203.59 291.06,-209.59 291.06,-209.59 291.06,-221.59 291.06,-221.59 291.06,-227.59 285.06,-233.59 279.06,-233.59"/>
+<text text-anchor="middle" x="183.06" y="-211.89" font-family="Menlo" font-size="14.00">DisclosureGroup</text>
+</a>
+</g>
+</g>
+<!-- DisclosureGroup&#45;&gt;View -->
+<g id="edge1" class="edge conformsTo">
+<title>DisclosureGroup&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M291.23,-209.86C423.82,-202.84 647.74,-190.97 784.77,-183.71"/>
+<polygon fill="black" stroke="black" points="785.09,-187.2 794.89,-183.17 784.72,-180.21 785.09,-187.2"/>
+</g>
+<!-- OutlineGroup -->
+<g id="node20" class="node structure">
+<title>OutlineGroup</title>
+<g id="a_node20"><a xlink:href="/OutlineGroup" xlink:title="OutlineGroup">
+<path fill="none" stroke="black" d="M539.06,-234.26C539.06,-234.26 347.06,-234.26 347.06,-234.26 341.06,-234.26 335.06,-228.26 335.06,-222.26 335.06,-222.26 335.06,-210.26 335.06,-210.26 335.06,-204.26 341.06,-198.26 347.06,-198.26 347.06,-198.26 539.06,-198.26 539.06,-198.26 545.06,-198.26 551.06,-204.26 551.06,-210.26 551.06,-210.26 551.06,-222.26 551.06,-222.26 551.06,-228.26 545.06,-234.26 539.06,-234.26"/>
+<text text-anchor="middle" x="443.06" y="-212.56" font-family="Menlo" font-size="14.00">OutlineGroup</text>
+</a>
+</g>
+</g>
+<!-- OutlineGroup&#45;&gt;View -->
+<g id="edge17" class="edge conformsTo">
+<title>OutlineGroup&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M551.18,-207.14C621.3,-201.22 712.68,-193.51 784.73,-187.43"/>
+<polygon fill="black" stroke="black" points="785.1,-190.91 794.77,-186.58 784.51,-183.93 785.1,-190.91"/>
+</g>
+<!-- GeometryReader -->
+<g id="node21" class="node structure">
+<title>GeometryReader</title>
+<g id="a_node21"><a xlink:href="/GeometryReader" xlink:title="GeometryReader">
+<path fill="none" stroke="black" d="M820.64,-129.33C820.64,-129.33 628.64,-129.33 628.64,-129.33 622.64,-129.33 616.64,-123.33 616.64,-117.33 616.64,-117.33 616.64,-105.33 616.64,-105.33 616.64,-99.33 622.64,-93.33 628.64,-93.33 628.64,-93.33 820.64,-93.33 820.64,-93.33 826.64,-93.33 832.64,-99.33 832.64,-105.33 832.64,-105.33 832.64,-117.33 832.64,-117.33 832.64,-123.33 826.64,-129.33 820.64,-129.33"/>
+<text text-anchor="middle" x="724.64" y="-107.63" font-family="Menlo" font-size="14.00">GeometryReader</text>
+</a>
+</g>
+</g>
+<!-- GeometryReader&#45;&gt;View -->
+<g id="edge11" class="edge conformsTo">
+<title>GeometryReader&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M773.37,-129.39C795.39,-137.56 821.58,-147.27 844.64,-155.82"/>
+<polygon fill="black" stroke="black" points="843.72,-159.21 854.31,-159.4 846.15,-152.64 843.72,-159.21"/>
+</g>
+<!-- LazyHStack -->
+<g id="node22" class="node structure">
+<title>LazyHStack</title>
+<g id="a_node22"><a xlink:href="/LazyHStack" xlink:title="LazyHStack">
+<path fill="none" stroke="black" d="M607.77,-118.23C607.77,-118.23 415.77,-118.23 415.77,-118.23 409.77,-118.23 403.77,-112.23 403.77,-106.23 403.77,-106.23 403.77,-94.23 403.77,-94.23 403.77,-88.23 409.77,-82.23 415.77,-82.23 415.77,-82.23 607.77,-82.23 607.77,-82.23 613.77,-82.23 619.77,-88.23 619.77,-94.23 619.77,-94.23 619.77,-106.23 619.77,-106.23 619.77,-112.23 613.77,-118.23 607.77,-118.23"/>
+<text text-anchor="middle" x="511.77" y="-96.53" font-family="Menlo" font-size="14.00">LazyHStack</text>
+</a>
+</g>
+</g>
+<!-- LazyHStack&#45;&gt;View -->
+<g id="edge43" class="edge conformsTo">
+<title>LazyHStack&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M603,-118.23C662.46,-129.97 740.11,-145.3 801.51,-157.42"/>
+<polygon fill="black" stroke="black" points="801.12,-160.91 811.61,-159.41 802.48,-154.04 801.12,-160.91"/>
+</g>
+<!-- LinearGradient -->
+<g id="node23" class="node structure">
+<title>LinearGradient</title>
+<g id="a_node23"><a xlink:href="/LinearGradient" xlink:title="LinearGradient">
+<path fill="none" stroke="black" d="M1230.93,-286.78C1230.93,-286.78 1038.93,-286.78 1038.93,-286.78 1032.93,-286.78 1026.93,-280.78 1026.93,-274.78 1026.93,-274.78 1026.93,-262.78 1026.93,-262.78 1026.93,-256.78 1032.93,-250.78 1038.93,-250.78 1038.93,-250.78 1230.93,-250.78 1230.93,-250.78 1236.93,-250.78 1242.93,-256.78 1242.93,-262.78 1242.93,-262.78 1242.93,-274.78 1242.93,-274.78 1242.93,-280.78 1236.93,-286.78 1230.93,-286.78"/>
+<text text-anchor="middle" x="1134.93" y="-265.08" font-family="Menlo" font-size="14.00">LinearGradient</text>
+</a>
+</g>
+</g>
+<!-- LinearGradient&#45;&gt;View -->
+<g id="edge47" class="edge conformsTo">
+<title>LinearGradient&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1089.1,-250.73C1051.46,-235.91 998.02,-214.87 958.05,-199.13"/>
+<polygon fill="black" stroke="black" points="959.3,-195.86 948.71,-195.45 956.74,-202.37 959.3,-195.86"/>
+</g>
+<!-- ColorPicker -->
+<g id="node24" class="node structure">
+<title>ColorPicker</title>
+<g id="a_node24"><a xlink:href="/ColorPicker" xlink:title="ColorPicker">
+<path fill="none" stroke="black" d="M1442.9,-323.39C1442.9,-323.39 1250.9,-323.39 1250.9,-323.39 1244.9,-323.39 1238.9,-317.39 1238.9,-311.39 1238.9,-311.39 1238.9,-299.39 1238.9,-299.39 1238.9,-293.39 1244.9,-287.39 1250.9,-287.39 1250.9,-287.39 1442.9,-287.39 1442.9,-287.39 1448.9,-287.39 1454.9,-293.39 1454.9,-299.39 1454.9,-299.39 1454.9,-311.39 1454.9,-311.39 1454.9,-317.39 1448.9,-323.39 1442.9,-323.39"/>
+<text text-anchor="middle" x="1346.9" y="-301.69" font-family="Menlo" font-size="14.00">ColorPicker</text>
+</a>
+</g>
+</g>
+<!-- ColorPicker&#45;&gt;View -->
+<g id="edge49" class="edge conformsTo">
+<title>ColorPicker&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1284.24,-287.33C1202.89,-263.88 1061.2,-223.05 975.35,-198.3"/>
+<polygon fill="black" stroke="black" points="976.26,-194.92 965.68,-195.52 974.32,-201.65 976.26,-194.92"/>
+</g>
+<!-- ButtonStyleConfiguration.Label -->
+<g id="node25" class="node structure">
+<title>ButtonStyleConfiguration.Label</title>
+<g id="a_node25"><a xlink:href="/ButtonStyleConfiguration_Label" xlink:title="ButtonStyleConfiguration.Label">
+<path fill="none" stroke="black" d="M826.34,-342.96C826.34,-342.96 586.34,-342.96 586.34,-342.96 580.34,-342.96 574.34,-336.96 574.34,-330.96 574.34,-330.96 574.34,-318.96 574.34,-318.96 574.34,-312.96 580.34,-306.96 586.34,-306.96 586.34,-306.96 826.34,-306.96 826.34,-306.96 832.34,-306.96 838.34,-312.96 838.34,-318.96 838.34,-318.96 838.34,-330.96 838.34,-330.96 838.34,-336.96 832.34,-342.96 826.34,-342.96"/>
+<text text-anchor="middle" x="706.34" y="-321.26" font-family="Menlo" font-size="14.00">ButtonStyleConfiguration.Label</text>
+</a>
+</g>
+</g>
+<!-- ButtonStyleConfiguration.Label&#45;&gt;View -->
+<g id="edge45" class="edge conformsTo">
+<title>ButtonStyleConfiguration.Label&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M730.45,-306.87C765.64,-280.48 831.13,-231.35 870.52,-201.8"/>
+<polygon fill="black" stroke="black" points="873.08,-204.25 878.98,-195.45 868.88,-198.65 873.08,-204.25"/>
+</g>
+<!-- Picker -->
+<g id="node26" class="node structure">
+<title>Picker</title>
+<g id="a_node26"><a xlink:href="/Picker" xlink:title="Picker">
+<path fill="none" stroke="black" d="M1162.73,-44.4C1162.73,-44.4 970.73,-44.4 970.73,-44.4 964.73,-44.4 958.73,-38.4 958.73,-32.4 958.73,-32.4 958.73,-20.4 958.73,-20.4 958.73,-14.4 964.73,-8.4 970.73,-8.4 970.73,-8.4 1162.73,-8.4 1162.73,-8.4 1168.73,-8.4 1174.73,-14.4 1174.73,-20.4 1174.73,-20.4 1174.73,-32.4 1174.73,-32.4 1174.73,-38.4 1168.73,-44.4 1162.73,-44.4"/>
+<text text-anchor="middle" x="1066.73" y="-22.7" font-family="Menlo" font-size="14.00">Picker</text>
+</a>
+</g>
+</g>
+<!-- Picker&#45;&gt;View -->
+<g id="edge14" class="edge conformsTo">
+<title>Picker&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1046.97,-44.62C1017.76,-71.57 962.94,-122.14 930.02,-152.5"/>
+<polygon fill="black" stroke="black" points="927.53,-150.04 922.55,-159.4 932.27,-155.19 927.53,-150.04"/>
+</g>
+<!-- Stepper -->
+<g id="node27" class="node structure">
+<title>Stepper</title>
+<g id="a_node27"><a xlink:href="/Stepper" xlink:title="Stepper">
+<path fill="none" stroke="black" d="M1512.35,-291.88C1512.35,-291.88 1320.35,-291.88 1320.35,-291.88 1314.35,-291.88 1308.35,-285.88 1308.35,-279.88 1308.35,-279.88 1308.35,-267.88 1308.35,-267.88 1308.35,-261.88 1314.35,-255.88 1320.35,-255.88 1320.35,-255.88 1512.35,-255.88 1512.35,-255.88 1518.35,-255.88 1524.35,-261.88 1524.35,-267.88 1524.35,-267.88 1524.35,-279.88 1524.35,-279.88 1524.35,-285.88 1518.35,-291.88 1512.35,-291.88"/>
+<text text-anchor="middle" x="1416.35" y="-270.18" font-family="Menlo" font-size="14.00">Stepper</text>
+</a>
+</g>
+</g>
+<!-- Stepper&#45;&gt;View -->
+<g id="edge12" class="edge conformsTo">
+<title>Stepper&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1320.39,-255.86C1231.77,-239.21 1100.38,-214.53 1008.76,-197.31"/>
+<polygon fill="black" stroke="black" points="1009.38,-193.87 998.91,-195.46 1008.09,-200.75 1009.38,-193.87"/>
+</g>
+<!-- AngularGradient -->
+<g id="node28" class="node structure">
+<title>AngularGradient</title>
+<g id="a_node28"><a xlink:href="/AngularGradient" xlink:title="AngularGradient">
+<path fill="none" stroke="black" d="M775.47,-208.37C775.47,-208.37 583.47,-208.37 583.47,-208.37 577.47,-208.37 571.47,-202.37 571.47,-196.37 571.47,-196.37 571.47,-184.37 571.47,-184.37 571.47,-178.37 577.47,-172.37 583.47,-172.37 583.47,-172.37 775.47,-172.37 775.47,-172.37 781.47,-172.37 787.47,-178.37 787.47,-184.37 787.47,-184.37 787.47,-196.37 787.47,-196.37 787.47,-202.37 781.47,-208.37 775.47,-208.37"/>
+<text text-anchor="middle" x="679.47" y="-186.67" font-family="Menlo" font-size="14.00">AngularGradient</text>
+</a>
+</g>
+</g>
+<!-- AngularGradient&#45;&gt;View -->
+<g id="edge53" class="edge conformsTo">
+<title>AngularGradient&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M787.62,-184.12C787.78,-184.11 787.93,-184.1 788.08,-184.09"/>
+<polygon fill="black" stroke="black" points="785.2,-187.76 794.98,-183.69 784.8,-180.77 785.2,-187.76"/>
+</g>
+<!-- Link -->
+<g id="node29" class="node structure">
+<title>Link</title>
+<g id="a_node29"><a xlink:href="/Link" xlink:title="Link">
+<path fill="none" stroke="black" d="M735.36,-82.34C735.36,-82.34 543.36,-82.34 543.36,-82.34 537.36,-82.34 531.36,-76.34 531.36,-70.34 531.36,-70.34 531.36,-58.34 531.36,-58.34 531.36,-52.34 537.36,-46.34 543.36,-46.34 543.36,-46.34 735.36,-46.34 735.36,-46.34 741.36,-46.34 747.36,-52.34 747.36,-58.34 747.36,-58.34 747.36,-70.34 747.36,-70.34 747.36,-76.34 741.36,-82.34 735.36,-82.34"/>
+<text text-anchor="middle" x="639.36" y="-60.64" font-family="Menlo" font-size="14.00">Link</text>
+</a>
+</g>
+</g>
+<!-- Link&#45;&gt;View -->
+<g id="edge48" class="edge conformsTo">
+<title>Link&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M681.42,-82.39C727.58,-102.19 801.7,-133.99 851.35,-155.29"/>
+<polygon fill="black" stroke="black" points="850.06,-158.55 860.63,-159.27 852.82,-152.12 850.06,-158.55"/>
+</g>
+<!-- NavigationView -->
+<g id="node30" class="node structure">
+<title>NavigationView</title>
+<g id="a_node30"><a xlink:href="/NavigationView" xlink:title="NavigationView">
+<path fill="none" stroke="black" d="M1621.27,-104.34C1621.27,-104.34 1429.27,-104.34 1429.27,-104.34 1423.27,-104.34 1417.27,-98.34 1417.27,-92.34 1417.27,-92.34 1417.27,-80.34 1417.27,-80.34 1417.27,-74.34 1423.27,-68.34 1429.27,-68.34 1429.27,-68.34 1621.27,-68.34 1621.27,-68.34 1627.27,-68.34 1633.27,-74.34 1633.27,-80.34 1633.27,-80.34 1633.27,-92.34 1633.27,-92.34 1633.27,-98.34 1627.27,-104.34 1621.27,-104.34"/>
+<text text-anchor="middle" x="1525.27" y="-82.64" font-family="Menlo" font-size="14.00">NavigationView</text>
+</a>
+</g>
+</g>
+<!-- NavigationView&#45;&gt;View -->
+<g id="edge62" class="edge conformsTo">
+<title>NavigationView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1417.23,-102.16C1306.67,-118.34 1135.35,-143.42 1021.22,-160.13"/>
+<polygon fill="black" stroke="black" points="1020.43,-156.71 1011.05,-161.62 1021.45,-163.64 1020.43,-156.71"/>
+</g>
+<!-- LazyVGrid -->
+<g id="node31" class="node structure">
+<title>LazyVGrid</title>
+<g id="a_node31"><a xlink:href="/LazyVGrid" xlink:title="LazyVGrid">
+<path fill="none" stroke="black" d="M1037.81,-269.68C1037.81,-269.68 845.81,-269.68 845.81,-269.68 839.81,-269.68 833.81,-263.68 833.81,-257.68 833.81,-257.68 833.81,-245.68 833.81,-245.68 833.81,-239.68 839.81,-233.68 845.81,-233.68 845.81,-233.68 1037.81,-233.68 1037.81,-233.68 1043.81,-233.68 1049.81,-239.68 1049.81,-245.68 1049.81,-245.68 1049.81,-257.68 1049.81,-257.68 1049.81,-263.68 1043.81,-269.68 1037.81,-269.68"/>
+<text text-anchor="middle" x="941.81" y="-247.98" font-family="Menlo" font-size="14.00">LazyVGrid</text>
+</a>
+</g>
+</g>
+<!-- LazyVGrid&#45;&gt;View -->
+<g id="edge16" class="edge conformsTo">
+<title>LazyVGrid&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M932.21,-233.33C927.7,-224.7 922.22,-214.23 917.24,-204.7"/>
+<polygon fill="black" stroke="black" points="920.21,-202.82 912.47,-195.58 914,-206.07 920.21,-202.82"/>
+</g>
+<!-- EditButton -->
+<g id="node32" class="node structure">
+<title>EditButton</title>
+<g id="a_node32"><a xlink:href="/EditButton" xlink:title="EditButton">
+<path fill="none" stroke="black" d="M1264.6,-181.5C1264.6,-181.5 1072.6,-181.5 1072.6,-181.5 1066.6,-181.5 1060.6,-175.5 1060.6,-169.5 1060.6,-169.5 1060.6,-157.5 1060.6,-157.5 1060.6,-151.5 1066.6,-145.5 1072.6,-145.5 1072.6,-145.5 1264.6,-145.5 1264.6,-145.5 1270.6,-145.5 1276.6,-151.5 1276.6,-157.5 1276.6,-157.5 1276.6,-169.5 1276.6,-169.5 1276.6,-175.5 1270.6,-181.5 1264.6,-181.5"/>
+<text text-anchor="middle" x="1168.6" y="-159.8" font-family="Menlo" font-size="14.00">EditButton</text>
+</a>
+</g>
+</g>
+<!-- EditButton&#45;&gt;View -->
+<g id="edge20" class="edge conformsTo">
+<title>EditButton&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1060.56,-169.17C1047.76,-169.84 1034.63,-170.53 1021.69,-171.21"/>
+<polygon fill="black" stroke="black" points="1021.16,-167.73 1011.36,-171.75 1021.52,-174.72 1021.16,-167.73"/>
+</g>
+<!-- ScrollViewReader -->
+<g id="node33" class="node structure">
+<title>ScrollViewReader</title>
+<g id="a_node33"><a xlink:href="/ScrollViewReader" xlink:title="ScrollViewReader">
+<path fill="none" stroke="black" d="M662.85,-53.64C662.85,-53.64 470.85,-53.64 470.85,-53.64 464.85,-53.64 458.85,-47.64 458.85,-41.64 458.85,-41.64 458.85,-29.64 458.85,-29.64 458.85,-23.64 464.85,-17.64 470.85,-17.64 470.85,-17.64 662.85,-17.64 662.85,-17.64 668.85,-17.64 674.85,-23.64 674.85,-29.64 674.85,-29.64 674.85,-41.64 674.85,-41.64 674.85,-47.64 668.85,-53.64 662.85,-53.64"/>
+<text text-anchor="middle" x="566.85" y="-31.94" font-family="Menlo" font-size="14.00">ScrollViewReader</text>
+</a>
+</g>
+</g>
+<!-- ScrollViewReader&#45;&gt;View -->
+<g id="edge22" class="edge conformsTo">
+<title>ScrollViewReader&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M609.76,-53.74C671.25,-79.68 784.3,-127.37 850.63,-155.36"/>
+<polygon fill="black" stroke="black" points="849.49,-158.67 860.06,-159.34 852.21,-152.22 849.49,-158.67"/>
+</g>
+<!-- ProgressView -->
+<g id="node34" class="node structure">
+<title>ProgressView</title>
+<g id="a_node34"><a xlink:href="/ProgressView" xlink:title="ProgressView">
+<path fill="none" stroke="black" d="M533.35,-264.02C533.35,-264.02 341.35,-264.02 341.35,-264.02 335.35,-264.02 329.35,-258.02 329.35,-252.02 329.35,-252.02 329.35,-240.02 329.35,-240.02 329.35,-234.02 335.35,-228.02 341.35,-228.02 341.35,-228.02 533.35,-228.02 533.35,-228.02 539.35,-228.02 545.35,-234.02 545.35,-240.02 545.35,-240.02 545.35,-252.02 545.35,-252.02 545.35,-258.02 539.35,-264.02 533.35,-264.02"/>
+<text text-anchor="middle" x="437.35" y="-242.32" font-family="Menlo" font-size="14.00">ProgressView</text>
+</a>
+</g>
+</g>
+<!-- ProgressView&#45;&gt;View -->
+<g id="edge50" class="edge conformsTo">
+<title>ProgressView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M545.64,-230.07C617.24,-219.52 711.1,-205.7 784.66,-194.87"/>
+<polygon fill="black" stroke="black" points="785.52,-198.28 794.9,-193.36 784.5,-191.36 785.52,-198.28"/>
+</g>
+<!-- Shape -->
+<g id="node35" class="node protocol">
+<title>Shape</title>
+<g id="a_node35"><a xlink:href="/Shape" xlink:title="Shape">
+<path fill="none" stroke="black" d="M1376.06,-265.16C1376.06,-265.16 1184.06,-265.16 1184.06,-265.16 1178.06,-265.16 1172.06,-259.16 1172.06,-253.16 1172.06,-253.16 1172.06,-241.16 1172.06,-241.16 1172.06,-235.16 1178.06,-229.16 1184.06,-229.16 1184.06,-229.16 1376.06,-229.16 1376.06,-229.16 1382.06,-229.16 1388.06,-235.16 1388.06,-241.16 1388.06,-241.16 1388.06,-253.16 1388.06,-253.16 1388.06,-259.16 1382.06,-265.16 1376.06,-265.16"/>
+<text text-anchor="middle" x="1280.06" y="-243.46" font-family="Menlo" font-size="14.00">Shape</text>
+</a>
+</g>
+</g>
+<!-- Shape&#45;&gt;View -->
+<g id="edge51" class="edge conformsTo">
+<title>Shape&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1182.46,-229.12C1129.77,-219.37 1064.62,-207.33 1010.47,-197.32"/>
+<polygon fill="black" stroke="black" points="1010.97,-193.85 1000.5,-195.47 1009.7,-200.73 1010.97,-193.85"/>
+</g>
+<!-- PrimitiveButtonStyleConfiguration.Label -->
+<g id="node36" class="node structure">
+<title>PrimitiveButtonStyleConfiguration.Label</title>
+<g id="a_node36"><a xlink:href="/PrimitiveButtonStyleConfiguration_Label" xlink:title="PrimitiveButtonStyleConfiguration.Label">
+<path fill="none" stroke="black" d="M1103.89,-119.92C1103.89,-119.92 789.89,-119.92 789.89,-119.92 783.89,-119.92 777.89,-113.92 777.89,-107.92 777.89,-107.92 777.89,-95.92 777.89,-95.92 777.89,-89.92 783.89,-83.92 789.89,-83.92 789.89,-83.92 1103.89,-83.92 1103.89,-83.92 1109.89,-83.92 1115.89,-89.92 1115.89,-95.92 1115.89,-95.92 1115.89,-107.92 1115.89,-107.92 1115.89,-113.92 1109.89,-119.92 1103.89,-119.92"/>
+<text text-anchor="middle" x="946.89" y="-98.22" font-family="Menlo" font-size="14.00">PrimitiveButtonStyleConfiguration.Label</text>
+</a>
+</g>
+</g>
+<!-- PrimitiveButtonStyleConfiguration.Label&#45;&gt;View -->
+<g id="edge18" class="edge conformsTo">
+<title>PrimitiveButtonStyleConfiguration.Label&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M936.26,-120.2C930.97,-129.29 924.48,-140.46 918.64,-150.51"/>
+<polygon fill="black" stroke="black" points="915.51,-148.93 913.51,-159.33 921.57,-152.44 915.51,-148.93"/>
+</g>
+<!-- UIViewControllerRepresentable -->
+<g id="node37" class="node protocol">
+<title>UIViewControllerRepresentable</title>
+<g id="a_node37"><a xlink:href="/UIViewControllerRepresentable" xlink:title="UIViewControllerRepresentable">
+<path fill="none" stroke="black" d="M1185.41,-229.46C1185.41,-229.46 953.41,-229.46 953.41,-229.46 947.41,-229.46 941.41,-223.46 941.41,-217.46 941.41,-217.46 941.41,-205.46 941.41,-205.46 941.41,-199.46 947.41,-193.46 953.41,-193.46 953.41,-193.46 1185.41,-193.46 1185.41,-193.46 1191.41,-193.46 1197.41,-199.46 1197.41,-205.46 1197.41,-205.46 1197.41,-217.46 1197.41,-217.46 1197.41,-223.46 1191.41,-229.46 1185.41,-229.46"/>
+<text text-anchor="middle" x="1069.41" y="-207.76" font-family="Menlo" font-size="14.00">UIViewControllerRepresentable</text>
+</a>
+</g>
+</g>
+<!-- UIViewControllerRepresentable&#45;&gt;View -->
+<g id="edge38" class="edge conformsTo">
+<title>UIViewControllerRepresentable&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M981.32,-193.45C981.24,-193.44 981.17,-193.42 981.09,-193.41"/>
+<polygon fill="black" stroke="black" points="991.35,-191.94 980.85,-193.36 989.95,-198.79 991.35,-191.94"/>
+</g>
+<!-- GroupBoxStyleConfiguration.Content -->
+<g id="node38" class="node structure">
+<title>GroupBoxStyleConfiguration.Content</title>
+<g id="a_node38"><a xlink:href="/GroupBoxStyleConfiguration_Content" xlink:title="GroupBoxStyleConfiguration.Content">
+<path fill="none" stroke="black" d="M1357.06,-342.94C1357.06,-342.94 1084.06,-342.94 1084.06,-342.94 1078.06,-342.94 1072.06,-336.94 1072.06,-330.94 1072.06,-330.94 1072.06,-318.94 1072.06,-318.94 1072.06,-312.94 1078.06,-306.94 1084.06,-306.94 1084.06,-306.94 1357.06,-306.94 1357.06,-306.94 1363.06,-306.94 1369.06,-312.94 1369.06,-318.94 1369.06,-318.94 1369.06,-330.94 1369.06,-330.94 1369.06,-336.94 1363.06,-342.94 1357.06,-342.94"/>
+<text text-anchor="middle" x="1220.56" y="-321.24" font-family="Menlo" font-size="14.00">GroupBoxStyleConfiguration.Content</text>
+</a>
+</g>
+</g>
+<!-- GroupBoxStyleConfiguration.Content&#45;&gt;View -->
+<g id="edge30" class="edge conformsTo">
+<title>GroupBoxStyleConfiguration.Content&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1181.62,-306.86C1123.49,-279.86 1014.12,-229.06 951.08,-199.78"/>
+<polygon fill="black" stroke="black" points="952.29,-196.49 941.75,-195.45 949.34,-202.83 952.29,-196.49"/>
+</g>
+<!-- TupleView -->
+<g id="node39" class="node structure">
+<title>TupleView</title>
+<g id="a_node39"><a xlink:href="/TupleView" xlink:title="TupleView">
+<path fill="none" stroke="black" d="M345.02,-203.91C345.02,-203.91 153.02,-203.91 153.02,-203.91 147.02,-203.91 141.02,-197.91 141.02,-191.91 141.02,-191.91 141.02,-179.91 141.02,-179.91 141.02,-173.91 147.02,-167.91 153.02,-167.91 153.02,-167.91 345.02,-167.91 345.02,-167.91 351.02,-167.91 357.02,-173.91 357.02,-179.91 357.02,-179.91 357.02,-191.91 357.02,-191.91 357.02,-197.91 351.02,-203.91 345.02,-203.91"/>
+<text text-anchor="middle" x="249.02" y="-182.21" font-family="Menlo" font-size="14.00">TupleView</text>
+</a>
+</g>
+</g>
+<!-- TupleView&#45;&gt;View -->
+<g id="edge28" class="edge conformsTo">
+<title>TupleView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M357.37,-184.51C475.3,-182.98 663.24,-180.55 784.86,-178.97"/>
+<polygon fill="black" stroke="black" points="785.01,-182.47 794.96,-178.84 784.92,-175.47 785.01,-182.47"/>
+</g>
+<!-- Section -->
+<g id="node40" class="node structure">
+<title>Section</title>
+<g id="a_node40"><a xlink:href="/Section" xlink:title="Section">
+<path fill="none" stroke="black" d="M272.55,-167.92C272.55,-167.92 80.55,-167.92 80.55,-167.92 74.55,-167.92 68.55,-161.92 68.55,-155.92 68.55,-155.92 68.55,-143.92 68.55,-143.92 68.55,-137.92 74.55,-131.92 80.55,-131.92 80.55,-131.92 272.55,-131.92 272.55,-131.92 278.55,-131.92 284.55,-137.92 284.55,-143.92 284.55,-143.92 284.55,-155.92 284.55,-155.92 284.55,-161.92 278.55,-167.92 272.55,-167.92"/>
+<text text-anchor="middle" x="176.55" y="-146.22" font-family="Menlo" font-size="14.00">Section</text>
+</a>
+</g>
+</g>
+<!-- Section&#45;&gt;View -->
+<g id="edge56" class="edge conformsTo">
+<title>Section&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M284.91,-154.03C418.9,-159.11 646.17,-167.71 784.62,-172.96"/>
+<polygon fill="black" stroke="black" points="784.72,-176.47 794.84,-173.35 784.98,-169.47 784.72,-176.47"/>
+</g>
+<!-- ScrollView -->
+<g id="node41" class="node structure">
+<title>ScrollView</title>
+<g id="a_node41"><a xlink:href="/ScrollView" xlink:title="ScrollView">
+<path fill="none" stroke="black" d="M737.22,-319.64C737.22,-319.64 545.22,-319.64 545.22,-319.64 539.22,-319.64 533.22,-313.64 533.22,-307.64 533.22,-307.64 533.22,-295.64 533.22,-295.64 533.22,-289.64 539.22,-283.64 545.22,-283.64 545.22,-283.64 737.22,-283.64 737.22,-283.64 743.22,-283.64 749.22,-289.64 749.22,-295.64 749.22,-295.64 749.22,-307.64 749.22,-307.64 749.22,-313.64 743.22,-319.64 737.22,-319.64"/>
+<text text-anchor="middle" x="641.22" y="-297.94" font-family="Menlo" font-size="14.00">ScrollView</text>
+</a>
+</g>
+</g>
+<!-- ScrollView&#45;&gt;View -->
+<g id="edge3" class="edge conformsTo">
+<title>ScrollView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M679.29,-283.58C726.01,-261.41 805.24,-223.82 855.78,-199.84"/>
+<polygon fill="black" stroke="black" points="857.34,-202.97 864.88,-195.53 854.34,-196.65 857.34,-202.97"/>
+</g>
+<!-- TextEditor -->
+<g id="node42" class="node structure">
+<title>TextEditor</title>
+<g id="a_node42"><a xlink:href="/TextEditor" xlink:title="TextEditor">
+<path fill="none" stroke="black" d="M572.03,-294.71C572.03,-294.71 380.03,-294.71 380.03,-294.71 374.03,-294.71 368.03,-288.71 368.03,-282.71 368.03,-282.71 368.03,-270.71 368.03,-270.71 368.03,-264.71 374.03,-258.71 380.03,-258.71 380.03,-258.71 572.03,-258.71 572.03,-258.71 578.03,-258.71 584.03,-264.71 584.03,-270.71 584.03,-270.71 584.03,-282.71 584.03,-282.71 584.03,-288.71 578.03,-294.71 572.03,-294.71"/>
+<text text-anchor="middle" x="476.03" y="-273.01" font-family="Menlo" font-size="14.00">TextEditor</text>
+</a>
+</g>
+</g>
+<!-- TextEditor&#45;&gt;View -->
+<g id="edge23" class="edge conformsTo">
+<title>TextEditor&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M553.84,-258.62C627.62,-241.47 738.3,-215.73 815.2,-197.85"/>
+<polygon fill="black" stroke="black" points="816.4,-201.17 825.34,-195.5 814.81,-194.35 816.4,-201.17"/>
+</g>
+<!-- LazyHGrid -->
+<g id="node43" class="node structure">
+<title>LazyHGrid</title>
+<g id="a_node43"><a xlink:href="/LazyHGrid" xlink:title="LazyHGrid">
+<path fill="none" stroke="black" d="M541.48,-198.52C541.48,-198.52 349.48,-198.52 349.48,-198.52 343.48,-198.52 337.48,-192.52 337.48,-186.52 337.48,-186.52 337.48,-174.52 337.48,-174.52 337.48,-168.52 343.48,-162.52 349.48,-162.52 349.48,-162.52 541.48,-162.52 541.48,-162.52 547.48,-162.52 553.48,-168.52 553.48,-174.52 553.48,-174.52 553.48,-186.52 553.48,-186.52 553.48,-192.52 547.48,-198.52 541.48,-198.52"/>
+<text text-anchor="middle" x="445.48" y="-176.82" font-family="Menlo" font-size="14.00">LazyHGrid</text>
+</a>
+</g>
+</g>
+<!-- LazyHGrid&#45;&gt;View -->
+<g id="edge25" class="edge conformsTo">
+<title>LazyHGrid&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M553.61,-179.79C622.99,-179.33 713.1,-178.72 784.43,-178.24"/>
+<polygon fill="black" stroke="black" points="784.83,-181.74 794.81,-178.17 784.79,-174.74 784.83,-181.74"/>
+</g>
+<!-- MenuStyleConfiguration.Content -->
+<g id="node44" class="node structure">
+<title>MenuStyleConfiguration.Content</title>
+<g id="a_node44"><a xlink:href="/MenuStyleConfiguration_Content" xlink:title="MenuStyleConfiguration.Content">
+<path fill="none" stroke="black" d="M1672.27,-250.01C1672.27,-250.01 1432.27,-250.01 1432.27,-250.01 1426.27,-250.01 1420.27,-244.01 1420.27,-238.01 1420.27,-238.01 1420.27,-226.01 1420.27,-226.01 1420.27,-220.01 1426.27,-214.01 1432.27,-214.01 1432.27,-214.01 1672.27,-214.01 1672.27,-214.01 1678.27,-214.01 1684.27,-220.01 1684.27,-226.01 1684.27,-226.01 1684.27,-238.01 1684.27,-238.01 1684.27,-244.01 1678.27,-250.01 1672.27,-250.01"/>
+<text text-anchor="middle" x="1552.27" y="-228.31" font-family="Menlo" font-size="14.00">MenuStyleConfiguration.Content</text>
+</a>
+</g>
+</g>
+<!-- MenuStyleConfiguration.Content&#45;&gt;View -->
+<g id="edge9" class="edge conformsTo">
+<title>MenuStyleConfiguration.Content&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1420.09,-220.91C1303.03,-211.07 1133.71,-196.84 1021.09,-187.37"/>
+<polygon fill="black" stroke="black" points="1021.31,-183.88 1011.05,-186.53 1020.72,-190.85 1021.31,-183.88"/>
+</g>
+<!-- Label -->
+<g id="node45" class="node structure">
+<title>Label</title>
+<g id="a_node45"><a xlink:href="/Label" xlink:title="Label">
+<path fill="none" stroke="black" d="M1590.87,-175.9C1590.87,-175.9 1398.87,-175.9 1398.87,-175.9 1392.87,-175.9 1386.87,-169.9 1386.87,-163.9 1386.87,-163.9 1386.87,-151.9 1386.87,-151.9 1386.87,-145.9 1392.87,-139.9 1398.87,-139.9 1398.87,-139.9 1590.87,-139.9 1590.87,-139.9 1596.87,-139.9 1602.87,-145.9 1602.87,-151.9 1602.87,-151.9 1602.87,-163.9 1602.87,-163.9 1602.87,-169.9 1596.87,-175.9 1590.87,-175.9"/>
+<text text-anchor="middle" x="1494.87" y="-154.2" font-family="Menlo" font-size="14.00">Label</text>
+</a>
+</g>
+</g>
+<!-- Label&#45;&gt;View -->
+<g id="edge26" class="edge conformsTo">
+<title>Label&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1386.65,-161.47C1283.24,-164.89 1127.74,-170.02 1021.14,-173.54"/>
+<polygon fill="black" stroke="black" points="1020.86,-170.05 1010.98,-173.88 1021.09,-177.05 1020.86,-170.05"/>
+</g>
+<!-- EquatableView -->
+<g id="node46" class="node structure">
+<title>EquatableView</title>
+<g id="a_node46"><a xlink:href="/EquatableView" xlink:title="EquatableView">
+<path fill="none" stroke="black" d="M414.86,-131.86C414.86,-131.86 222.86,-131.86 222.86,-131.86 216.86,-131.86 210.86,-125.86 210.86,-119.86 210.86,-119.86 210.86,-107.86 210.86,-107.86 210.86,-101.86 216.86,-95.86 222.86,-95.86 222.86,-95.86 414.86,-95.86 414.86,-95.86 420.86,-95.86 426.86,-101.86 426.86,-107.86 426.86,-107.86 426.86,-119.86 426.86,-119.86 426.86,-125.86 420.86,-131.86 414.86,-131.86"/>
+<text text-anchor="middle" x="318.86" y="-110.16" font-family="Menlo" font-size="14.00">EquatableView</text>
+</a>
+</g>
+</g>
+<!-- EquatableView&#45;&gt;View -->
+<g id="edge33" class="edge conformsTo">
+<title>EquatableView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M427.02,-125.63C528.62,-136.69 680.27,-153.2 784.95,-164.6"/>
+<polygon fill="black" stroke="black" points="784.62,-168.08 794.94,-165.68 785.37,-161.12 784.62,-168.08"/>
+</g>
+<!-- TextField -->
+<g id="node47" class="node structure">
+<title>TextField</title>
+<g id="a_node47"><a xlink:href="/TextField" xlink:title="TextField">
+<path fill="none" stroke="black" d="M1633.55,-130.15C1633.55,-130.15 1441.55,-130.15 1441.55,-130.15 1435.55,-130.15 1429.55,-124.15 1429.55,-118.15 1429.55,-118.15 1429.55,-106.15 1429.55,-106.15 1429.55,-100.15 1435.55,-94.15 1441.55,-94.15 1441.55,-94.15 1633.55,-94.15 1633.55,-94.15 1639.55,-94.15 1645.55,-100.15 1645.55,-106.15 1645.55,-106.15 1645.55,-118.15 1645.55,-118.15 1645.55,-124.15 1639.55,-130.15 1633.55,-130.15"/>
+<text text-anchor="middle" x="1537.55" y="-108.45" font-family="Menlo" font-size="14.00">TextField</text>
+</a>
+</g>
+</g>
+<!-- TextField&#45;&gt;View -->
+<g id="edge40" class="edge conformsTo">
+<title>TextField&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1429.55,-123.26C1316.1,-134.94 1138.22,-153.24 1021.11,-165.29"/>
+<polygon fill="black" stroke="black" points="1020.62,-161.82 1011.03,-166.33 1021.34,-168.78 1020.62,-161.82"/>
+</g>
+<!-- MenuStyleConfiguration.Label -->
+<g id="node48" class="node structure">
+<title>MenuStyleConfiguration.Label</title>
+<g id="a_node48"><a xlink:href="/MenuStyleConfiguration_Label" xlink:title="MenuStyleConfiguration.Label">
+<path fill="none" stroke="black" d="M1400.52,-101.63C1400.52,-101.63 1176.52,-101.63 1176.52,-101.63 1170.52,-101.63 1164.52,-95.63 1164.52,-89.63 1164.52,-89.63 1164.52,-77.63 1164.52,-77.63 1164.52,-71.63 1170.52,-65.63 1176.52,-65.63 1176.52,-65.63 1400.52,-65.63 1400.52,-65.63 1406.52,-65.63 1412.52,-71.63 1412.52,-77.63 1412.52,-77.63 1412.52,-89.63 1412.52,-89.63 1412.52,-95.63 1406.52,-101.63 1400.52,-101.63"/>
+<text text-anchor="middle" x="1288.52" y="-79.93" font-family="Menlo" font-size="14.00">MenuStyleConfiguration.Label</text>
+</a>
+</g>
+</g>
+<!-- MenuStyleConfiguration.Label&#45;&gt;View -->
+<g id="edge54" class="edge conformsTo">
+<title>MenuStyleConfiguration.Label&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1214.19,-101.72C1149.12,-117.55 1054.65,-140.54 986.89,-157.03"/>
+<polygon fill="black" stroke="black" points="985.98,-153.65 977.09,-159.41 987.64,-160.45 985.98,-153.65"/>
+</g>
+<!-- UIViewRepresentable -->
+<g id="node49" class="node protocol">
+<title>UIViewRepresentable</title>
+<g id="a_node49"><a xlink:href="/UIViewRepresentable" xlink:title="UIViewRepresentable">
+<path fill="none" stroke="black" d="M1745.74,-212.61C1745.74,-212.61 1553.74,-212.61 1553.74,-212.61 1547.74,-212.61 1541.74,-206.61 1541.74,-200.61 1541.74,-200.61 1541.74,-188.61 1541.74,-188.61 1541.74,-182.61 1547.74,-176.61 1553.74,-176.61 1553.74,-176.61 1745.74,-176.61 1745.74,-176.61 1751.74,-176.61 1757.74,-182.61 1757.74,-188.61 1757.74,-188.61 1757.74,-200.61 1757.74,-200.61 1757.74,-206.61 1751.74,-212.61 1745.74,-212.61"/>
+<text text-anchor="middle" x="1649.74" y="-190.91" font-family="Menlo" font-size="14.00">UIViewRepresentable</text>
+</a>
+</g>
+</g>
+<!-- UIViewRepresentable&#45;&gt;View -->
+<g id="edge27" class="edge conformsTo">
+<title>UIViewRepresentable&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1541.55,-192.12C1403.2,-188.94 1164.44,-183.45 1021.35,-180.16"/>
+<polygon fill="black" stroke="black" points="1021.3,-176.66 1011.22,-179.93 1021.14,-183.66 1021.3,-176.66"/>
+</g>
+<!-- GroupBoxStyleConfiguration.Label -->
+<g id="node50" class="node structure">
+<title>GroupBoxStyleConfiguration.Label</title>
+<g id="a_node50"><a xlink:href="/GroupBoxStyleConfiguration_Label" xlink:title="GroupBoxStyleConfiguration.Label">
+<path fill="none" stroke="black" d="M1788.88,-181.36C1788.88,-181.36 1531.88,-181.36 1531.88,-181.36 1525.88,-181.36 1519.88,-175.36 1519.88,-169.36 1519.88,-169.36 1519.88,-157.36 1519.88,-157.36 1519.88,-151.36 1525.88,-145.36 1531.88,-145.36 1531.88,-145.36 1788.88,-145.36 1788.88,-145.36 1794.88,-145.36 1800.88,-151.36 1800.88,-157.36 1800.88,-157.36 1800.88,-169.36 1800.88,-169.36 1800.88,-175.36 1794.88,-181.36 1788.88,-181.36"/>
+<text text-anchor="middle" x="1660.38" y="-159.66" font-family="Menlo" font-size="14.00">GroupBoxStyleConfiguration.Label</text>
+</a>
+</g>
+</g>
+<!-- GroupBoxStyleConfiguration.Label&#45;&gt;View -->
+<g id="edge36" class="edge conformsTo">
+<title>GroupBoxStyleConfiguration.Label&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1519.69,-165.98C1376.27,-168.64 1156.24,-172.73 1021.43,-175.24"/>
+<polygon fill="black" stroke="black" points="1021,-171.75 1011.07,-175.43 1021.14,-178.75 1021,-171.75"/>
+</g>
+<!-- DatePicker -->
+<g id="node51" class="node structure">
+<title>DatePicker</title>
+<g id="a_node51"><a xlink:href="/DatePicker" xlink:title="DatePicker">
+<path fill="none" stroke="black" d="M332.56,-149.12C332.56,-149.12 140.56,-149.12 140.56,-149.12 134.56,-149.12 128.56,-143.12 128.56,-137.12 128.56,-137.12 128.56,-125.12 128.56,-125.12 128.56,-119.12 134.56,-113.12 140.56,-113.12 140.56,-113.12 332.56,-113.12 332.56,-113.12 338.56,-113.12 344.56,-119.12 344.56,-125.12 344.56,-125.12 344.56,-137.12 344.56,-137.12 344.56,-143.12 338.56,-149.12 332.56,-149.12"/>
+<text text-anchor="middle" x="236.56" y="-127.42" font-family="Menlo" font-size="14.00">DatePicker</text>
+</a>
+</g>
+</g>
+<!-- DatePicker&#45;&gt;View -->
+<g id="edge52" class="edge conformsTo">
+<title>DatePicker&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M344.74,-138.64C465.39,-147.03 659.91,-160.55 784.56,-169.21"/>
+<polygon fill="black" stroke="black" points="784.68,-172.73 794.9,-169.93 785.17,-165.75 784.68,-172.73"/>
+</g>
+<!-- DynamicViewContent -->
+<g id="node52" class="node protocol">
+<title>DynamicViewContent</title>
+<g id="a_node52"><a xlink:href="/DynamicViewContent" xlink:title="DynamicViewContent">
+<path fill="none" stroke="black" d="M1731.44,-254.8C1731.44,-254.8 1539.44,-254.8 1539.44,-254.8 1533.44,-254.8 1527.44,-248.8 1527.44,-242.8 1527.44,-242.8 1527.44,-230.8 1527.44,-230.8 1527.44,-224.8 1533.44,-218.8 1539.44,-218.8 1539.44,-218.8 1731.44,-218.8 1731.44,-218.8 1737.44,-218.8 1743.44,-224.8 1743.44,-230.8 1743.44,-230.8 1743.44,-242.8 1743.44,-242.8 1743.44,-248.8 1737.44,-254.8 1731.44,-254.8"/>
+<text text-anchor="middle" x="1635.44" y="-233.1" font-family="Menlo" font-size="14.00">DynamicViewContent</text>
+</a>
+</g>
+</g>
+<!-- DynamicViewContent&#45;&gt;View -->
+<g id="edge7" class="edge conformsTo">
+<title>DynamicViewContent&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1527.36,-228.04C1392.16,-217.08 1161.46,-198.39 1021.54,-187.05"/>
+<polygon fill="black" stroke="black" points="1021.45,-183.53 1011.2,-186.21 1020.89,-190.51 1021.45,-183.53"/>
+</g>
+<!-- LazyVStack -->
+<g id="node53" class="node structure">
+<title>LazyVStack</title>
+<g id="a_node53"><a xlink:href="/LazyVStack" xlink:title="LazyVStack">
+<path fill="none" stroke="black" d="M1158.2,-349.37C1158.2,-349.37 966.2,-349.37 966.2,-349.37 960.2,-349.37 954.2,-343.37 954.2,-337.37 954.2,-337.37 954.2,-325.37 954.2,-325.37 954.2,-319.37 960.2,-313.37 966.2,-313.37 966.2,-313.37 1158.2,-313.37 1158.2,-313.37 1164.2,-313.37 1170.2,-319.37 1170.2,-325.37 1170.2,-325.37 1170.2,-337.37 1170.2,-337.37 1170.2,-343.37 1164.2,-349.37 1158.2,-349.37"/>
+<text text-anchor="middle" x="1062.2" y="-327.67" font-family="Menlo" font-size="14.00">LazyVStack</text>
+</a>
+</g>
+</g>
+<!-- LazyVStack&#45;&gt;View -->
+<g id="edge10" class="edge conformsTo">
+<title>LazyVStack&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1043.31,-313.11C1014.95,-285.68 961.25,-233.77 929.13,-202.72"/>
+<polygon fill="black" stroke="black" points="931.47,-200.12 921.85,-195.68 926.61,-205.15 931.47,-200.12"/>
+</g>
+<!-- VStack -->
+<g id="node54" class="node structure">
+<title>VStack</title>
+<g id="a_node54"><a xlink:href="/VStack" xlink:title="VStack">
+<path fill="none" stroke="black" d="M1032.74,-351.51C1032.74,-351.51 840.74,-351.51 840.74,-351.51 834.74,-351.51 828.74,-345.51 828.74,-339.51 828.74,-339.51 828.74,-327.51 828.74,-327.51 828.74,-321.51 834.74,-315.51 840.74,-315.51 840.74,-315.51 1032.74,-315.51 1032.74,-315.51 1038.74,-315.51 1044.74,-321.51 1044.74,-327.51 1044.74,-327.51 1044.74,-339.51 1044.74,-339.51 1044.74,-345.51 1038.74,-351.51 1032.74,-351.51"/>
+<text text-anchor="middle" x="936.74" y="-329.81" font-family="Menlo" font-size="14.00">VStack</text>
+</a>
+</g>
+</g>
+<!-- VStack&#45;&gt;View -->
+<g id="edge2" class="edge conformsTo">
+<title>VStack&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M932.81,-315.3C926.96,-288.28 915.94,-237.35 909.06,-205.53"/>
+<polygon fill="black" stroke="black" points="912.43,-204.57 906.9,-195.54 905.59,-206.05 912.43,-204.57"/>
+</g>
+<!-- AnyView -->
+<g id="node55" class="node structure">
+<title>AnyView</title>
+<g id="a_node55"><a xlink:href="/AnyView" xlink:title="AnyView">
+<path fill="none" stroke="black" d="M1240.93,-320.62C1240.93,-320.62 1048.93,-320.62 1048.93,-320.62 1042.93,-320.62 1036.93,-314.62 1036.93,-308.62 1036.93,-308.62 1036.93,-296.62 1036.93,-296.62 1036.93,-290.62 1042.93,-284.62 1048.93,-284.62 1048.93,-284.62 1240.93,-284.62 1240.93,-284.62 1246.93,-284.62 1252.93,-290.62 1252.93,-296.62 1252.93,-296.62 1252.93,-308.62 1252.93,-308.62 1252.93,-314.62 1246.93,-320.62 1240.93,-320.62"/>
+<text text-anchor="middle" x="1144.93" y="-298.92" font-family="Menlo" font-size="14.00">AnyView</text>
+</a>
+</g>
+</g>
+<!-- AnyView&#45;&gt;View -->
+<g id="edge59" class="edge conformsTo">
+<title>AnyView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1110.01,-284.55C1066.95,-262.27 993.72,-224.39 946.89,-200.16"/>
+<polygon fill="black" stroke="black" points="948.39,-196.99 937.9,-195.51 945.17,-203.21 948.39,-196.99"/>
+</g>
+<!-- ForEach -->
+<g id="node56" class="node structure">
+<title>ForEach</title>
+<g id="a_node56"><a xlink:href="/ForEach" xlink:title="ForEach">
+<path fill="none" stroke="black" d="M1032.88,-36C1032.88,-36 840.88,-36 840.88,-36 834.88,-36 828.88,-30 828.88,-24 828.88,-24 828.88,-12 828.88,-12 828.88,-6 834.88,0 840.88,0 840.88,0 1032.88,0 1032.88,0 1038.88,0 1044.88,-6 1044.88,-12 1044.88,-12 1044.88,-24 1044.88,-24 1044.88,-30 1038.88,-36 1032.88,-36"/>
+<text text-anchor="middle" x="936.88" y="-14.3" font-family="Menlo" font-size="14.00">ForEach</text>
+</a>
+</g>
+</g>
+<!-- ForEach&#45;&gt;View -->
+<g id="edge19" class="edge conformsTo">
+<title>ForEach&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M932.99,-36.29C927.09,-64.04 915.83,-117 908.91,-149.57"/>
+<polygon fill="black" stroke="black" points="905.48,-148.86 906.83,-159.37 912.33,-150.31 905.48,-148.86"/>
+</g>
+<!-- TabView -->
+<g id="node57" class="node structure">
+<title>TabView</title>
+<g id="a_node57"><a xlink:href="/TabView" xlink:title="TabView">
+<path fill="none" stroke="black" d="M481.81,-91.89C481.81,-91.89 289.81,-91.89 289.81,-91.89 283.81,-91.89 277.81,-85.89 277.81,-79.89 277.81,-79.89 277.81,-67.89 277.81,-67.89 277.81,-61.89 283.81,-55.89 289.81,-55.89 289.81,-55.89 481.81,-55.89 481.81,-55.89 487.81,-55.89 493.81,-61.89 493.81,-67.89 493.81,-67.89 493.81,-79.89 493.81,-79.89 493.81,-85.89 487.81,-91.89 481.81,-91.89"/>
+<text text-anchor="middle" x="385.81" y="-70.19" font-family="Menlo" font-size="14.00">TabView</text>
+</a>
+</g>
+</g>
+<!-- TabView&#45;&gt;View -->
+<g id="edge63" class="edge conformsTo">
+<title>TabView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M475.9,-91.93C567.3,-110.23 708.44,-138.49 803.19,-157.46"/>
+<polygon fill="black" stroke="black" points="802.57,-160.91 813.07,-159.44 803.95,-154.05 802.57,-160.91"/>
+</g>
+<!-- ZStack -->
+<g id="node58" class="node structure">
+<title>ZStack</title>
+<g id="a_node58"><a xlink:href="/ZStack" xlink:title="ZStack">
+<path fill="none" stroke="black" d="M488.1,-315.94C488.1,-315.94 296.1,-315.94 296.1,-315.94 290.1,-315.94 284.1,-309.94 284.1,-303.94 284.1,-303.94 284.1,-291.94 284.1,-291.94 284.1,-285.94 290.1,-279.94 296.1,-279.94 296.1,-279.94 488.1,-279.94 488.1,-279.94 494.1,-279.94 500.1,-285.94 500.1,-291.94 500.1,-291.94 500.1,-303.94 500.1,-303.94 500.1,-309.94 494.1,-315.94 488.1,-315.94"/>
+<text text-anchor="middle" x="392.1" y="-294.24" font-family="Menlo" font-size="14.00">ZStack</text>
+</a>
+</g>
+</g>
+<!-- ZStack&#45;&gt;View -->
+<g id="edge5" class="edge conformsTo">
+<title>ZStack&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M468.59,-279.9C561.83,-257.91 719.02,-220.83 816.56,-197.83"/>
+<polygon fill="black" stroke="black" points="817.47,-201.21 826.39,-195.51 815.86,-194.4 817.47,-201.21"/>
+</g>
+<!-- ModifiedContent -->
+<g id="node59" class="node structure">
+<title>ModifiedContent</title>
+<g id="a_node59"><a xlink:href="/ModifiedContent" xlink:title="ModifiedContent">
+<path fill="none" stroke="black" d="M1487.35,-240.23C1487.35,-240.23 1295.35,-240.23 1295.35,-240.23 1289.35,-240.23 1283.35,-234.23 1283.35,-228.23 1283.35,-228.23 1283.35,-216.23 1283.35,-216.23 1283.35,-210.23 1289.35,-204.23 1295.35,-204.23 1295.35,-204.23 1487.35,-204.23 1487.35,-204.23 1493.35,-204.23 1499.35,-210.23 1499.35,-216.23 1499.35,-216.23 1499.35,-228.23 1499.35,-228.23 1499.35,-234.23 1493.35,-240.23 1487.35,-240.23"/>
+<text text-anchor="middle" x="1391.35" y="-218.53" font-family="Menlo" font-size="14.00">ModifiedContent</text>
+</a>
+</g>
+</g>
+<!-- ModifiedContent&#45;&gt;View -->
+<g id="edge42" class="edge conformsTo">
+<title>ModifiedContent&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1283.27,-212.32C1205.67,-205.2 1101.13,-195.62 1021.3,-188.3"/>
+<polygon fill="black" stroke="black" points="1021.48,-184.8 1011.2,-187.37 1020.84,-191.77 1021.48,-184.8"/>
+</g>
+<!-- GroupBox -->
+<g id="node60" class="node structure">
+<title>GroupBox</title>
+<g id="a_node60"><a xlink:href="/GroupBox" xlink:title="GroupBox">
+<path fill="none" stroke="black" d="M311.29,-259.88C311.29,-259.88 119.29,-259.88 119.29,-259.88 113.29,-259.88 107.29,-253.88 107.29,-247.88 107.29,-247.88 107.29,-235.88 107.29,-235.88 107.29,-229.88 113.29,-223.88 119.29,-223.88 119.29,-223.88 311.29,-223.88 311.29,-223.88 317.29,-223.88 323.29,-229.88 323.29,-235.88 323.29,-235.88 323.29,-247.88 323.29,-247.88 323.29,-253.88 317.29,-259.88 311.29,-259.88"/>
+<text text-anchor="middle" x="215.29" y="-238.18" font-family="Menlo" font-size="14.00">GroupBox</text>
+</a>
+</g>
+</g>
+<!-- GroupBox&#45;&gt;View -->
+<g id="edge31" class="edge conformsTo">
+<title>GroupBox&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M323.5,-231.74C449.02,-219.98 655.27,-200.66 784.87,-188.51"/>
+<polygon fill="black" stroke="black" points="785.21,-192 794.84,-187.58 784.56,-185.03 785.21,-192"/>
+</g>
+<!-- SecureField -->
+<g id="node61" class="node structure">
+<title>SecureField</title>
+<g id="a_node61"><a xlink:href="/SecureField" xlink:title="SecureField">
+<path fill="none" stroke="black" d="M787.74,-273.82C787.74,-273.82 595.74,-273.82 595.74,-273.82 589.74,-273.82 583.74,-267.82 583.74,-261.82 583.74,-261.82 583.74,-249.82 583.74,-249.82 583.74,-243.82 589.74,-237.82 595.74,-237.82 595.74,-237.82 787.74,-237.82 787.74,-237.82 793.74,-237.82 799.74,-243.82 799.74,-249.82 799.74,-249.82 799.74,-261.82 799.74,-261.82 799.74,-267.82 793.74,-273.82 787.74,-273.82"/>
+<text text-anchor="middle" x="691.74" y="-252.12" font-family="Menlo" font-size="14.00">SecureField</text>
+</a>
+</g>
+</g>
+<!-- SecureField&#45;&gt;View -->
+<g id="edge55" class="edge conformsTo">
+<title>SecureField&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M740.47,-237.74C771.52,-226.22 811.92,-211.23 844.68,-199.08"/>
+<polygon fill="black" stroke="black" points="845.98,-202.33 854.13,-195.57 843.54,-195.76 845.98,-202.33"/>
+</g>
+<!-- Slider -->
+<g id="node62" class="node structure">
+<title>Slider</title>
+<g id="a_node62"><a xlink:href="/Slider" xlink:title="Slider">
+<path fill="none" stroke="black" d="M907.57,-352.98C907.57,-352.98 715.57,-352.98 715.57,-352.98 709.57,-352.98 703.57,-346.98 703.57,-340.98 703.57,-340.98 703.57,-328.98 703.57,-328.98 703.57,-322.98 709.57,-316.98 715.57,-316.98 715.57,-316.98 907.57,-316.98 907.57,-316.98 913.57,-316.98 919.57,-322.98 919.57,-328.98 919.57,-328.98 919.57,-340.98 919.57,-340.98 919.57,-346.98 913.57,-352.98 907.57,-352.98"/>
+<text text-anchor="middle" x="811.57" y="-331.28" font-family="Menlo" font-size="14.00">Slider</text>
+</a>
+</g>
+</g>
+<!-- Slider&#45;&gt;View -->
+<g id="edge24" class="edge conformsTo">
+<title>Slider&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M822.06,-316.9C838.02,-289.39 868.53,-236.82 887.18,-204.67"/>
+<polygon fill="black" stroke="black" points="890.35,-206.2 892.34,-195.79 884.29,-202.68 890.35,-206.2"/>
+</g>
+<!-- Button -->
+<g id="node63" class="node structure">
+<title>Button</title>
+<g id="a_node63"><a xlink:href="/Button" xlink:title="Button">
+<path fill="none" stroke="black" d="M356.64,-107.77C356.64,-107.77 164.64,-107.77 164.64,-107.77 158.64,-107.77 152.64,-101.77 152.64,-95.77 152.64,-95.77 152.64,-83.77 152.64,-83.77 152.64,-77.77 158.64,-71.77 164.64,-71.77 164.64,-71.77 356.64,-71.77 356.64,-71.77 362.64,-71.77 368.64,-77.77 368.64,-83.77 368.64,-83.77 368.64,-95.77 368.64,-95.77 368.64,-101.77 362.64,-107.77 356.64,-107.77"/>
+<text text-anchor="middle" x="260.64" y="-86.07" font-family="Menlo" font-size="14.00">Button</text>
+</a>
+</g>
+</g>
+<!-- Button&#45;&gt;View -->
+<g id="edge44" class="edge conformsTo">
+<title>Button&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M368.88,-104.54C484.05,-120.26 665.7,-145.06 784.6,-161.29"/>
+<polygon fill="black" stroke="black" points="784.46,-164.8 794.84,-162.68 785.4,-157.86 784.46,-164.8"/>
+</g>
+<!-- Color -->
+<g id="node64" class="node structure">
+<title>Color</title>
+<g id="a_node64"><a xlink:href="/Color" xlink:title="Color">
+<path fill="none" stroke="black" d="M1605.1,-298.38C1605.1,-298.38 1413.1,-298.38 1413.1,-298.38 1407.1,-298.38 1401.1,-292.38 1401.1,-286.38 1401.1,-286.38 1401.1,-274.38 1401.1,-274.38 1401.1,-268.38 1407.1,-262.38 1413.1,-262.38 1413.1,-262.38 1605.1,-262.38 1605.1,-262.38 1611.1,-262.38 1617.1,-268.38 1617.1,-274.38 1617.1,-274.38 1617.1,-286.38 1617.1,-286.38 1617.1,-292.38 1611.1,-298.38 1605.1,-298.38"/>
+<text text-anchor="middle" x="1509.1" y="-276.68" font-family="Menlo" font-size="14.00">Color</text>
+</a>
+</g>
+</g>
+<!-- Color&#45;&gt;View -->
+<g id="edge21" class="edge conformsTo">
+<title>Color&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M1402.83,-262.34C1295.39,-244.09 1129.81,-215.97 1019.01,-197.15"/>
+<polygon fill="black" stroke="black" points="1019.58,-193.7 1009.13,-195.47 1018.4,-200.6 1019.58,-193.7"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for View.</figcaption>
+</figure>
+        <h3>Types Conforming to <code>View</code></h3>
+<dl>
+    <dt class="structure"><code><a href="/AngularGradient">AngularGradient</a></code></dt>
+<dd><p>An angular gradient.</p>
+</dd>
+<dt class="structure"><code><a href="/AnyView">AnyView</a></code></dt>
+<dd><p>A type-erased view.</p>
+</dd>
+<dt class="structure"><code><a href="/Button">Button</a></code></dt>
+<dd><p>A control that performs an action when triggered.</p>
+</dd>
+<dt class="structure"><code><a href="/ButtonStyleConfiguration_Label">ButtonStyleConfiguration.Label</a></code></dt>
+<dd><p>A type-erased label of a button.</p>
+</dd>
+<dt class="structure"><code><a href="/Color">Color</a></code></dt>
+<dd><p>An environment-dependent color.</p>
+</dd>
+<dt class="structure"><code><a href="/ColorPicker">ColorPicker</a></code></dt>
+<dd><p>A control used to select a color from the system color picker UI.</p>
+</dd>
+<dt class="structure"><code><a href="/DatePicker">DatePicker</a></code></dt>
+<dd><p>A control for selecting an absolute date.</p>
+</dd>
+<dt class="structure"><code><a href="/DisclosureGroup">DisclosureGroup</a></code></dt>
+<dd><p>A view that shows or hides another content view, based on the state of a
+disclosure control.</p>
+</dd>
+<dt class="structure"><code><a href="/Divider">Divider</a></code></dt>
+<dd><p>A visual element that can be used to separate other content.</p>
+</dd>
+<dt class="protocol"><code><a href="/DynamicViewContent">DynamicViewContent</a></code></dt>
+<dd><p>A type of view that generates views from an underlying collection of data.</p>
+</dd>
+<dt class="structure"><code><a href="/EditButton">EditButton</a></code></dt>
+<dd><p>A button that toggles the edit mode for the current edit scope.</p>
+</dd>
+<dt class="structure"><code><a href="/EmptyView">EmptyView</a></code></dt>
+<dd><p>A view that doesn't contain any content.</p>
+</dd>
+<dt class="structure"><code><a href="/EquatableView">EquatableView</a></code></dt>
+<dd><p>A view type that compares itself against its previous value and prevents its
+child updating if its new value is the same as its old value.</p>
+</dd>
+<dt class="structure"><code><a href="/ForEach">ForEach</a></code></dt>
+<dd><p>A structure that computes views on demand from an underlying collection of
+of identified data.</p>
+</dd>
+<dt class="structure"><code><a href="/Form">Form</a></code></dt>
+<dd><p>A container for grouping controls used for data entry, such as in settings
+or inspectors.</p>
+</dd>
+<dt class="structure"><code><a href="/GeometryReader">GeometryReader</a></code></dt>
+<dd><p>A container view that defines its content as a function of its own size and
+coordinate space.</p>
+</dd>
+<dt class="structure"><code><a href="/Group">Group</a></code></dt>
+<dd><p>An affordance for grouping view content.</p>
+</dd>
+<dt class="structure"><code><a href="/GroupBox">GroupBox</a></code></dt>
+<dd><p>A stylized view with an optional label that is associated with a logical
+grouping of content.</p>
+</dd>
+<dt class="structure"><code><a href="/GroupBoxStyleConfiguration_Label">GroupBoxStyleConfiguration.Label</a></code></dt>
+<dd><p>A type-erased label of a <code>GroupBox</code>.</p>
+</dd>
+<dt class="structure"><code><a href="/GroupBoxStyleConfiguration_Content">GroupBoxStyleConfiguration.Content</a></code></dt>
+<dd><p>A type-erased content of a <code>GroupBox</code>.</p>
+</dd>
+<dt class="structure"><code><a href="/HStack">HStack</a></code></dt>
+<dd><p>A view that arranges its children in a horizontal line.</p>
+</dd>
+<dt class="structure"><code><a href="/Image">Image</a></code></dt>
+<dd><p>A view that displays an environment-dependent image.</p>
+</dd>
+<dt class="structure"><code><a href="/Label">Label</a></code></dt>
+<dd><p>A standard label for user interface items, consisting of an icon with a
+title.</p>
+</dd>
+<dt class="structure"><code><a href="/LazyHGrid">LazyHGrid</a></code></dt>
+<dd><p>A container view that arranges its child views in a grid that
+grows horizontally, creating items only as needed.</p>
+</dd>
+<dt class="structure"><code><a href="/LazyHStack">LazyHStack</a></code></dt>
+<dd><p>A view that arranges its children in a line that grows horizontally,
+creating items only as needed.</p>
+</dd>
+<dt class="structure"><code><a href="/LazyVGrid">LazyVGrid</a></code></dt>
+<dd><p>A container view that arranges its child views in a grid that
+grows vertically, creating items only as needed.</p>
+</dd>
+<dt class="structure"><code><a href="/LazyVStack">LazyVStack</a></code></dt>
+<dd><p>A view that arranges its children in a line that grows vertically,
+creating items only as needed.</p>
+</dd>
+<dt class="structure"><code><a href="/LinearGradient">LinearGradient</a></code></dt>
+<dd><p>A linear gradient.</p>
+</dd>
+<dt class="structure"><code><a href="/Link">Link</a></code></dt>
+<dd><p>A control for navigating to a URL.</p>
+</dd>
+<dt class="structure"><code><a href="/List">List</a></code></dt>
+<dd><p>A container that presents rows of data arranged in a single column.</p>
+</dd>
+<dt class="structure"><code><a href="/Menu">Menu</a></code></dt>
+<dd><p>A control for presenting a menu of actions.</p>
+</dd>
+<dt class="structure"><code><a href="/MenuStyleConfiguration_Label">MenuStyleConfiguration.Label</a></code></dt>
+<dd><p>A type-erased label of a menu.</p>
+</dd>
+<dt class="structure"><code><a href="/MenuStyleConfiguration_Content">MenuStyleConfiguration.Content</a></code></dt>
+<dd><p>A type-erased content of a menu.</p>
+</dd>
+<dt class="structure"><code><a href="/ModifiedContent">ModifiedContent</a></code></dt>
+<dd><p>A value with a modifier applied to it.</p>
+</dd>
+<dt class="structure"><code><a href="/NavigationLink">NavigationLink</a></code></dt>
+<dd><p>A view that controls a navigation presentation.</p>
+</dd>
+<dt class="structure"><code><a href="/NavigationView">NavigationView</a></code></dt>
+<dd><p>A view for presenting a stack of views representing a visible path in a
+navigation hierarchy.</p>
+</dd>
+<dt class="structure"><code><a href="/OutlineGroup">OutlineGroup</a></code></dt>
+<dd><p>A structure that computes views and disclosure groups on demand from an
+underlying collection of tree-structured, identified data.</p>
+</dd>
+<dt class="structure"><code><a href="/OutlineSubgroupChildren">OutlineSubgroupChildren</a></code></dt>
+<dd><p>A type-erased view representing the children in an outline subgroup.</p>
+</dd>
+<dt class="structure"><code><a href="/Picker">Picker</a></code></dt>
+<dd><p>A control for selecting from a set of mutually exclusive values.</p>
+</dd>
+<dt class="structure"><code><a href="/PrimitiveButtonStyleConfiguration_Label">PrimitiveButtonStyleConfiguration.Label</a></code></dt>
+<dd><p>A type-erased label of a button.</p>
+</dd>
+<dt class="structure"><code><a href="/ProgressView">ProgressView</a></code></dt>
+<dd><p>A view that shows the progress towards completion of a task.</p>
+</dd>
+<dt class="structure"><code><a href="/ProgressViewStyleConfiguration_Label">ProgressViewStyleConfiguration.Label</a></code></dt>
+<dd><p>A type-erased label describing the task represented by the progress
+view.</p>
+</dd>
+<dt class="structure"><code><a href="/ProgressViewStyleConfiguration_CurrentValueLabel">ProgressViewStyleConfiguration.CurrentValueLabel</a></code></dt>
+<dd><p>A type-erased label that describes the current value of a progress view.</p>
+</dd>
+<dt class="structure"><code><a href="/RadialGradient">RadialGradient</a></code></dt>
+<dd><p>A radial gradient.</p>
+</dd>
+<dt class="structure"><code><a href="/ScrollView">ScrollView</a></code></dt>
+<dd><p>A scrollable view.</p>
+</dd>
+<dt class="structure"><code><a href="/ScrollViewReader">ScrollViewReader</a></code></dt>
+<dd><p>A view whose child is defined as a function of a <code>ScrollViewProxy</code>
+targeting the scrollable views within the child.</p>
+</dd>
+<dt class="structure"><code><a href="/Section">Section</a></code></dt>
+<dd><p>An affordance for creating hierarchical view content.</p>
+</dd>
+<dt class="structure"><code><a href="/SecureField">SecureField</a></code></dt>
+<dd><p>A control into which the user securely enters private text.</p>
+</dd>
+<dt class="protocol"><code><a href="/Shape">Shape</a></code></dt>
+<dd><p>A 2D shape that you can use when drawing a view.</p>
+</dd>
+<dt class="structure"><code><a href="/Slider">Slider</a></code></dt>
+<dd><p>A control for selecting a value from a bounded linear range of values.</p>
+</dd>
+<dt class="structure"><code><a href="/Stepper">Stepper</a></code></dt>
+<dd><p>A control that performs increment and decrement actions.</p>
+</dd>
+<dt class="structure"><code><a href="/SubscriptionView">SubscriptionView</a></code></dt>
+<dd><p>A view that subscribes to a publisher with an action.</p>
+</dd>
+<dt class="structure"><code><a href="/TabView">TabView</a></code></dt>
+<dd><p>A view that switches between multiple child views using interactive user
+interface elements.</p>
+</dd>
+<dt class="structure"><code><a href="/Text">Text</a></code></dt>
+<dd><p>A view that displays one or more lines of read-only text.</p>
+</dd>
+<dt class="structure"><code><a href="/TextEditor">TextEditor</a></code></dt>
+<dd><p>A view that can display and edit long-form text.</p>
+</dd>
+<dt class="structure"><code><a href="/TextField">TextField</a></code></dt>
+<dd><p>A control that displays an editable text interface.</p>
+</dd>
+<dt class="structure"><code><a href="/Toggle">Toggle</a></code></dt>
+<dd><p>A control that toggles between on and off states.</p>
+</dd>
+<dt class="structure"><code><a href="/ToggleStyleConfiguration_Label">ToggleStyleConfiguration.Label</a></code></dt>
+<dd><p>A type-erased label of a toggle.</p>
+</dd>
+<dt class="structure"><code><a href="/TupleView">TupleView</a></code></dt>
+<dd><p>A View created from a swift tuple of View values.</p>
+</dd>
+<dt class="protocol"><code><a href="/UIViewControllerRepresentable">UIViewControllerRepresentable</a></code></dt>
+<dd><p>A view that represents a UIKit view controller.</p>
+</dd>
+<dt class="protocol"><code><a href="/UIViewRepresentable">UIViewRepresentable</a></code></dt>
+<dd><p>A wrapper for a UIKit view that you use to integrate that view into your
+SwiftUI view hierarchy.</p>
+</dd>
+<dt class="structure"><code><a href="/VStack">VStack</a></code></dt>
+<dd><p>A view that arranges its children in a vertical line.</p>
+</dd>
+<dt class="structure"><code><a href="/ZStack">ZStack</a></code></dt>
+<dd><p>A view that overlays its children, aligning them in both axes.</p>
+</dd>
+</dl>
+</section>
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="variable" id="view.body">
+    <h3>
+        <code>body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">Self</span>.<span class="type">Body</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The content and behavior of the view.</p>
+
+</div>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:13-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - Transaction</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#transaction.init()">init()</a></li><li class="initializer"><a href="#transaction.init(animation:)">init(animation:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#transaction.animation">animation</a></li><li class="variable"><a href="#transaction.disablesanimations">disables​Animations</a></li><li class="variable"><a href="#transaction.iscontinuous">is​Continuous</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Transaction</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="attribute">@</span><span class="attribute">frozen</span> <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Transaction</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The context of the current state-processing update.</p>
+
+</div>
+<div class="discussion">
+    <p>Use a transaction to pass an animation between views in a view hierarchy.</p>
+
+<p>The root transaction for a state change comes from the binding that changed,
+plus any global values set by calling <code>withTransaction(_:_:)</code> or
+<code>withAnimation(_:_:)</code>.</p>
+
+</div>
+
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="transaction.init()">
+    <h3>
+        <code>init()</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">inlinable</span> <span class="keyword">public</span> <span class="keyword">init</span>()</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a transaction.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="transaction.init(animation:)">
+    <h3>
+        <code>init(animation:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">animation</span>: <a href="/Animation"><span class="type">Animation</span></a>?)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a transaction and assigns its animation property.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>animation</th>
+    <td><code class="type">Animation?</code></td>
+    <td><p>The animation to perform when the current state changes.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="transaction.animation">
+    <h3>
+        <code>animation</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">animation</span>: <a href="/Animation"><span class="type">Animation</span></a>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The animation, if any, associated with the current state change.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="transaction.disablesanimations">
+    <h3>
+        <code>disables​Animations</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">disablesAnimations</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that indicates whether views should disable animations.</p>
+
+</div>
+<div class="discussion">
+    <p>This value is <code>true</code> during the initial phase of a two-part transition
+update, to prevent <code>View/animation(_:)</code> from inserting new animations
+into the transaction.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="transaction.iscontinuous">
+    <h3>
+        <code>is​Continuous</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">isContinuous</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that indicates whether the transaction originated from
+an action that produces a sequence of values.</p>
+
+</div>
+<div class="discussion">
+    <p>This value is <code>true</code> if a continuous action created the transaction, and
+is <code>false</code> otherwise. Continuous actions include things like dragging a
+slider or pressing and holding a stepper, as opposed to tapping a
+button.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:16-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

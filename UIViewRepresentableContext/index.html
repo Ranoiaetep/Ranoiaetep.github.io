@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - UIViewRepresentableContext</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#uiviewrepresentablecontext.coordinator">coordinator</a></li><li class="variable"><a href="#uiviewrepresentablecontext.transaction">transaction</a></li><li class="variable"><a href="#uiviewrepresentablecontext.environment">environment</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">UIView​Representable​Context</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">UIViewRepresentableContext</span>&lt;<span class="variable">Representable</span>&gt; <span class="keyword">where</span> <span class="type">Representable</span>: <a href="/UIViewRepresentable"><span class="type">UIViewRepresentable</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Contextual information about the state of the system that you use to create
+and update your UIKit view.</p>
+
+</div>
+<div class="discussion">
+    <p>A <code>UIViewRepresentableContext</code> structure contains details about the
+current state of the system. When creating and updating your view, the
+system creates one of these structures and passes it to the appropriate
+method of your custom <code>UIViewRepresentable</code> instance. Use the information
+in this structure to configure your view. For example, use the provided
+environment values to configure the appearance of your view. Don't create
+this structure yourself.</p>
+
+</div>
+
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="uiviewrepresentablecontext.coordinator">
+    <h3>
+        <code>coordinator</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">coordinator</span>: <span class="type">Representable</span>.<span class="type">Coordinator</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The view's associated coordinator.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="uiviewrepresentablecontext.transaction">
+    <h3>
+        <code>transaction</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">transaction</span>: <a href="/Transaction"><span class="type">Transaction</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The current transaction.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="uiviewrepresentablecontext.environment">
+    <h3>
+        <code>environment</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">environment</span>: <a href="/EnvironmentValues"><span class="type">EnvironmentValues</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The current environment.</p>
+
+</div>
+<div class="discussion">
+    <p>Use the environment values to configure the state of your view when
+creating or updating it.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:08-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>
