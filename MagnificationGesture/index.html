@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - MagnificationGesture</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#magnificationgesture.value">Value</a></li><li class="typealias"><a href="#magnificationgesture.body">Body</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#magnificationgesture.init(minimumscaledelta:)">init(minimum​Scale​Delta:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#magnificationgesture.minimumscaledelta">minimum​Scale​Delta</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Magnification​Gesture</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">MagnificationGesture</span>: <a href="/Gesture"><span class="type">Gesture</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A gesture that recognizes a magnification motion and tracks the amount of
+magnification.</p>
+
+</div>
+<div class="discussion">
+    <p>A magnification gesture tracks how a magnification event sequence changes.
+To recognize a magnification gesture on a view, create and configure the
+gesture, and then add it to the view using the
+<code>View/gesture(_:including:)</code> modifier.</p>
+
+<p>Add a magnification gesture to a <code>Circle</code> that changes its size while the
+user performs the gesture:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">MagnificationGestureView</span>: <a href="/View"><span class="type">View</span></a> {
+
+    <span class="attribute">@</span><a href="/GestureState"><span class="type">GestureState</span></a> <span class="keyword">var</span> <span class="variable">magnifyBy</span> = <span class="variable">CGFloat</span>(<span class="number literal">1.0</span>)
+
+    <span class="keyword">var</span> <span class="variable">magnification</span>: <span class="keyword">some</span> <a href="/Gesture"><span class="type">Gesture</span></a> {
+        <span class="variable">MagnificationGesture</span>()
+            .<span class="type">updating</span>(<span class="variable">$magnifyBy</span>) { <span class="variable">currentState</span>, <span class="variable">gestureState</span>, <span class="variable">transaction</span> <span class="keyword">in</span>
+                <span class="variable">gestureState</span> = <span class="variable">currentState</span>
+            }
+    }
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Circle</span>()
+            .<span class="type">frame</span>(<span class="variable">width</span>: <span class="number literal">100</span> * <span class="variable">magnifyBy</span>,
+                   <span class="variable">height</span>: <span class="number literal">100</span> * <span class="variable">magnifyBy</span>,
+                   <span class="variable">alignment</span>: .<span class="variable">center</span>)
+            .<span class="type">gesture</span>(<span class="variable">magnification</span>)
+    }
+}
+</code></pre></body></html>
+<p>The circle's size resets to its original size when the gesture finishes.</p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- MagnificationGesture -->
+<g id="node1" class="node structure current">
+<title>MagnificationGesture</title>
+<g id="a_node1"><a xlink:href="/MagnificationGesture" xlink:title="MagnificationGesture">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">MagnificationGesture</text>
+</a>
+</g>
+</g>
+<!-- Gesture -->
+<g id="node2" class="node protocol">
+<title>Gesture</title>
+<g id="a_node2"><a xlink:href="/Gesture" xlink:title="Gesture">
+<path fill="none" stroke="black" d="M528,-36C528,-36 336,-36 336,-36 330,-36 324,-30 324,-24 324,-24 324,-12 324,-12 324,-6 330,0 336,0 336,0 528,0 528,0 534,0 540,-6 540,-12 540,-12 540,-24 540,-24 540,-30 534,-36 528,-36"/>
+<text text-anchor="middle" x="432" y="-14.3" font-family="Menlo" font-size="14.00">Gesture</text>
+</a>
+</g>
+</g>
+<!-- MagnificationGesture&#45;&gt;Gesture -->
+<g id="edge1" class="edge conformsTo">
+<title>MagnificationGesture&#45;&gt;Gesture</title>
+<path fill="none" stroke="black" d="M432,-71.7C432,-63.98 432,-54.71 432,-46.11"/>
+<polygon fill="black" stroke="black" points="435.5,-46.1 432,-36.1 428.5,-46.1 435.5,-46.1"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for MagnificationGesture.</figcaption>
+</figure>
+        <h3>Conforms To</h3>
+<dl>
+    <dt class="protocol"><code><a href="/Gesture">Gesture</a></code></dt>
+<dd><p>An instance that matches a sequence of events to a gesture, and returns a
+stream of values for each of its states.</p>
+</dd>
+</dl>
+</section>
+    <section id="nested type aliases">
+        <h2>Nested Type Aliases</h2>
+
+        <div role="article" class="typealias" id="magnificationgesture.value">
+    <h3>
+        <code>Value</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">Value</span> = <span class="type">CGFloat</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The type representing the gesture's value.</p>
+
+</div>
+</div>
+<div role="article" class="typealias" id="magnificationgesture.body">
+    <h3>
+        <code>Body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">Body</span> = <span class="type">Never</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The type of gesture representing the body of <code>Self</code>.</p>
+
+</div>
+</div>
+    </section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="magnificationgesture.init(minimumscaledelta:)">
+    <h3>
+        <code>init(minimum​Scale​Delta:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">minimumScaleDelta</span>: <span class="type">CGFloat</span> = <span class="number literal">0.01</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a magnification gesture with a given minimum delta for the
+gesture to start.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>minimum​Scale​Delta</th>
+    <td><code class="type">CGFloat</code></td>
+    <td><p>The minimum scale delta required before the gesture starts.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="magnificationgesture.minimumscaledelta">
+    <h3>
+        <code>minimum​Scale​Delta</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">minimumScaleDelta</span>: <span class="type">CGFloat</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The minimum required delta before the gesture starts.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:15-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

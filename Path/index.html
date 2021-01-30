@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - Path</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Nested Types</a></li><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#path.animatabledata">Animatable​Data</a></li><li class="typealias"><a href="#path.body">Body</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#path.init()">init()</a></li><li class="initializer"><a href="#path.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#path.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#path.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#path.init(roundedrect:cornersize:style:)">init(rounded​Rect:​corner​Size:​style:​)</a></li><li class="initializer"><a href="#path.init(roundedrect:cornerradius:style:)">init(rounded​Rect:​corner​Radius:​style:​)</a></li><li class="initializer"><a href="#path.init(ellipsein:)">init(ellipse​In:​)</a></li><li class="initializer"><a href="#path.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#path.init?(_:)">init?(_:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#path.description">description</a></li><li class="variable"><a href="#path.cgpath">cg​Path</a></li><li class="variable"><a href="#path.isempty">is​Empty</a></li><li class="variable"><a href="#path.boundingrect">bounding​Rect</a></li><li class="variable"><a href="#path.currentpoint">current​Point</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#path.contains(_:eofill:)">contains(_:​eo​Fill:​)</a></li><li class="function"><a href="#path.foreach(_:)">for​Each(_:​)</a></li><li class="function"><a href="#path.strokedpath(_:)">stroked​Path(_:​)</a></li><li class="function"><a href="#path.trimmedpath(from:to:)">trimmed​Path(from:​to:​)</a></li><li class="function"><a href="#path.==(a:b:)">==(a:​b:​)</a></li><li class="function"><a href="#path.path(in:)">path(in:​)</a></li><li class="function"><a href="#path.move(to:)">move(to:​)</a></li><li class="function"><a href="#path.addline(to:)">add​Line(to:​)</a></li><li class="function"><a href="#path.addquadcurve(to:control:)">add​Quad​Curve(to:​control:​)</a></li><li class="function"><a href="#path.addcurve(to:control1:control2:)">add​Curve(to:​control1:​control2:​)</a></li><li class="function"><a href="#path.closesubpath()">close​Subpath()</a></li><li class="function"><a href="#path.addrect(_:transform:)">add​Rect(_:​transform:​)</a></li><li class="function"><a href="#path.addroundedrect(in:cornersize:style:transform:)">add​Rounded​Rect(in:​corner​Size:​style:​transform:​)</a></li><li class="function"><a href="#path.addellipse(in:transform:)">add​Ellipse(in:​transform:​)</a></li><li class="function"><a href="#path.addrects(_:transform:)">add​Rects(_:​transform:​)</a></li><li class="function"><a href="#path.addlines(_:)">add​Lines(_:​)</a></li><li class="function"><a href="#path.addrelativearc(center:radius:startangle:delta:transform:)">add​Relative​Arc(center:​radius:​start​Angle:​delta:​transform:​)</a></li><li class="function"><a href="#path.addarc(center:radius:startangle:endangle:clockwise:transform:)">add​Arc(center:​radius:​start​Angle:​end​Angle:​clockwise:​transform:​)</a></li><li class="function"><a href="#path.addarc(tangent1end:tangent2end:radius:transform:)">add​Arc(tangent1End:​tangent2End:​radius:​transform:​)</a></li><li class="function"><a href="#path.addpath(_:transform:)">add​Path(_:​transform:​)</a></li><li class="function"><a href="#path.applying(_:)">applying(_:​)</a></li><li class="function"><a href="#path.offsetby(dx:dy:)">offset​By(dx:​dy:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Path</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="attribute">@</span><span class="attribute">frozen</span> <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Path</span>: <span class="type">Equatable</span>, <span class="type">LosslessStringConvertible</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The outline of a 2D shape.</p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="1084pt" height="242pt"
+ viewBox="0.00 0.00 1084.02 241.73" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 237.73)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-237.73 1080.02,-237.73 1080.02,4 -4,4"/>
+<!-- Path -->
+<g id="node1" class="node structure current">
+<title>Path</title>
+<g id="a_node1"><a xlink:href="/Path" xlink:title="Path">
+<path fill="none" stroke="black" stroke-width="3" d="M538.61,-143.64C538.61,-143.64 346.61,-143.64 346.61,-143.64 340.61,-143.64 334.61,-137.64 334.61,-131.64 334.61,-131.64 334.61,-119.64 334.61,-119.64 334.61,-113.64 340.61,-107.64 346.61,-107.64 346.61,-107.64 538.61,-107.64 538.61,-107.64 544.61,-107.64 550.61,-113.64 550.61,-119.64 550.61,-119.64 550.61,-131.64 550.61,-131.64 550.61,-137.64 544.61,-143.64 538.61,-143.64"/>
+<text text-anchor="middle" x="442.61" y="-121.94" font-family="Menlo" font-size="14.00">Path</text>
+</a>
+</g>
+</g>
+<!-- Equatable -->
+<g id="node2" class="node unknown">
+<title>Equatable</title>
+<path fill="none" stroke="black" d="M1064.02,-161.31C1064.02,-161.31 872.02,-161.31 872.02,-161.31 866.02,-161.31 860.02,-155.31 860.02,-149.31 860.02,-149.31 860.02,-137.31 860.02,-137.31 860.02,-131.31 866.02,-125.31 872.02,-125.31 872.02,-125.31 1064.02,-125.31 1064.02,-125.31 1070.02,-125.31 1076.02,-131.31 1076.02,-137.31 1076.02,-137.31 1076.02,-149.31 1076.02,-149.31 1076.02,-155.31 1070.02,-161.31 1064.02,-161.31"/>
+<text text-anchor="middle" x="968.02" y="-139.61" font-family="Menlo" font-size="14.00">Equatable</text>
+</g>
+<!-- Path&#45;&gt;Equatable -->
+<g id="edge2" class="edge conformsTo">
+<title>Path&#45;&gt;Equatable</title>
+<path fill="none" stroke="black" d="M550.83,-129.28C637.9,-132.21 760.08,-136.31 849.71,-139.33"/>
+<polygon fill="black" stroke="black" points="849.82,-142.83 859.93,-139.67 850.05,-135.84 849.82,-142.83"/>
+</g>
+<!-- Shape -->
+<g id="node3" class="node protocol">
+<title>Shape</title>
+<g id="a_node3"><a xlink:href="/Shape" xlink:title="Shape">
+<path fill="none" stroke="black" d="M349.83,-36C349.83,-36 157.83,-36 157.83,-36 151.83,-36 145.83,-30 145.83,-24 145.83,-24 145.83,-12 145.83,-12 145.83,-6 151.83,0 157.83,0 157.83,0 349.83,0 349.83,0 355.83,0 361.83,-6 361.83,-12 361.83,-12 361.83,-24 361.83,-24 361.83,-30 355.83,-36 349.83,-36"/>
+<text text-anchor="middle" x="253.83" y="-14.3" font-family="Menlo" font-size="14.00">Shape</text>
+</a>
+</g>
+</g>
+<!-- Path&#45;&gt;Shape -->
+<g id="edge1" class="edge conformsTo">
+<title>Path&#45;&gt;Shape</title>
+<path fill="none" stroke="black" d="M411.01,-107.62C379.02,-89.38 329.42,-61.1 294.51,-41.2"/>
+<polygon fill="black" stroke="black" points="295.95,-37.99 285.53,-36.08 292.48,-44.07 295.95,-37.99"/>
+</g>
+<!-- LosslessStringConvertible -->
+<g id="node4" class="node unknown">
+<title>LosslessStringConvertible</title>
+<path fill="none" stroke="black" d="M211,-233.73C211,-233.73 12,-233.73 12,-233.73 6,-233.73 0,-227.73 0,-221.73 0,-221.73 0,-209.73 0,-209.73 0,-203.73 6,-197.73 12,-197.73 12,-197.73 211,-197.73 211,-197.73 217,-197.73 223,-203.73 223,-209.73 223,-209.73 223,-221.73 223,-221.73 223,-227.73 217,-233.73 211,-233.73"/>
+<text text-anchor="middle" x="111.5" y="-212.03" font-family="Menlo" font-size="14.00">LosslessStringConvertible</text>
+</g>
+<!-- Path&#45;&gt;LosslessStringConvertible -->
+<g id="edge3" class="edge conformsTo">
+<title>Path&#45;&gt;LosslessStringConvertible</title>
+<path fill="none" stroke="black" d="M376.4,-143.65C321.9,-158.48 244.6,-179.52 187.56,-195.04"/>
+<polygon fill="black" stroke="black" points="186.61,-191.67 177.88,-197.67 188.45,-198.42 186.61,-191.67"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for Path.</figcaption>
+</figure>
+        <h3>Nested Types</h3>
+<dl>
+    <dt class="enumeration"><code><a href="/Path_Element">Path.Element</a></code></dt>
+<dd><p>An element of a path.</p>
+</dd>
+</dl>
+<h3>Conforms To</h3>
+<dl>
+    <dt class="protocol"><code><a href="/Shape">Shape</a></code></dt>
+<dd><p>A 2D shape that you can use when drawing a view.</p>
+</dd>
+<dt class="unknown"><code>Equatable</code></dt>
+<dt class="unknown"><code>LosslessStringConvertible</code></dt>
+</dl>
+</section>
+    <section id="nested type aliases">
+        <h2>Nested Type Aliases</h2>
+
+        <div role="article" class="typealias" id="path.animatabledata">
+    <h3>
+        <code>Animatable​Data</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">AnimatableData</span> = <a href="/EmptyAnimatableData"><span class="type">EmptyAnimatableData</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The type defining the data to animate.</p>
+
+</div>
+</div>
+<div role="article" class="typealias" id="path.body">
+    <h3>
+        <code>Body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">Body</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The type of view representing the body of this view.</p>
+
+</div>
+<div class="discussion">
+    <p>When you create a custom view, Swift infers this type from your
+implementation of the required <code>body</code> property.</p>
+
+</div>
+</div>
+    </section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="path.init()">
+    <h3>
+        <code>init()</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>()</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates an empty path.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="path.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">path</span>: <span class="type">CGPath</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a path from an immutable shape path.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="path.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">path</span>: <span class="type">CGMutablePath</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a path from a copy of a mutable shape path.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="path.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">rect</span>: <span class="type">CGRect</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a path as the given rectangle.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="path.init(roundedrect:cornersize:style:)">
+    <h3>
+        <code>init(rounded​Rect:​corner​Size:​style:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">roundedRect</span> <span class="variable">rect</span>: <span class="type">CGRect</span>, <span class="variable">cornerSize</span>: <span class="type">CGSize</span>, <span class="variable">style</span>: <a href="/RoundedCornerStyle"><span class="type">RoundedCornerStyle</span></a> = .<span class="variable">circular</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a path as the given rounded rectangle.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="path.init(roundedrect:cornerradius:style:)">
+    <h3>
+        <code>init(rounded​Rect:​corner​Radius:​style:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">roundedRect</span> <span class="variable">rect</span>: <span class="type">CGRect</span>, <span class="variable">cornerRadius</span>: <span class="type">CGFloat</span>, <span class="variable">style</span>: <a href="/RoundedCornerStyle"><span class="type">RoundedCornerStyle</span></a> = .<span class="variable">circular</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a path as the given rounded rectangle.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="path.init(ellipsein:)">
+    <h3>
+        <code>init(ellipse​In:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">ellipseIn</span> <span class="variable">rect</span>: <span class="type">CGRect</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a path as an ellipse inscribed within the given rectangle.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="path.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">callback</span>: (<span class="keyword">inout</span> <a href="/Path"><span class="type">Path</span></a>) -&gt; ())</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates an empty path, and then executes the closure to add the initial
+elements.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="path.init?(_:)">
+    <h3>
+        <code>init?(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>?(<span class="keyword">_</span> <span class="variable">string</span>: <span class="type">String</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Initializes from the result of a previous call to
+<code>Path.stringRepresentation</code>. Fails if the <code>string</code> does not
+describe a valid path.</p>
+
+</div>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="path.description">
+    <h3>
+        <code>description</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">description</span>: <span class="type">String</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A description of the path that may be used to recreate the path
+via <code>init?(_:)</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="path.cgpath">
+    <h3>
+        <code>cg​Path</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">cgPath</span>: <span class="type">CGPath</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>An immutable path representing the elements in the path.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="path.isempty">
+    <h3>
+        <code>is​Empty</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">isEmpty</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value indicating whether the path contains zero elements.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="path.boundingrect">
+    <h3>
+        <code>bounding​Rect</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">boundingRect</span>: <span class="type">CGRect</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A rectangle containing all path segments.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="path.currentpoint">
+    <h3>
+        <code>current​Point</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">currentPoint</span>: <span class="type">CGPoint</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns the last point in the path, or nil if the path contains
+no points.</p>
+
+</div>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="path.contains(_:eofill:)">
+    <h3>
+        <code>contains(_:​eo​Fill:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">contains</span>(<span class="keyword">_</span> <span class="variable">p</span>: <span class="type">CGPoint</span>, <span class="variable">eoFill</span>: <span class="type">Bool</span> = <span class="keyword">false</span>) -&gt; <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns true if the path contains a specified point.</p>
+
+</div>
+<div class="discussion">
+    <p>If <code>eoFill</code> is true, this method uses the even-odd rule to define which
+points are inside the path. Otherwise, it uses the non-zero rule.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.foreach(_:)">
+    <h3>
+        <code>for​Each(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">forEach</span>(<span class="keyword">_</span> <span class="variable">body</span>: (<a href="/Path"><span class="type">Path</span></a>.<span class="type">Element</span>) -&gt; <span class="type">Void</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Calls <code>body</code> with each element in the path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.strokedpath(_:)">
+    <h3>
+        <code>stroked​Path(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">strokedPath</span>(<span class="keyword">_</span> <span class="variable">style</span>: <a href="/StrokeStyle"><span class="type">StrokeStyle</span></a>) -&gt; <a href="/Path"><span class="type">Path</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns a stroked copy of the path using <code>style</code> to define how the
+stroked outline is created.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.trimmedpath(from:to:)">
+    <h3>
+        <code>trimmed​Path(from:​to:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">trimmedPath</span>(<span class="variable">from</span>: <span class="type">CGFloat</span>, <span class="variable">to</span>: <span class="type">CGFloat</span>) -&gt; <a href="/Path"><span class="type">Path</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns a partial copy of the path.</p>
+
+</div>
+<div class="discussion">
+    <p>The returned path contains the region between <code>from</code> and <code>to</code>, both of
+which must be fractions between zero and one defining points
+linearly-interpolated along the path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.==(a:b:)">
+    <h3>
+        <code>==(a:​b:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> ==(<span class="variable">a</span>: <a href="/Path"><span class="type">Path</span></a>, <span class="variable">b</span>: <a href="/Path"><span class="type">Path</span></a>) -&gt; <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns a Boolean value indicating whether two values are equal.</p>
+
+</div>
+<div class="discussion">
+    <p>Equality is the inverse of inequality. For any values <code>a</code> and <code>b</code>,
+<code>a == b</code> implies that <code>a != b</code> is <code>false</code>.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>lhs</th>
+    <td></td>
+    <td><p>A value to compare.</p>
+</td>
+</tr>
+<tr>
+    <th>rhs</th>
+    <td></td>
+    <td><p>Another value to compare.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="path.path(in:)">
+    <h3>
+        <code>path(in:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">path</span>(<span class="variable">in</span> <span class="keyword">_</span>: <span class="type">CGRect</span>) -&gt; <a href="/Path"><span class="type">Path</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Describes this shape as a path within a rectangular frame of reference.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>rect</th>
+    <td></td>
+    <td><p>The frame of reference for describing this shape.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>A path that describes this shape.</p>
+
+</div>
+<div role="article" class="function" id="path.move(to:)">
+    <h3>
+        <code>move(to:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">move</span>(<span class="variable">to</span> <span class="variable">p</span>: <span class="type">CGPoint</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Begins a new subpath at the specified point.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addline(to:)">
+    <h3>
+        <code>add​Line(to:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addLine</span>(<span class="variable">to</span> <span class="variable">p</span>: <span class="type">CGPoint</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Appends a straight line segment from the current point to the specified
+point.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addquadcurve(to:control:)">
+    <h3>
+        <code>add​Quad​Curve(to:​control:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addQuadCurve</span>(<span class="variable">to</span> <span class="variable">p</span>: <span class="type">CGPoint</span>, <span class="variable">control</span> <span class="variable">cp</span>: <span class="type">CGPoint</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds a quadratic Bézier curve to the path, with the specified end point
+and control point.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addcurve(to:control1:control2:)">
+    <h3>
+        <code>add​Curve(to:​control1:​control2:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addCurve</span>(<span class="variable">to</span> <span class="variable">p</span>: <span class="type">CGPoint</span>, <span class="variable">control1</span> <span class="variable">cp1</span>: <span class="type">CGPoint</span>, <span class="variable">control2</span> <span class="variable">cp2</span>: <span class="type">CGPoint</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds a cubic Bézier curve to the path, with the specified end point and
+control points.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.closesubpath()">
+    <h3>
+        <code>close​Subpath()</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">closeSubpath</span>()</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Closes and completes the current subpath.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addrect(_:transform:)">
+    <h3>
+        <code>add​Rect(_:​transform:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addRect</span>(<span class="keyword">_</span> <span class="variable">rect</span>: <span class="type">CGRect</span>, <span class="variable">transform</span>: <span class="type">CGAffineTransform</span> = .<span class="variable">identity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds a rectangular subpath to the path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addroundedrect(in:cornersize:style:transform:)">
+    <h3>
+        <code>add​Rounded​Rect(in:​corner​Size:​style:​transform:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addRoundedRect</span>(<span class="variable">in</span> <span class="variable">rect</span>: <span class="type">CGRect</span>, <span class="variable">cornerSize</span>: <span class="type">CGSize</span>, <span class="variable">style</span>: <a href="/RoundedCornerStyle"><span class="type">RoundedCornerStyle</span></a> = .<span class="variable">circular</span>, <span class="variable">transform</span>: <span class="type">CGAffineTransform</span> = .<span class="variable">identity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds a rounded rectangle to the path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addellipse(in:transform:)">
+    <h3>
+        <code>add​Ellipse(in:​transform:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addEllipse</span>(<span class="variable">in</span> <span class="variable">rect</span>: <span class="type">CGRect</span>, <span class="variable">transform</span>: <span class="type">CGAffineTransform</span> = .<span class="variable">identity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds an ellipse to the path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addrects(_:transform:)">
+    <h3>
+        <code>add​Rects(_:​transform:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addRects</span>(<span class="keyword">_</span> <span class="variable">rects</span>: [<span class="type">CGRect</span>], <span class="variable">transform</span>: <span class="type">CGAffineTransform</span> = .<span class="variable">identity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds a sequence of rectangular subpaths to the path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addlines(_:)">
+    <h3>
+        <code>add​Lines(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addLines</span>(<span class="keyword">_</span> <span class="variable">lines</span>: [<span class="type">CGPoint</span>])</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds a sequence of connected straight-line segments to the path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addrelativearc(center:radius:startangle:delta:transform:)">
+    <h3>
+        <code>add​Relative​Arc(center:​radius:​start​Angle:​delta:​transform:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addRelativeArc</span>(<span class="variable">center</span>: <span class="type">CGPoint</span>, <span class="variable">radius</span>: <span class="type">CGFloat</span>, <span class="variable">startAngle</span>: <a href="/Angle"><span class="type">Angle</span></a>, <span class="variable">delta</span>: <a href="/Angle"><span class="type">Angle</span></a>, <span class="variable">transform</span>: <span class="type">CGAffineTransform</span> = .<span class="variable">identity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds an arc of a circle to the path, specified with a radius and a
+difference in angle.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addarc(center:radius:startangle:endangle:clockwise:transform:)">
+    <h3>
+        <code>add​Arc(center:​radius:​start​Angle:​end​Angle:​clockwise:​transform:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addArc</span>(<span class="variable">center</span>: <span class="type">CGPoint</span>, <span class="variable">radius</span>: <span class="type">CGFloat</span>, <span class="variable">startAngle</span>: <a href="/Angle"><span class="type">Angle</span></a>, <span class="variable">endAngle</span>: <a href="/Angle"><span class="type">Angle</span></a>, <span class="variable">clockwise</span>: <span class="type">Bool</span>, <span class="variable">transform</span>: <span class="type">CGAffineTransform</span> = .<span class="variable">identity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds an arc of a circle to the path, specified with a radius and angles.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addarc(tangent1end:tangent2end:radius:transform:)">
+    <h3>
+        <code>add​Arc(tangent1End:​tangent2End:​radius:​transform:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addArc</span>(<span class="variable">tangent1End</span> <span class="variable">p1</span>: <span class="type">CGPoint</span>, <span class="variable">tangent2End</span> <span class="variable">p2</span>: <span class="type">CGPoint</span>, <span class="variable">radius</span>: <span class="type">CGFloat</span>, <span class="variable">transform</span>: <span class="type">CGAffineTransform</span> = .<span class="variable">identity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Adds an arc of a circle to the path, specified with a radius and two
+tangent lines.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.addpath(_:transform:)">
+    <h3>
+        <code>add​Path(_:​transform:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="attribute">mutating</span> <span class="keyword">func</span> <span class="function">addPath</span>(<span class="keyword">_</span> <span class="variable">path</span>: <a href="/Path"><span class="type">Path</span></a>, <span class="variable">transform</span>: <span class="type">CGAffineTransform</span> = .<span class="variable">identity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Appends a copy of the given path to this path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.applying(_:)">
+    <h3>
+        <code>applying(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">applying</span>(<span class="keyword">_</span> <span class="variable">transform</span>: <span class="type">CGAffineTransform</span>) -&gt; <a href="/Path"><span class="type">Path</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns a path constructed by applying the transform to all points of
+the path.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="path.offsetby(dx:dy:)">
+    <h3>
+        <code>offset​By(dx:​dy:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">offsetBy</span>(<span class="variable">dx</span>: <span class="type">CGFloat</span>, <span class="variable">dy</span>: <span class="type">CGFloat</span>) -&gt; <a href="/Path"><span class="type">Path</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns a path constructed by translating <code>self</code> by <code>(dx, dy)</code>.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:08-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

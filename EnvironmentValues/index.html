@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - EnvironmentValues</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#environmentvalues.init()">init()</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#environmentvalues.description">description</a></li><li class="variable"><a href="#environmentvalues.disableautocorrection">disable​Autocorrection</a></li><li class="variable"><a href="#environmentvalues.sizecategory">size​Category</a></li><li class="variable"><a href="#environmentvalues.managedobjectcontext">managed​Object​Context</a></li><li class="variable"><a href="#environmentvalues.undomanager">undo​Manager</a></li><li class="variable"><a href="#environmentvalues.layoutdirection">layout​Direction</a></li><li class="variable"><a href="#environmentvalues.redactionreasons">redaction​Reasons</a></li><li class="variable"><a href="#environmentvalues.scenephase">scene​Phase</a></li><li class="variable"><a href="#environmentvalues.defaultminlistrowheight">default​Min​List​Row​Height</a></li><li class="variable"><a href="#environmentvalues.defaultminlistheaderheight">default​Min​List​Header​Height</a></li><li class="variable"><a href="#environmentvalues.isenabled">is​Enabled</a></li><li class="variable"><a href="#environmentvalues.isfocused">is​Focused</a></li><li class="variable"><a href="#environmentvalues.font">font</a></li><li class="variable"><a href="#environmentvalues.displayscale">display​Scale</a></li><li class="variable"><a href="#environmentvalues.imagescale">image​Scale</a></li><li class="variable"><a href="#environmentvalues.pixellength">pixel​Length</a></li><li class="variable"><a href="#environmentvalues.legibilityweight">legibility​Weight</a></li><li class="variable"><a href="#environmentvalues.locale">locale</a></li><li class="variable"><a href="#environmentvalues.calendar">calendar</a></li><li class="variable"><a href="#environmentvalues.timezone">time​Zone</a></li><li class="variable"><a href="#environmentvalues.colorscheme">color​Scheme</a></li><li class="variable"><a href="#environmentvalues.colorschemecontrast">color​Scheme​Contrast</a></li><li class="variable"><a href="#environmentvalues.horizontalsizeclass">horizontal​Size​Class</a></li><li class="variable"><a href="#environmentvalues.verticalsizeclass">vertical​Size​Class</a></li><li class="variable"><a href="#environmentvalues.accessibilityenabled">accessibility​Enabled</a></li><li class="variable"><a href="#environmentvalues.accessibilitydifferentiatewithoutcolor">accessibility​Differentiate​Without​Color</a></li><li class="variable"><a href="#environmentvalues.accessibilityreducetransparency">accessibility​Reduce​Transparency</a></li><li class="variable"><a href="#environmentvalues.accessibilityreducemotion">accessibility​Reduce​Motion</a></li><li class="variable"><a href="#environmentvalues.accessibilityinvertcolors">accessibility​Invert​Colors</a></li><li class="variable"><a href="#environmentvalues.accessibilityshowbuttonshapes">accessibility​Show​Button​Shapes</a></li><li class="variable"><a href="#environmentvalues.openurl">open​URL</a></li><li class="variable"><a href="#environmentvalues.multilinetextalignment">multiline​Text​Alignment</a></li><li class="variable"><a href="#environmentvalues.truncationmode">truncation​Mode</a></li><li class="variable"><a href="#environmentvalues.linespacing">line​Spacing</a></li><li class="variable"><a href="#environmentvalues.allowstightening">allows​Tightening</a></li><li class="variable"><a href="#environmentvalues.linelimit">line​Limit</a></li><li class="variable"><a href="#environmentvalues.minimumscalefactor">minimum​Scale​Factor</a></li><li class="variable"><a href="#environmentvalues.textcase">text​Case</a></li><li class="variable"><a href="#environmentvalues.editmode">edit​Mode</a></li><li class="variable"><a href="#environmentvalues.presentationmode">presentation​Mode</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Environment​Values</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">EnvironmentValues</span>: <span class="type">CustomStringConvertible</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A collection of environment values propagated through a view hierarchy.</p>
+
+</div>
+<div class="discussion">
+    <p>SwiftUI exposes a collection of values to your app's views in an
+<code>EnvironmentValues</code> structure. To read a value from the structure,
+declare a property using the <code>Environment</code> property wrapper and
+specify the value's key path. For example, you can read the current locale:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><a href="/Environment"><span class="type">Environment</span></a>(\.<span class="type">locale</span>) <span class="keyword">var</span> <span class="variable">locale</span>: <span class="type">Locale</span>
+</code></pre></body></html>
+<p>Use the property you declare to dynamically control a view's layout.
+SwiftUI automatically sets or updates many environment values, like
+<code>EnvironmentValues/pixelLength</code>, <code>EnvironmentValues/scenePhase</code>, or
+<code>EnvironmentValues/locale</code>, based on device characteristics, system state,
+or user settings. For others, like <code>EnvironmentValues/lineLimit</code>, SwiftUI
+provides a reasonable default value.</p>
+
+<p>You can set or override some values using the <code>View/environment(_:_:)</code>
+view modifier:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">MyView</span>()
+    .<span class="type">environment</span>(\.<span class="type">lineLimit</span>, <span class="number literal">2</span>)
+</code></pre></body></html>
+<p>The value that you set affects the environment for the view that you modify
+--- including its descendants in the view hierarchy --- but only up to the
+point where you apply a different environment modifier.</p>
+
+<p>SwiftUI provides dedicated view modifiers for setting some values, which
+typically makes your code easier to read. For example, rather than setting
+the <code>EnvironmentValues/lineLimit</code> value directly, as in the previous
+example, you should instead use the <code>View/lineLimit(_:)</code> modifier:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">MyView</span>()
+    .<span class="type">lineLimit</span>(<span class="number literal">2</span>)
+</code></pre></body></html>
+<p>In some cases, using a dedicated view modifier provides additional
+functionality. For example, you must use the
+<code>View/preferredColorScheme(_:)</code> modifier rather than setting
+<code>EnvironmentValues/colorScheme</code> directly to ensure that the new
+value propagates up to the presenting container when presenting a view
+like a popover:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">MyView</span>()
+    .<span class="type">popover</span>(<span class="variable">isPresented</span>: <span class="type">$isPopped</span>) {
+        <span class="variable">PopoverContent</span>()
+            .<span class="type">preferredColorScheme</span>(.<span class="variable">dark</span>)
+    }
+</code></pre></body></html>
+<p>Create custom environment values by defining a type that
+conforms to the <code>EnvironmentKey</code> protocol, and then extending the
+environment values structure with a new property. Use your key to get and
+set the value, and provide a dedicated modifier for clients to use when
+setting the value:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">private</span> <span class="keyword">struct</span> <span class="type">MyEnvironmentKey</span>: <a href="/EnvironmentKey"><span class="type">EnvironmentKey</span></a> {
+    <span class="keyword">static</span> <span class="keyword">let</span> <span class="variable">defaultValue</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal">Default value</span><span class="string literal">"</span>
+}
+
+<span class="keyword">extension</span> <span class="type">EnvironmentValues</span> {
+    <span class="keyword">var</span> <span class="variable">myCustomValue</span>: <span class="type">String</span> {
+        <span class="keyword">get</span> { <span class="keyword">self</span>[<span class="variable">MyEnvironmentKey</span>.<span class="keyword">self</span>] }
+        <span class="keyword">set</span> { <span class="keyword">self</span>[<span class="variable">MyEnvironmentKey</span>.<span class="keyword">self</span>] = <span class="variable">newValue</span> }
+    }
+}
+
+<span class="keyword">extension</span> <a href="/View"><span class="type">View</span></a> {
+    <span class="keyword">func</span> <span class="function">myCustomValue</span>(<span class="keyword">_</span> <span class="variable">myCustomValue</span>: <span class="type">String</span>) -&gt; <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">environment</span>(\.<span class="type">myCustomValue</span>, <span class="variable">myCustomValue</span>)
+    }
+}
+</code></pre></body></html>
+<p>Clients of your value then access the value in the usual way, reading it
+with the <code>Environment</code> property wrapper, and setting it with the
+<code>myCustomValue</code> view modifier.</p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- EnvironmentValues -->
+<g id="node1" class="node structure current">
+<title>EnvironmentValues</title>
+<g id="a_node1"><a xlink:href="/EnvironmentValues" xlink:title="EnvironmentValues">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">EnvironmentValues</text>
+</a>
+</g>
+</g>
+<!-- CustomStringConvertible -->
+<g id="node2" class="node unknown">
+<title>CustomStringConvertible</title>
+<path fill="none" stroke="black" d="M528,-36C528,-36 336,-36 336,-36 330,-36 324,-30 324,-24 324,-24 324,-12 324,-12 324,-6 330,0 336,0 336,0 528,0 528,0 534,0 540,-6 540,-12 540,-12 540,-24 540,-24 540,-30 534,-36 528,-36"/>
+<text text-anchor="middle" x="432" y="-14.3" font-family="Menlo" font-size="14.00">CustomStringConvertible</text>
+</g>
+<!-- EnvironmentValues&#45;&gt;CustomStringConvertible -->
+<g id="edge1" class="edge conformsTo">
+<title>EnvironmentValues&#45;&gt;CustomStringConvertible</title>
+<path fill="none" stroke="black" d="M432,-71.7C432,-63.98 432,-54.71 432,-46.11"/>
+<polygon fill="black" stroke="black" points="435.5,-46.1 432,-36.1 428.5,-46.1 435.5,-46.1"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for EnvironmentValues.</figcaption>
+</figure>
+        <h3>Conforms To</h3>
+<dl>
+    <dt class="unknown"><code>CustomStringConvertible</code></dt>
+</dl>
+</section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="environmentvalues.init()">
+    <h3>
+        <code>init()</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>()</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates an environment values instance.</p>
+
+</div>
+<div class="discussion">
+    <p>You don't typically create an instance of <code>EnvironmentValues</code>
+directly. Doing so would provide access only to default values that
+don't update based on system settings or device characteristics.
+Instead, you rely on an environment values' instance
+that SwiftUI manages for you when you use the <code>Environment</code>
+property wrapper and the <code>View/environment(_:_:)</code> view modifier.</p>
+
+</div>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="environmentvalues.description">
+    <h3>
+        <code>description</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">description</span>: <span class="type">String</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A string that represents the contents of the environment values
+instance.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.disableautocorrection">
+    <h3>
+        <code>disable​Autocorrection</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">disableAutocorrection</span>: <span class="type">Bool</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that determines whether the view hierarchy has
+auto-correction enabled.</p>
+
+</div>
+<div class="discussion">
+    <p>When the value is <code>nil</code>, SwiftUI uses the system default. The default
+value is <code>nil</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.sizecategory">
+    <h3>
+        <code>size​Category</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">sizeCategory</span>: <a href="/ContentSizeCategory"><span class="type">ContentSizeCategory</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The preferred size of the content.</p>
+
+</div>
+<div class="discussion">
+    <p>The default value is <code>ContentSizeCategory/large</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.managedobjectcontext">
+    <h3>
+        <code>managed​Object​Context</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">managedObjectContext</span>: <span class="type">NSManagedObjectContext</span></code></pre></body></html>
+</div>
+<div role="article" class="variable" id="environmentvalues.undomanager">
+    <h3>
+        <code>undo​Manager</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">undoManager</span>: <span class="type">UndoManager</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The undo manager used to register a view's undo operations.</p>
+
+</div>
+<div class="discussion">
+    <p>This value is <code>nil</code> when the environment represents a context that
+doesn't support undo and redo operations. You can skip registration of
+an undo operation when this value is <code>nil</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.layoutdirection">
+    <h3>
+        <code>layout​Direction</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">layoutDirection</span>: <a href="/LayoutDirection"><span class="type">LayoutDirection</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The layout direction associated with the current environment.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this value to determine whether the environment uses a left-to-right
+or right-to-left orientation.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.redactionreasons">
+    <h3>
+        <code>redaction​Reasons</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">redactionReasons</span>: <a href="/RedactionReasons"><span class="type">RedactionReasons</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The current redaction reasons applied to the view hierarchy.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.scenephase">
+    <h3>
+        <code>scene​Phase</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">scenePhase</span>: <a href="/ScenePhase"><span class="type">ScenePhase</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The current phase of the scene.</p>
+
+</div>
+<div class="discussion">
+    <p>The system sets this value to provide an indication of the
+operational state of a scene or collection of scenes. The exact
+meaning depends on where you access the value. For more information,
+see <code>ScenePhase</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.defaultminlistrowheight">
+    <h3>
+        <code>default​Min​List​Row​Height</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">defaultMinListRowHeight</span>: <span class="type">CGFloat</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The default minimum height of a row in a list.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.defaultminlistheaderheight">
+    <h3>
+        <code>default​Min​List​Header​Height</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">defaultMinListHeaderHeight</span>: <span class="type">CGFloat</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The default minimum height of a header in a list.</p>
+
+</div>
+<div class="discussion">
+    <p>When this value is <code>nil</code>, the system chooses the appropriate height. The
+default is <code>nil</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.isenabled">
+    <h3>
+        <code>is​Enabled</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">isEnabled</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that indicates whether the view associated with this
+environment allows user interaction.</p>
+
+</div>
+<div class="discussion">
+    <p>The default value is <code>true</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.isfocused">
+    <h3>
+        <code>is​Focused</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">isFocused</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns whether the nearest focusable ancestor has focus.</p>
+
+</div>
+<div class="discussion">
+    <p>If there is no focusable ancestor, the value is <code>false</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.font">
+    <h3>
+        <code>font</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">font</span>: <a href="/Font"><span class="type">Font</span></a>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The default font of this environment.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.displayscale">
+    <h3>
+        <code>display​Scale</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">displayScale</span>: <span class="type">CGFloat</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The display scale of this environment.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.imagescale">
+    <h3>
+        <code>image​Scale</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">imageScale</span>: <a href="/Image"><span class="type">Image</span></a>.<span class="type">Scale</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The image scale for this environment.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.pixellength">
+    <h3>
+        <code>pixel​Length</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">pixelLength</span>: <span class="type">CGFloat</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The size of a pixel on the screen.</p>
+
+</div>
+<div class="discussion">
+    <p>This value is equal to <code>1</code> divided by
+<code>EnvironmentValues/displayScale</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.legibilityweight">
+    <h3>
+        <code>legibility​Weight</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">legibilityWeight</span>: <a href="/LegibilityWeight"><span class="type">LegibilityWeight</span></a>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The font weight to apply to text.</p>
+
+</div>
+<div class="discussion">
+    <p>This value reflects the value of the Bold Text display setting found in
+the Accessibility settings.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.locale">
+    <h3>
+        <code>locale</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">locale</span>: <span class="type">Locale</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The current locale that views should use.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.calendar">
+    <h3>
+        <code>calendar</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">calendar</span>: <span class="type">Calendar</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The current calendar that views should use when handling dates.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.timezone">
+    <h3>
+        <code>time​Zone</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">timeZone</span>: <span class="type">TimeZone</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The current time zone that views should use when handling dates.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.colorscheme">
+    <h3>
+        <code>color​Scheme</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">colorScheme</span>: <a href="/ColorScheme"><span class="type">ColorScheme</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The color scheme of this environment.</p>
+
+</div>
+<div class="discussion">
+    <p>When writing custom drawing code that depends on the current color
+scheme, you should also consider the
+<code>EnvironmentValues/colorSchemeContrast</code> property. You can specify
+images and colors in asset catalogs according to either the
+<code>ColorScheme/light</code> or <code>ColorScheme/dark</code> color scheme, as well as
+standard or increased contrast. The correct image or color displays
+automatically for the current environment.</p>
+
+<p>You only need to check <code>colorScheme</code> and
+<code>EnvironmentValues/colorSchemeContrast</code> for custom drawing if the
+differences go beyond images and colors.</p>
+
+<p>Setting the <code>colorScheme</code> environment value directly is an advanced use
+case, as it changes the color scheme of the contained views but <em>not</em> of
+the container. Instead, consider using the
+<code>View/preferredColorScheme(_:)</code> modifier, which propagates to the
+presentation containing the view.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.colorschemecontrast">
+    <h3>
+        <code>color​Scheme​Contrast</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">colorSchemeContrast</span>: <a href="/ColorSchemeContrast"><span class="type">ColorSchemeContrast</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The contrast associated with the color scheme of this environment.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.horizontalsizeclass">
+    <h3>
+        <code>horizontal​Size​Class</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">horizontalSizeClass</span>: <a href="/UserInterfaceSizeClass"><span class="type">UserInterfaceSizeClass</span></a>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The horizontal size class of this environment.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.verticalsizeclass">
+    <h3>
+        <code>vertical​Size​Class</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">verticalSizeClass</span>: <a href="/UserInterfaceSizeClass"><span class="type">UserInterfaceSizeClass</span></a>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The vertical size class of this environment.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.accessibilityenabled">
+    <h3>
+        <code>accessibility​Enabled</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">accessibilityEnabled</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that indicates whether the user has enabled an assistive
+technology.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.accessibilitydifferentiatewithoutcolor">
+    <h3>
+        <code>accessibility​Differentiate​Without​Color</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">accessibilityDifferentiateWithoutColor</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Whether the system preference for Differentiate without Color is enabled.</p>
+
+</div>
+<div class="discussion">
+    <p>If this is true, UI should not convey information using color alone
+and instead should use shapes or glyphs to convey information.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.accessibilityreducetransparency">
+    <h3>
+        <code>accessibility​Reduce​Transparency</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">accessibilityReduceTransparency</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Whether the system preference for Reduce Transparency is enabled.</p>
+
+</div>
+<div class="discussion">
+    <p>If this property's value is true, UI (mainly window) backgrounds should
+not be semi-transparent; they should be opaque.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.accessibilityreducemotion">
+    <h3>
+        <code>accessibility​Reduce​Motion</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">accessibilityReduceMotion</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Whether the system preference for Reduce Motion is enabled.</p>
+
+</div>
+<div class="discussion">
+    <p>If this property's value is true, UI should avoid large animations,
+especially those that simulate the third dimension.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.accessibilityinvertcolors">
+    <h3>
+        <code>accessibility​Invert​Colors</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">accessibilityInvertColors</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Whether the system preference for Invert Colors is enabled.</p>
+
+</div>
+<div class="discussion">
+    <p>If this property's value is true then the display will be inverted.
+In these cases it may be needed for UI drawing to be adjusted to in
+order to display optimally when inverted.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.accessibilityshowbuttonshapes">
+    <h3>
+        <code>accessibility​Show​Button​Shapes</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">accessibilityShowButtonShapes</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Whether the system preference for Show Button Shapes is enabled.</p>
+
+</div>
+<div class="discussion">
+    <p>If this property's value is true, interactive custom controls
+such as buttons should be drawn in such a way that their edges
+and borders are clearly visible.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.openurl">
+    <h3>
+        <code>open​URL</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">openURL</span>: <a href="/OpenURLAction"><span class="type">OpenURLAction</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Opens a URL using the appropriate system service.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.multilinetextalignment">
+    <h3>
+        <code>multiline​Text​Alignment</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">multilineTextAlignment</span>: <a href="/TextAlignment"><span class="type">TextAlignment</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A value that indicates how text instance aligns its lines when the
+content wraps or contains newlines.</p>
+
+</div>
+<div class="discussion">
+    <p>Use alignment parameters on a parent view to align <code>Text</code> with respect
+to its parent. Because the horizontal bounds of <code>TextField</code> never
+exceed its graphical extent, this value has little to no effect on
+single-line text.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.truncationmode">
+    <h3>
+        <code>truncation​Mode</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">truncationMode</span>: <a href="/Text"><span class="type">Text</span></a>.<span class="type">TruncationMode</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A value that indicates how the layout truncates the last line of text to
+fit into the available space.</p>
+
+</div>
+<div class="discussion">
+    <p>The default value is <code>Text/TruncationMode/tail</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.linespacing">
+    <h3>
+        <code>line​Spacing</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">lineSpacing</span>: <span class="type">CGFloat</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The distance in points between the bottom of one line fragment and the
+top of the next.</p>
+
+</div>
+<div class="discussion">
+    <p>This value is always nonnegative.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.allowstightening">
+    <h3>
+        <code>allows​Tightening</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">allowsTightening</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A Boolean value that indicates whether inter-character spacing should
+tighten to fit the text into the available space.</p>
+
+</div>
+<div class="discussion">
+    <p>The default value is <code>false</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.linelimit">
+    <h3>
+        <code>line​Limit</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">lineLimit</span>: <span class="type">Int</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The maximum number of lines that text can occupy in a view.</p>
+
+</div>
+<div class="discussion">
+    <p>The maximum number of lines is <code>1</code> if the value is less than <code>1</code>. If the
+value is <code>nil</code>, the text uses as many lines as required. The default is
+<code>nil</code>.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.minimumscalefactor">
+    <h3>
+        <code>minimum​Scale​Factor</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">minimumScaleFactor</span>: <span class="type">CGFloat</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The minimum permissible proportion to shrink the font size to fit
+the text into the available space.</p>
+
+</div>
+<div class="discussion">
+    <p>In the example below, a label with a <code>minimumScaleFactor</code> of <code>0.5</code>
+draws its text in a font size as small as half of the actual font if
+needed to fit into the space next to the text input field:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">HStack</span> {
+    <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">This is a very long label:</span><span class="string literal">"</span>)
+        .<span class="type">lineLimit</span>(<span class="number literal">1</span>)
+        .<span class="type">minimumScaleFactor</span>(<span class="number literal">0.5</span>)
+    <span class="variable">TextField</span>(<span class="string literal">"</span><span class="string literal">My Long Text Field</span><span class="string literal">"</span>, <span class="variable">text</span>: <span class="type">$myTextField</span>)
+        .<span class="type">frame</span>(<span class="variable">width</span>: <span class="number literal">250</span>, <span class="variable">height</span>: <span class="number literal">50</span>, <span class="variable">alignment</span>: .<span class="variable">center</span>)
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-view-minimumScaleFactor.png" alt="A screenshot showing the effects of setting the minimumScaleFactor on the text in a view" /></p>
+
+<p>You can set the minimum scale factor to any value greater than <code>0</code> and
+less than or equal to <code>1</code>. The default value is <code>1</code>.</p>
+
+<p>SwiftUI uses this value to shrink text that doesn't fit in a view when
+it's okay to shrink the text. For example, a label with a
+<code>minimumScaleFactor</code> of <code>0.5</code> draws its text in a font size as small as
+half the actual font if needed.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.textcase">
+    <h3>
+        <code>text​Case</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">textCase</span>: <a href="/Text"><span class="type">Text</span></a>.<span class="type">Case</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A stylistic override to transform the case of <code>Text</code> when displayed,
+using the environment's locale.</p>
+
+</div>
+<div class="discussion">
+    <p>The default value is <code>nil</code>, displaying the <code>Text</code> without any case
+changes.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.editmode">
+    <h3>
+        <code>edit​Mode</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">editMode</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<a href="/EditMode"><span class="type">EditMode</span></a>&gt;?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The mode indicating whether the user can edit the contents of a view
+associated with this environment.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="environmentvalues.presentationmode">
+    <h3>
+        <code>presentation​Mode</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">presentationMode</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<a href="/PresentationMode"><span class="type">PresentationMode</span></a>&gt;</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A binding to the current presentation mode of the view associated with
+this environment.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:12-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

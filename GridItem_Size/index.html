@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - GridItem.Size</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Member Of</a></li></ul></li><li><a href="#enumeration cases">Enumeration Cases</a><ul><li class="case"><a href="#griditem.size.fixed">fixed</a></li><li class="case"><a href="#griditem.size.flexible">flexible</a></li><li class="case"><a href="#griditem.size.adaptive">adaptive</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Enumeration</small>
+    <code class="name">Grid​Item.​Size</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">enum</span> <span class="type">Size</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The size in the minor axis of one or more rows or columns in a grid
+layout.</p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        
+        <h3>Member Of</h3>
+<dl>
+    <dt class="structure"><code><a href="/GridItem">GridItem</a></code></dt>
+<dd><p>A description of a single grid item, such as a row or a column.</p>
+</dd>
+</dl>
+</section>
+    <section id="enumeration cases">
+        <h2>Enumeration Cases</h2>
+
+        <div role="article" class="case" id="griditem.size.fixed">
+    <h3>
+        <code>fixed</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">case</span> <span class="variable">fixed</span>(: <span class="type">CGFloat</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A single item with the specified fixed size.</p>
+
+</div>
+</div>
+<div role="article" class="case" id="griditem.size.flexible">
+    <h3>
+        <code>flexible</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">case</span> <span class="variable">flexible</span>(<span class="variable">minimum</span>: <span class="type">CGFloat</span> = <span class="number literal">10</span>, <span class="variable">maximum</span>: <span class="type">CGFloat</span> = .<span class="variable">infinity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A single flexible item.</p>
+
+</div>
+<div class="discussion">
+    <p>The size of this item is the size of the grid with spacing and
+inflexible items removed, divided by the number of flexible items,
+clamped to the provided bounds.</p>
+
+</div>
+</div>
+<div role="article" class="case" id="griditem.size.adaptive">
+    <h3>
+        <code>adaptive</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">case</span> <span class="variable">adaptive</span>(<span class="variable">minimum</span>: <span class="type">CGFloat</span>, <span class="variable">maximum</span>: <span class="type">CGFloat</span> = .<span class="variable">infinity</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Multiple items in the space of a single flexible item.</p>
+
+</div>
+<div class="discussion">
+    <p>This size case places one or more items into the space assigned to
+a single <code>flexible</code> item, using the provided bounds and
+spacing to decide exactly how many items fit. This approach prefers
+to insert as many items of the <code>minimum</code> size as possible
+but lets them increase to the <code>maximum</code> size.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:08-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

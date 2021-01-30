@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - Binding</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#binding.init(get:set:)">init(get:​set:​)</a></li><li class="initializer"><a href="#binding.init(get:set:)">init(get:​set:​)</a></li><li class="initializer"><a href="#binding.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#binding.init?(_:)">init?(_:​)</a></li><li class="initializer"><a href="#binding.init(_:)">init(_:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#binding.transaction">transaction</a></li><li class="variable"><a href="#binding.projectedvalue">projected​Value</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#binding.constant(_:)">constant(_:​)</a></li><li class="function"><a href="#binding.transaction(_:)">transaction(_:​)</a></li><li class="function"><a href="#binding.animation(_:)">animation(_:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Binding</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="attribute">@</span><span class="attribute">frozen</span> <span class="attribute">@</span><span class="attribute">propertyWrapper</span> <span class="attribute">@</span><span class="attribute">dynamicMemberLookup</span> <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">Binding</span>&lt;<span class="variable">Value</span>&gt;</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A property wrapper type that can read and write a value owned by a source of
+truth.</p>
+
+</div>
+<div class="discussion">
+    <p>Use a binding to create a two-way connection between a property that stores
+data, and a view that displays and changes the data. A binding connects a
+property to a source of truth stored elsewhere, instead of storing data
+directly. For example, a button that toggles between play and pause can
+create a binding to a property of its parent view using the <code>Binding</code>
+property wrapper.</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">PlayButton</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><span class="type">Binding</span> <span class="keyword">var</span> <span class="variable">isPlaying</span>: <span class="type">Bool</span>
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Button</span>(<span class="variable">action</span>: {
+            <span class="keyword">self</span>.<span class="type">isPlaying</span>.<span class="type">toggle</span>()
+        }) {
+            <span class="variable">Image</span>(<span class="variable">systemName</span>: <span class="type">isPlaying</span> ? <span class="string literal">"</span><span class="string literal">pause.circle</span><span class="string literal">"</span> : <span class="string literal">"</span><span class="string literal">play.circle</span><span class="string literal">"</span>)
+        }
+    }
+}
+</code></pre></body></html>
+<p>The parent view declares a property to hold the playing state, using the
+<code>State</code> property wrapper to indicate that this property is the value's
+source of truth.</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">PlayerView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="keyword">var</span> <span class="variable">episode</span>: <span class="type">Episode</span>
+    <span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">isPlaying</span>: <span class="type">Bool</span> = <span class="keyword">false</span>
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">VStack</span> {
+            <span class="variable">Text</span>(<span class="variable">episode</span>.<span class="type">title</span>)
+            <span class="variable">Text</span>(<span class="variable">episode</span>.<span class="type">showTitle</span>)
+            <span class="variable">PlayButton</span>(<span class="variable">isPlaying</span>: <span class="type">$isPlaying</span>)
+        }
+    }
+}
+</code></pre></body></html>
+<p>When <code>PlayerView</code> initializes <code>PlayButton</code>, it passes a binding of its state
+property into the button's binding property. Applying the <code>$</code> prefix to a
+property wrapped value returns its <code>State/projectedValue</code>, which for a
+state property wrapper returns a binding to the value.</p>
+
+<p>Whenever the user taps the <code>PlayButton</code>, the <code>PlayerView</code> updates its
+<code>isPlaying</code> state.</p>
+
+</div>
+
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="binding.init(get:set:)">
+    <h3>
+        <code>init(get:​set:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">get</span>: <span class="attribute">@</span><span class="attribute">escaping</span> () -&gt; <span class="type">Value</span>, <span class="variable">set</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Value</span>) -&gt; <span class="type">Void</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a binding with closures that read and write the binding value.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>get</th>
+    <td><code class="type">@escaping () -&gt; Value</code></td>
+    <td><p>A closure that retrieves the binding value. The closure has no parameters, and returns a value.</p>
+</td>
+</tr>
+<tr>
+    <th>set</th>
+    <td><code class="type">@escaping (Value) -&gt; Void</code></td>
+    <td><ul>
+<li>newValue: The new value of the binding value.</li>
+</ul>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="binding.init(get:set:)">
+    <h3>
+        <code>init(get:​set:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">get</span>: <span class="attribute">@</span><span class="attribute">escaping</span> () -&gt; <span class="type">Value</span>, <span class="variable">set</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Value</span>, <a href="/Transaction"><span class="type">Transaction</span></a>) -&gt; <span class="type">Void</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a binding with a closure that reads from the binding value, and
+a closure that applies a transaction when writing to the binding value.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>get</th>
+    <td><code class="type">@escaping () -&gt; Value</code></td>
+    <td><p>A closure to retrieve the binding value. The closure has no parameters, and returns a value.</p>
+</td>
+</tr>
+<tr>
+    <th>set</th>
+    <td><code class="type">@escaping (Value, Transaction) -&gt; Void</code></td>
+    <td><ul>
+<li>newValue: The new value of the binding value.</li>
+<li>transaction: The transaction to apply when setting a new value.</li>
+</ul>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="binding.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">V</span>&gt;(<span class="keyword">_</span> <span class="variable">base</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">V</span>&gt;) <span class="keyword">where</span> <span class="type">Value</span> == <span class="type">V</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a binding by projecting the base value to an optional value.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>base</th>
+    <td><code class="type">Binding&lt;V&gt;</code></td>
+    <td><p>A value to project to an optional value.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="binding.init?(_:)">
+    <h3>
+        <code>init?(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>?(<span class="keyword">_</span> <span class="variable">base</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">Value</span>?&gt;)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a binding by projecting the base value to an unwrapped value.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>base</th>
+    <td><code class="type">Binding&lt;Value?&gt;</code></td>
+    <td><p>A value to project to an unwrapped value.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>A new binding or <code>nil</code> when <code>base</code> is <code>nil</code>.</p>
+
+</div>
+<div role="article" class="initializer" id="binding.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">V</span>&gt;(<span class="keyword">_</span> <span class="variable">base</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">V</span>&gt;) <span class="keyword">where</span> <span class="type">Value</span> == <span class="type">AnyHashable</span>, <span class="type">V</span>: <span class="type">Hashable</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a binding by projecting the base value to a hashable value.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>base</th>
+    <td><code class="type">Binding&lt;V&gt;</code></td>
+    <td><p>A <code>Hashable</code> value to project to an <code>AnyHashable</code> value.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="binding.transaction">
+    <h3>
+        <code>transaction</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">transaction</span>: <a href="/Transaction"><span class="type">Transaction</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The binding's transaction.</p>
+
+</div>
+<div class="discussion">
+    <p>The transaction captures the information needed to update the view when
+the binding value changes.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="binding.projectedvalue">
+    <h3>
+        <code>projected​Value</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">projectedValue</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">Value</span>&gt;</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A projection of the binding value that returns a binding.</p>
+
+</div>
+<div class="discussion">
+    <p>Use the projected value to pass a binding value down a view hierarchy.
+To get the <code>projectedValue</code>, prefix the property variable with <code>$</code>. For
+example, in the following code example <code>PlayerView</code> projects a binding
+of the state property <code>isPlaying</code> to the <code>PlayButton</code> view using
+<code>$isPlaying</code>.</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">PlayerView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="keyword">var</span> <span class="variable">episode</span>: <span class="type">Episode</span>
+    <span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">isPlaying</span>: <span class="type">Bool</span> = <span class="keyword">false</span>
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">VStack</span> {
+            <span class="variable">Text</span>(<span class="variable">episode</span>.<span class="type">title</span>)
+            <span class="variable">Text</span>(<span class="variable">episode</span>.<span class="type">showTitle</span>)
+            <span class="variable">PlayButton</span>(<span class="variable">isPlaying</span>: <span class="type">$isPlaying</span>)
+        }
+    }
+}
+</code></pre></body></html>
+</div>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="binding.constant(_:)">
+    <h3>
+        <code>constant(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">constant</span>(<span class="keyword">_</span> <span class="variable">value</span>: <span class="type">Value</span>) -&gt; <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">Value</span>&gt;</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a binding with an immutable value.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this method to create a binding to a value that cannot change.
+This can be useful when using a <code>PreviewProvider</code> to see how a view
+represents different values.</p>
+
+<html><body><pre class="highlight"><code><span class="comment">// Example of binding to an immutable value.</span>
+<span class="variable">PlayButton</span>(<span class="variable">isPlaying</span>: <a href="/Binding"><span class="type">Binding</span></a>.<span class="type">constant</span>(<span class="keyword">true</span>))
+</code></pre></body></html>
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>value</th>
+    <td><code class="type">Value</code></td>
+    <td><p>An immutable value.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="function" id="binding.transaction(_:)">
+    <h3>
+        <code>transaction(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">transaction</span>(<span class="keyword">_</span> <span class="variable">transaction</span>: <a href="/Transaction"><span class="type">Transaction</span></a>) -&gt; <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">Value</span>&gt;</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Specifies a transaction for the binding.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>transaction</th>
+    <td><code class="type">Transaction</code></td>
+    <td><p>An instance of a <code>Transaction</code>.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>A new binding.</p>
+
+</div>
+<div role="article" class="function" id="binding.animation(_:)">
+    <h3>
+        <code>animation(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">animation</span>(<span class="keyword">_</span> <span class="variable">animation</span>: <a href="/Animation"><span class="type">Animation</span></a>? = .<span class="variable">default</span>) -&gt; <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">Value</span>&gt;</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Specifies an animation to perform when the binding value changes.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>animation</th>
+    <td><code class="type">Animation?</code></td>
+    <td><p>An animation sequence performed when the binding value changes.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>A new binding.</p>
+
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:14-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - App</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="variable"><a href="#app.body">body</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">App</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, <span class="keyword">tvOS</span> <span class="number literal">14.0</span>, <span class="keyword">watchOS</span> <span class="number literal">7.0</span>, *) <span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">App</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A type that represents the structure and behavior of an app.</p>
+
+</div>
+<div class="discussion">
+    <p>Create an app by declaring a structure that conforms to the <code>App</code> protocol.
+Implement the required <code>SwiftUI/App/body-swift.property</code> computed property
+to define the app's content:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">main</span>
+<span class="keyword">struct</span> <span class="type">MyApp</span>: <span class="type">App</span> {
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/Scene"><span class="type">Scene</span></a> {
+        <span class="variable">WindowGroup</span> {
+            <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Hello, world!</span><span class="string literal">"</span>)
+        }
+    }
+}
+</code></pre></body></html>
+<p>Precede the structure's declaration with the
+<a href="https://docs.swift.org/swift-book/ReferenceManual/Attributes.html#ID626">@main</a>
+attribute to indicate that your custom <code>App</code> protocol conformer provides the
+entry point into your app. The protocol provides a default implementation of
+the <code>SwiftUI/App/main()</code> method that the system calls to launch your app.
+You can have exactly one entry point among all of your app's files.</p>
+
+<p>Compose the app's body from instances that conform to the <code>SwiftUI/Scene</code>
+protocol. Each scene contains the root view of a view hierarchy and has a
+life cycle managed by the system. SwiftUI provides some concrete scene types
+to handle common scenarios, like for displaying documents or settings. You
+can also create custom scenes.</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">main</span>
+<span class="keyword">struct</span> <span class="type">Mail</span>: <span class="type">App</span> {
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/Scene"><span class="type">Scene</span></a> {
+        <span class="variable">WindowGroup</span> {
+            <span class="variable">MailViewer</span>()
+        }
+        <span class="variable">Settings</span> {
+            <span class="variable">SettingsView</span>()
+        }
+    }
+}
+</code></pre></body></html>
+<p>You can declare state in your app to share across all of its scenes. For
+example, you can use the <code>SwiftUI/StateObject</code> attribute to initialize a
+data model, and then provide that model on a view input as an
+<code>SwiftUI/ObservedObject</code> or through the environment as an
+<code>SwiftUI/EnvironmentObject</code> to scenes in the app:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">main</span>
+<span class="keyword">struct</span> <span class="type">Mail</span>: <span class="type">App</span> {
+    <span class="attribute">@</span><a href="/StateObject"><span class="type">StateObject</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">model</span> = <span class="variable">MailModel</span>()
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/Scene"><span class="type">Scene</span></a> {
+        <span class="variable">WindowGroup</span> {
+            <span class="variable">MailViewer</span>()
+                .<span class="type">environmentObject</span>(<span class="variable">model</span>) <span class="comment">// Passed through the environment.</span>
+        }
+        <span class="variable">Settings</span> {
+            <span class="variable">SettingsView</span>(<span class="variable">model</span>: <span class="type">model</span>) <span class="comment">// Passed as an observed object.</span>
+        }
+    }
+}
+</code></pre></body></html>
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="variable" id="app.body">
+    <h3>
+        <code>body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">Self</span>.<span class="type">Body</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The content and behavior of the app.</p>
+
+</div>
+<div class="discussion">
+    <p>For any app that you create, provide a computed <code>body</code> property that
+defines your app's scenes, which are instances that conform to the
+<code>SwiftUI/Scene</code> protocol. For example, you can create a simple app
+with a single scene containing a single view:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">main</span>
+<span class="keyword">struct</span> <span class="type">MyApp</span>: <a href="/App"><span class="type">App</span></a> {
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/Scene"><span class="type">Scene</span></a> {
+        <span class="variable">WindowGroup</span> {
+            <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Hello, world!</span><span class="string literal">"</span>)
+        }
+    }
+}
+</code></pre></body></html>
+<p>Swift infers the app's <code>SwiftUI/App/Body-swift.associatedtype</code>
+associated type based on the scene provided by the <code>body</code> property.</p>
+
+</div>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:12-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

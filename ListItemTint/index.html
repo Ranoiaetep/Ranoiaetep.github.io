@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ListItemTint</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#listitemtint.monochrome">monochrome</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#listitemtint.fixed(_:)">fixed(_:​)</a></li><li class="function"><a href="#listitemtint.preferred(_:)">preferred(_:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">List​Item​Tint</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, <span class="keyword">tvOS</span> <span class="number literal">14.0</span>, <span class="keyword">watchOS</span> <span class="number literal">7.0</span>, *) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">ListItemTint</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The configuration of a tint effect applied to content within a List.</p>
+
+</div>
+<div class="discussion">
+    <ul>
+<li>
+<p>See Also: <code>View.listItemTint(_:)</code></p>
+</li>
+</ul>
+
+</div>
+
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="listitemtint.monochrome">
+    <h3>
+        <code>monochrome</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">monochrome</span>: <a href="/ListItemTint"><span class="type">ListItemTint</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A standard grayscale tint effect.</p>
+
+</div>
+<div class="discussion">
+    <p>Monochrome tints are not overridable.</p>
+
+</div>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="listitemtint.fixed(_:)">
+    <h3>
+        <code>fixed(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">fixed</span>(<span class="keyword">_</span> <span class="variable">tint</span>: <a href="/Color"><span class="type">Color</span></a>) -&gt; <a href="/ListItemTint"><span class="type">ListItemTint</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>An explicit tint color.</p>
+
+</div>
+<div class="discussion">
+    <p>This tint effect is fixed and not overridable by other
+system effects.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="listitemtint.preferred(_:)">
+    <h3>
+        <code>preferred(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">preferred</span>(<span class="keyword">_</span> <span class="variable">tint</span>: <a href="/Color"><span class="type">Color</span></a>) -&gt; <a href="/ListItemTint"><span class="type">ListItemTint</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>An explicit tint color that is overridable.</p>
+
+</div>
+<div class="discussion">
+    <p>This tint effect is overridable by system effects, for
+example when the system has a custom user accent
+color on macOS.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:14-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

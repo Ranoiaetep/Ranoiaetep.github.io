@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ContextMenu</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#contextmenu.init(menuitems:)">init(menu​Items:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Context​Menu</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">iOS</span>, <span class="variable">introduced</span>: <span class="number literal">13.0</span>, <span class="variable">deprecated</span>: <span class="number literal">100000.0</span>, <span class="variable">message</span>: <span class="string literal">"Use `contextMenu(menuItems:)` instead."</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">macOS</span>, <span class="variable">introduced</span>: <span class="number literal">10.15</span>, <span class="variable">deprecated</span>: <span class="number literal">100000.0</span>, <span class="variable">message</span>: <span class="string literal">"Use `contextMenu(menuItems:)` instead."</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">introduced</span>: <span class="number literal">6.0</span>, <span class="variable">deprecated</span>: <span class="number literal">7.0</span>) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">ContextMenu</span>&lt;<span class="variable">MenuItems</span>&gt; <span class="keyword">where</span> <span class="type">MenuItems</span>: <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A container for views that you present as menu items in a contextual menu
+after completion of the standard system gesture.</p>
+
+</div>
+<div class="discussion">
+    <p>A context menu view allows you to present a situationally specific menu to
+the user allowing them to perform actions relevant to the current task
+they're performing in your app.</p>
+
+<p>You create a context menu by first defining a <code>ContextMenu</code> container
+with the buttons that will represent the actions the user can select
+from. Next, you add a <code>View/contextMenu(_:)</code> view modifier to the view that
+will enable the context menu. The context menu view modifier takes
+the menu items you defined above as its argument.</p>
+
+<p>The example below creates a four-item context menu container
+used by the context menu view modifier. The Boolean value
+<code>shouldShowMenu</code> controls the attachment of context menu; it is set to
+<code>true</code>, enabling the contextual menu.</p>
+
+<p>Note that it is possible to place the actions performed by the menu
+selection directly inside the button closures or, as shown below, to invoke
+them via function references.</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">selectHearts</span>() {
+    <span class="comment">// Act on hearts selection.</span>
+}
+<span class="keyword">func</span> <span class="function">selectClubs</span>() { ... }
+<span class="keyword">func</span> <span class="function">selectSpades</span>() { ... }
+<span class="keyword">func</span> <span class="function">selectDiamonds</span>() { ... }
+
+<span class="keyword">let</span> <span class="variable">menuItems</span> = <span class="variable">ContextMenu</span> {
+    <span class="variable">Button</span>(<span class="string literal">"</span><span class="string literal">♥️ - Hearts</span><span class="string literal">"</span>, <span class="variable">action</span>: <span class="type">selectHearts</span>)
+    <span class="variable">Button</span>(<span class="string literal">"</span><span class="string literal">♣️ - Clubs</span><span class="string literal">"</span>, <span class="variable">action</span>: <span class="type">selectClubs</span>)
+    <span class="variable">Button</span>(<span class="string literal">"</span><span class="string literal">♠️ - Spades</span><span class="string literal">"</span>, <span class="variable">action</span>: <span class="type">selectSpades</span>)
+    <span class="variable">Button</span>(<span class="string literal">"</span><span class="string literal">♦️ - Diamonds</span><span class="string literal">"</span>, <span class="variable">action</span>: <span class="type">selectDiamonds</span>)
+}
+
+<span class="keyword">struct</span> <span class="type">ContextMenuMenuItems</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">shouldShowMenu</span> = <span class="keyword">true</span>
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">VStack</span> {
+            <span class="variable">Text</span>(<span class="string literal">"</span><span class="string literal">Favorite Card Suit</span><span class="string literal">"</span>)
+                .<span class="type">padding</span>()
+                .<span class="type">contextMenu</span>(<span class="variable">shouldShowMenu</span> ? <span class="variable">menuItems</span> : <span class="keyword">nil</span>)
+        }
+    }
+}
+</code></pre></body></html>
+<p><img src="SwiftUI-contextMenu.png" alt="A screenshot of a context menu showing four menu items: Hearts, Clubs, Spades and Diamonds." /></p>
+
+</div>
+
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="contextmenu.init(menuitems:)">
+    <h3>
+        <code>init(menu​Items:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">menuItems</span>: () -&gt; <span class="type">MenuItems</span>)</code></pre></body></html>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:14-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

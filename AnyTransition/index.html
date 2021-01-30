@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - AnyTransition</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#anytransition.scale">scale</a></li><li class="variable"><a href="#anytransition.opacity">opacity</a></li><li class="variable"><a href="#anytransition.slide">slide</a></li><li class="variable"><a href="#anytransition.identity">identity</a></li></ul></li><li><a href="#methods">Methods</a><ul><li class="function"><a href="#anytransition.offset(_:)">offset(_:​)</a></li><li class="function"><a href="#anytransition.offset(x:y:)">offset(x:​y:​)</a></li><li class="function"><a href="#anytransition.scale(scale:anchor:)">scale(scale:​anchor:​)</a></li><li class="function"><a href="#anytransition.combined(with:)">combined(with:​)</a></li><li class="function"><a href="#anytransition.modifier(active:identity:)">modifier(active:​identity:​)</a></li><li class="function"><a href="#anytransition.animation(_:)">animation(_:​)</a></li><li class="function"><a href="#anytransition.move(edge:)">move(edge:​)</a></li><li class="function"><a href="#anytransition.asymmetric(insertion:removal:)">asymmetric(insertion:​removal:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Any​Transition</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="attribute">@</span><span class="attribute">frozen</span> <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">AnyTransition</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A type-erased transition.</p>
+
+</div>
+
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="anytransition.scale">
+    <h3>
+        <code>scale</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">scale</span>: <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+</div>
+<div role="article" class="variable" id="anytransition.opacity">
+    <h3>
+        <code>opacity</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">opacity</span>: <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A transition from transparent to opaque on insertion, and from opaque to
+transparent on removal.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="anytransition.slide">
+    <h3>
+        <code>slide</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">slide</span>: <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A transition that inserts by moving in from the leading edge, and
+removes by moving out towards the trailing edge.</p>
+
+</div>
+<div class="discussion">
+    <aside class="seealso">
+    <p><code>AnyTransition.move(edge:)</code></p>
+
+</aside>
+</div>
+</div>
+<div role="article" class="variable" id="anytransition.identity">
+    <h3>
+        <code>identity</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">identity</span>: <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A transition that returns the input view, unmodified, as the output
+view.</p>
+
+</div>
+</div>
+    </section>
+    <section id="methods">
+        <h2>Methods</h2>
+
+        <div role="article" class="function" id="anytransition.offset(_:)">
+    <h3>
+        <code>offset(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">offset</span>(<span class="keyword">_</span> <span class="variable">offset</span>: <span class="type">CGSize</span>) -&gt; <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+</div>
+<div role="article" class="function" id="anytransition.offset(x:y:)">
+    <h3>
+        <code>offset(x:​y:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">offset</span>(<span class="variable">x</span>: <span class="type">CGFloat</span> = <span class="number literal">0</span>, <span class="variable">y</span>: <span class="type">CGFloat</span> = <span class="number literal">0</span>) -&gt; <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+</div>
+<div role="article" class="function" id="anytransition.scale(scale:anchor:)">
+    <h3>
+        <code>scale(scale:​anchor:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">scale</span>(<span class="variable">scale</span>: <span class="type">CGFloat</span>, <span class="variable">anchor</span>: <a href="/UnitPoint"><span class="type">UnitPoint</span></a> = .<span class="variable">center</span>) -&gt; <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+</div>
+<div role="article" class="function" id="anytransition.combined(with:)">
+    <h3>
+        <code>combined(with:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">combined</span>(<span class="variable">with</span> <span class="variable">other</span>: <a href="/AnyTransition"><span class="type">AnyTransition</span></a>) -&gt; <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Combines this transition with another, returning a new transition that
+is the result of both transitions being applied.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="anytransition.modifier(active:identity:)">
+    <h3>
+        <code>modifier(active:​identity:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">modifier</span>&lt;<span class="variable">E</span>&gt;(<span class="variable">active</span>: <span class="type">E</span>, <span class="variable">identity</span>: <span class="type">E</span>) -&gt; <a href="/AnyTransition"><span class="type">AnyTransition</span></a> <span class="keyword">where</span> <span class="type">E</span>: <a href="/ViewModifier"><span class="type">ViewModifier</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns a transition defined between an active modifier and an identity
+modifier.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="anytransition.animation(_:)">
+    <h3>
+        <code>animation(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">func</span> <span class="function">animation</span>(<span class="keyword">_</span> <span class="variable">animation</span>: <a href="/Animation"><span class="type">Animation</span></a>?) -&gt; <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Attaches an animation to this transition.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="anytransition.move(edge:)">
+    <h3>
+        <code>move(edge:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">move</span>(<span class="variable">edge</span>: <a href="/Edge"><span class="type">Edge</span></a>) -&gt; <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Returns a transition that moves the view away, towards the specified
+edge of the view.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="anytransition.asymmetric(insertion:removal:)">
+    <h3>
+        <code>asymmetric(insertion:​removal:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">func</span> <span class="function">asymmetric</span>(<span class="variable">insertion</span>: <a href="/AnyTransition"><span class="type">AnyTransition</span></a>, <span class="variable">removal</span>: <a href="/AnyTransition"><span class="type">AnyTransition</span></a>) -&gt; <a href="/AnyTransition"><span class="type">AnyTransition</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Provides a composite transition that uses a different transition for
+insertion versus removal.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:05-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

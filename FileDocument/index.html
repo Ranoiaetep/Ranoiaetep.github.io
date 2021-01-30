@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - FileDocument</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="variable"><a href="#filedocument.readablecontenttypes">readable​Content​Types</a></li><li class="variable"><a href="#filedocument.writablecontenttypes">writable​Content​Types</a></li><li class="function"><a href="#filedocument.filewrapper(configuration:)">file​Wrapper(configuration:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">File​Document</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">FileDocument</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A document model definition used to serialize documents to and from file
+contents.</p>
+
+</div>
+<div class="discussion">
+    <p>Conformance to <code>FileDocument</code> is expected to have value semantics and be
+thread-safe. Serialization and deserialization will be done on a background
+thread.</p>
+
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="variable" id="filedocument.readablecontenttypes">
+    <h3>
+        <code>readable​Content​Types</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">readableContentTypes</span>: [<span class="type">UTType</span>]</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The types the document is able to open.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="filedocument.writablecontenttypes">
+    <h3>
+        <code>writable​Content​Types</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">writableContentTypes</span>: [<span class="type">UTType</span>]</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The types the document is able to save or export to.</p>
+
+</div>
+<div class="discussion">
+    <p>Defaults to <code>readableContentTypes</code>.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="filedocument.filewrapper(configuration:)">
+    <h3>
+        <code>file​Wrapper(configuration:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">fileWrapper</span>(<span class="variable">configuration</span>: <span class="keyword">Self</span>.<span class="type">WriteConfiguration</span>) <span class="keyword">throws</span> -&gt; <span class="type">FileWrapper</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Serialize the document to file contents for a specified <code>configuration</code>.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>configuration</th>
+    <td><code class="type">Self.​Write​Configuration</code></td>
+    <td><p>the configuration for the current document contents.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+  <h4>Returns</h4>
+  <p>The destination to serialize the document contents to. The value can be a newly created <code>FileWrapper</code> or an updated <code>FileWrapper</code> of the one provided in <code>configuration</code>.</p>
+
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:15-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

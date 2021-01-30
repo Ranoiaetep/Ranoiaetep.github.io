@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - EnvironmentKey</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="variable"><a href="#environmentkey.defaultvalue">default​Value</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">Environment​Key</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">EnvironmentKey</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A key for accessing values in the environment.</p>
+
+</div>
+<div class="discussion">
+    <p>You can create custom environment values by extending the
+<code>EnvironmentValues</code> structure with new properties.
+First declare a new environment key type and specify a value for the
+required <code>defaultValue</code> property:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">private</span> <span class="keyword">struct</span> <span class="type">MyEnvironmentKey</span>: <span class="type">EnvironmentKey</span> {
+    <span class="keyword">static</span> <span class="keyword">let</span> <span class="variable">defaultValue</span>: <span class="type">String</span> = <span class="string literal">"</span><span class="string literal">Default value</span><span class="string literal">"</span>
+}
+</code></pre></body></html>
+<p>The Swift compiler automatically infers the associated <code>Value</code> type as the
+type you specify for the default value. Then use the key to define a new
+environment value property:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">extension</span> <a href="/EnvironmentValues"><span class="type">EnvironmentValues</span></a> {
+    <span class="keyword">var</span> <span class="variable">myCustomValue</span>: <span class="type">String</span> {
+        <span class="keyword">get</span> { <span class="keyword">self</span>[<span class="variable">MyEnvironmentKey</span>.<span class="keyword">self</span>] }
+        <span class="keyword">set</span> { <span class="keyword">self</span>[<span class="variable">MyEnvironmentKey</span>.<span class="keyword">self</span>] = <span class="variable">newValue</span> }
+    }
+}
+</code></pre></body></html>
+<p>Clients of your environment value never use the key directly.
+Instead, they use the key path of your custom environment value property.
+To set the environment value for a view and all its subviews, add the
+<code>View/environment(_:_:)</code> view modifier to that view:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">MyView</span>()
+    .<span class="type">environment</span>(\.<span class="type">myCustomValue</span>, <span class="string literal">"</span><span class="string literal">Another string</span><span class="string literal">"</span>)
+</code></pre></body></html>
+<p>As a convenience, you can also define a dedicated view modifier to
+apply this environment value:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">extension</span> <a href="/View"><span class="type">View</span></a> {
+    <span class="keyword">func</span> <span class="function">myCustomValue</span>(<span class="keyword">_</span> <span class="variable">myCustomValue</span>: <span class="type">String</span>) -&gt; <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">environment</span>(\.<span class="type">myCustomValue</span>, <span class="variable">myCustomValue</span>)
+    }
+}
+</code></pre></body></html>
+<p>This improves clarity at the call site:</p>
+
+<html><body><pre class="highlight"><code><span class="variable">MyView</span>()
+    .<span class="type">myCustomValue</span>(<span class="string literal">"</span><span class="string literal">Another string</span><span class="string literal">"</span>)
+</code></pre></body></html>
+<p>To read the value from inside <code>MyView</code> or one of its descendants, use the
+<code>Environment</code> property wrapper:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">MyView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><a href="/Environment"><span class="type">Environment</span></a>(\.<span class="type">myCustomValue</span>) <span class="keyword">var</span> <span class="variable">customValue</span>: <span class="type">String</span>
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Text</span>(<span class="variable">customValue</span>) <span class="comment">// Displays "Another value".</span>
+    }
+}
+</code></pre></body></html>
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="variable" id="environmentkey.defaultvalue">
+    <h3>
+        <code>default​Value</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">defaultValue</span>: <span class="keyword">Self</span>.<span class="type">Value</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The default value for the environment key.</p>
+
+</div>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:08-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

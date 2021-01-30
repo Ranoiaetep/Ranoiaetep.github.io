@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - MenuStyleConfiguration</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Nested Types</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Menu​Style​Configuration</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">MenuStyleConfiguration</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A configuration of a menu.</p>
+
+</div>
+<div class="discussion">
+    <p>Use the <code>Menu/init(_:)</code> initializer of <code>Menu</code> to create an
+instance using the current menu style, which you can modify to create a
+custom style.</p>
+
+<p>For example, the following code creates a new, custom style that adds a red
+border to the current menu style:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">RedBorderMenuStyle</span> : <a href="/MenuStyle"><span class="type">MenuStyle</span></a> {
+    <span class="keyword">func</span> <span class="function">makeBody</span>(<span class="variable">configuration</span>: <span class="type">Configuration</span>) -&gt; <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Menu</span>(<span class="variable">configuration</span>)
+            .<span class="type">border</span>(<span class="variable">Color</span>.<span class="type">red</span>)
+    }
+}
+</code></pre></body></html>
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        
+        <h3>Nested Types</h3>
+<dl>
+    <dt class="structure"><code><a href="/MenuStyleConfiguration_Label">MenuStyleConfiguration.Label</a></code></dt>
+<dd><p>A type-erased label of a menu.</p>
+</dd>
+<dt class="structure"><code><a href="/MenuStyleConfiguration_Content">MenuStyleConfiguration.Content</a></code></dt>
+<dd><p>A type-erased content of a menu.</p>
+</dd>
+</dl>
+</section>
+
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:04-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

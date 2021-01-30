@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - DropDelegate</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="function"><a href="#dropdelegate.validatedrop(info:)">validate​Drop(info:​)</a></li><li class="function"><a href="#dropdelegate.performdrop(info:)">perform​Drop(info:​)</a></li><li class="function"><a href="#dropdelegate.dropentered(info:)">drop​Entered(info:​)</a></li><li class="function"><a href="#dropdelegate.dropupdated(info:)">drop​Updated(info:​)</a></li><li class="function"><a href="#dropdelegate.dropexited(info:)">drop​Exited(info:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">Drop​Delegate</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.4</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">DropDelegate</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>An interface that you implement to interact with a drop operation in a view
+modified to accept drops.</p>
+
+</div>
+<div class="discussion">
+    <p>The <code>DropDelegate</code> protocol provides a comprehensive and flexible way to
+interact with a drop operation. Specify a drop delegate when you modify a
+view to accept drops with the <code>View/onDrop(of:delegate:)-6lin8</code> method.</p>
+
+<p>Alternatively, for simple drop cases that don't require the full
+functionality of a drop delegate, you can modify a view to accept drops
+using the <code>View/onDrop(of:isTargeted:perform:)-f15m</code> or the
+<code>View/onDrop(of:isTargeted:perform:)-982eu</code> method. These methods handle the
+drop using a closure you provide as part of the modifier.</p>
+
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="function" id="dropdelegate.validatedrop(info:)">
+    <h3>
+        <code>validate​Drop(info:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">validateDrop</span>(<span class="variable">info</span>: <a href="/DropInfo"><span class="type">DropInfo</span></a>) -&gt; <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Tells the delegate that a drop containing items conforming to one of the
+expected types entered a view that accepts drops.</p>
+
+</div>
+<div class="discussion">
+    <p>Specify the expected types when you apply the drop modifier to the view.
+The default implementation returns <code>true</code>.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="dropdelegate.performdrop(info:)">
+    <h3>
+        <code>perform​Drop(info:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">performDrop</span>(<span class="variable">info</span>: <a href="/DropInfo"><span class="type">DropInfo</span></a>) -&gt; <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Tells the delegate it can request the item provider data from the given
+information.</p>
+
+</div>
+<div class="discussion">
+    <p>Incorporate the received data into your app's data model as appropriate.</p>
+
+</div>
+  <h4>Returns</h4>
+  <p>A Boolean that is <code>true</code> if the drop was successful, <code>false</code> otherwise.</p>
+
+</div>
+<div role="article" class="function" id="dropdelegate.dropentered(info:)">
+    <h3>
+        <code>drop​Entered(info:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">dropEntered</span>(<span class="variable">info</span>: <a href="/DropInfo"><span class="type">DropInfo</span></a>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Tells the delegate a validated drop has entered the modified view.</p>
+
+</div>
+<div class="discussion">
+    <p>The default implementation does nothing.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="dropdelegate.dropupdated(info:)">
+    <h3>
+        <code>drop​Updated(info:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">dropUpdated</span>(<span class="variable">info</span>: <a href="/DropInfo"><span class="type">DropInfo</span></a>) -&gt; <a href="/DropProposal"><span class="type">DropProposal</span></a>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Tells the delegate that a validated drop moved inside the modified view.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this method to return a drop proposal containing the operation the
+delegate intends to perform at the drop <code>DropInfo/location</code>. The
+default implementation of this method returns <code>nil</code>, which tells the
+drop to use the last valid returned value or else
+<code>DropOperation/copy</code>.</p>
+
+</div>
+</div>
+<div role="article" class="function" id="dropdelegate.dropexited(info:)">
+    <h3>
+        <code>drop​Exited(info:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">dropExited</span>(<span class="variable">info</span>: <a href="/DropInfo"><span class="type">DropInfo</span></a>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Tells the delegate a validated drop operation has exited the modified
+view.</p>
+
+</div>
+<div class="discussion">
+    <p>The default implementation does nothing.</p>
+
+</div>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:09-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

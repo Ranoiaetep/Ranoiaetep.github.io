@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - PreviewLayout</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#enumeration cases">Enumeration Cases</a><ul><li class="case"><a href="#previewlayout.device">device</a></li><li class="case"><a href="#previewlayout.sizethatfits">size​That​Fits</a></li><li class="case"><a href="#previewlayout.fixed">fixed</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Enumeration</small>
+    <code class="name">Preview​Layout</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="keyword">public</span> <span class="keyword">enum</span> <span class="type">PreviewLayout</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The size constraint for a preview.</p>
+
+</div>
+
+    <section id="enumeration cases">
+        <h2>Enumeration Cases</h2>
+
+        <div role="article" class="case" id="previewlayout.device">
+    <h3>
+        <code>device</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">case</span> <span class="variable">device</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Center the preview in a container the size of the device on which the
+preview is running.</p>
+
+</div>
+</div>
+<div role="article" class="case" id="previewlayout.sizethatfits">
+    <h3>
+        <code>size​That​Fits</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">case</span> <span class="variable">sizeThatFits</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Fit the container to the size of the preview when offered the size of
+the device on which the preview is running.</p>
+
+</div>
+</div>
+<div role="article" class="case" id="previewlayout.fixed">
+    <h3>
+        <code>fixed</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">case</span> <span class="variable">fixed</span>(<span class="variable">width</span>: <span class="type">CGFloat</span>, <span class="variable">height</span>: <span class="type">CGFloat</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Center the preview in a fixed size container.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:16-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

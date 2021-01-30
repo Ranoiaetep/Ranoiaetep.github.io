@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - CommandGroupPlacement</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#commandgroupplacement.appinfo">app​Info</a></li><li class="variable"><a href="#commandgroupplacement.appsettings">app​Settings</a></li><li class="variable"><a href="#commandgroupplacement.systemservices">system​Services</a></li><li class="variable"><a href="#commandgroupplacement.appvisibility">app​Visibility</a></li><li class="variable"><a href="#commandgroupplacement.apptermination">app​Termination</a></li><li class="variable"><a href="#commandgroupplacement.newitem">new​Item</a></li><li class="variable"><a href="#commandgroupplacement.saveitem">save​Item</a></li><li class="variable"><a href="#commandgroupplacement.importexport">import​Export</a></li><li class="variable"><a href="#commandgroupplacement.printitem">print​Item</a></li><li class="variable"><a href="#commandgroupplacement.undoredo">undo​Redo</a></li><li class="variable"><a href="#commandgroupplacement.pasteboard">pasteboard</a></li><li class="variable"><a href="#commandgroupplacement.textediting">text​Editing</a></li><li class="variable"><a href="#commandgroupplacement.textformatting">text​Formatting</a></li><li class="variable"><a href="#commandgroupplacement.toolbar">toolbar</a></li><li class="variable"><a href="#commandgroupplacement.sidebar">sidebar</a></li><li class="variable"><a href="#commandgroupplacement.windowsize">window​Size</a></li><li class="variable"><a href="#commandgroupplacement.windowarrangement">window​Arrangement</a></li><li class="variable"><a href="#commandgroupplacement.help">help</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Command​Group​Placement</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">CommandGroupPlacement</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Identifier types for standard locations that new command groups can be
+placed relative to.</p>
+
+</div>
+
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="commandgroupplacement.appinfo">
+    <h3>
+        <code>app​Info</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">appInfo</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that provide information about the app,
+the terms of the user's license agreement, etc.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>About App</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.appsettings">
+    <h3>
+        <code>app​Settings</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">appSettings</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that expose app settings and
+preferences.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Preferences</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.systemservices">
+    <h3>
+        <code>system​Services</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">systemServices</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that expose services provided by other
+apps.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Services submenu (managed automatically)</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.appvisibility">
+    <h3>
+        <code>app​Visibility</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">appVisibility</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that control the visibility of running
+apps.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Hide App</p>
+</li>
+<li>
+<p>Hide Others</p>
+</li>
+<li>
+<p>Show All</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.apptermination">
+    <h3>
+        <code>app​Termination</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">appTermination</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that result in app termination.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Quit App</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.newitem">
+    <h3>
+        <code>new​Item</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">newItem</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that create and open different kinds of
+documents.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>New</p>
+</li>
+<li>
+<p>Open</p>
+</li>
+<li>
+<p>Open Recent submenu (managed automatically)</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.saveitem">
+    <h3>
+        <code>save​Item</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">saveItem</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that save open documents and close
+windows.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Close</p>
+</li>
+<li>
+<p>Save</p>
+</li>
+<li>
+<p>Save As/Duplicate</p>
+</li>
+<li>
+<p>Revert to Saved</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.importexport">
+    <h3>
+        <code>import​Export</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">importExport</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that relate to importing and exporting
+data using formats that the app doesn't natively support.</p>
+
+</div>
+<div class="discussion">
+    <p>Empty by default on macOS.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.printitem">
+    <h3>
+        <code>print​Item</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">printItem</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands related to printing app content.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Page Setup</p>
+</li>
+<li>
+<p>Print</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.undoredo">
+    <h3>
+        <code>undo​Redo</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">undoRedo</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that control the Undo Manager.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Undo</p>
+</li>
+<li>
+<p>Redo</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.pasteboard">
+    <h3>
+        <code>pasteboard</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">pasteboard</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that interact with the pasteboard and
+manipulate content that is currently selected in the app's view
+hierarchy.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Cut</p>
+</li>
+<li>
+<p>Copy</p>
+</li>
+<li>
+<p>Paste</p>
+</li>
+<li>
+<p>Paste and Match Style</p>
+</li>
+<li>
+<p>Delete</p>
+</li>
+<li>
+<p>Select All</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.textediting">
+    <h3>
+        <code>text​Editing</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">textEditing</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that manipulate and transform text
+selections.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Find submenu</p>
+</li>
+<li>
+<p>Spelling and Grammar submenu</p>
+</li>
+<li>
+<p>Substitutions submenu</p>
+</li>
+<li>
+<p>Transformations submenu</p>
+</li>
+<li>
+<p>Speech submenu</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.textformatting">
+    <h3>
+        <code>text​Formatting</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">textFormatting</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that manipulate and transform the styles
+applied to text selections.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Font submenu</p>
+</li>
+<li>
+<p>Text submenu</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.toolbar">
+    <h3>
+        <code>toolbar</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">toolbar</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that manipulate the toolbar.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Show/Hide Toolbar</p>
+</li>
+<li>
+<p>Customize Toolbar</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.sidebar">
+    <h3>
+        <code>sidebar</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">sidebar</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that control the app's sidebar and full
+screen modes.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Show/Hide Sidebar</p>
+</li>
+<li>
+<p>Enter/Exit Full Screen</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.windowsize">
+    <h3>
+        <code>window​Size</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">windowSize</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that control the size of the window.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Minimize</p>
+</li>
+<li>
+<p>Zoom</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.windowarrangement">
+    <h3>
+        <code>window​Arrangement</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">windowArrangement</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that arrange all of an app's windows.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>Bring All to Front</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div role="article" class="variable" id="commandgroupplacement.help">
+    <h3>
+        <code>help</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">help</span>: <a href="/CommandGroupPlacement"><span class="type">CommandGroupPlacement</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Standard placement for commands that present documentation and helpful
+information to the user.</p>
+
+</div>
+<div class="discussion">
+    <p>Includes the following by default on macOS:</p>
+
+<ul>
+<li>
+<p>App Help</p>
+</li>
+</ul>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:06-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

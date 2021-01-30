@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - FileDocumentConfiguration</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#filedocumentconfiguration.$document">$document</a></li><li class="variable"><a href="#filedocumentconfiguration.fileurl">file​URL</a></li><li class="variable"><a href="#filedocumentconfiguration.iseditable">is​Editable</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">File​Document​Configuration</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, *) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">tvOS</span>, <span class="variable">unavailable</span>) <span class="attribute">@</span><span class="attribute">available</span>(<span class="variable">watchOS</span>, <span class="variable">unavailable</span>) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">FileDocumentConfiguration</span>&lt;<span class="variable">Document</span>&gt; <span class="keyword">where</span> <span class="type">Document</span>: <a href="/FileDocument"><span class="type">FileDocument</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The properties of an open file document.</p>
+
+</div>
+
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="filedocumentconfiguration.$document">
+    <h3>
+        <code>$document</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">$document</span>: <a href="/Binding"><span class="type">Binding</span></a>&lt;<span class="type">Document</span>&gt;</code></pre></body></html>
+</div>
+<div role="article" class="variable" id="filedocumentconfiguration.fileurl">
+    <h3>
+        <code>file​URL</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">fileURL</span>: <span class="type">URL</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The url of the open file document.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="filedocumentconfiguration.iseditable">
+    <h3>
+        <code>is​Editable</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">isEditable</span>: <span class="type">Bool</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Whether the document is able to be edited.</p>
+
+</div>
+<div class="discussion">
+    <p>This can return <code>false</code> if the document is in viewing mode or if the
+file is unable to be written to.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:13-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

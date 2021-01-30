@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - GridItem</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Nested Types</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#griditem.init(_:spacing:alignment:)">init(_:​spacing:​alignment:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#griditem.size">size</a></li><li class="variable"><a href="#griditem.spacing">spacing</a></li><li class="variable"><a href="#griditem.alignment">alignment</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Grid​Item</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, <span class="keyword">tvOS</span> <span class="number literal">14.0</span>, <span class="keyword">watchOS</span> <span class="number literal">7.0</span>, *) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">GridItem</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A description of a single grid item, such as a row or a column.</p>
+
+</div>
+<div class="discussion">
+    <p>You use <code>GridItem</code> instances to configure the layout of items in
+<code>LazyHGrid</code> and <code>LazyVGrid</code> views. Each grid item specifies layout
+properties like spacing and alignment, which the grid view uses to size and
+position all items in a given column or row.</p>
+
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        
+        <h3>Nested Types</h3>
+<dl>
+    <dt class="enumeration"><code><a href="/GridItem_Size">GridItem.Size</a></code></dt>
+<dd><p>The size in the minor axis of one or more rows or columns in a grid
+layout.</p>
+</dd>
+</dl>
+</section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="griditem.init(_:spacing:alignment:)">
+    <h3>
+        <code>init(_:​spacing:​alignment:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">size</span>: <a href="/GridItem"><span class="type">GridItem</span></a>.<span class="type">Size</span> = .<span class="variable">flexible</span>(), <span class="variable">spacing</span>: <span class="type">CGFloat</span>? = <span class="keyword">nil</span>, <span class="variable">alignment</span>: <a href="/Alignment"><span class="type">Alignment</span></a>? = <span class="keyword">nil</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a grid item with the provided size, spacing, and alignment
+properties.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>size</th>
+    <td><code class="type">Grid​Item.​Size</code></td>
+    <td><p>The size of the grid item.</p>
+</td>
+</tr>
+<tr>
+    <th>spacing</th>
+    <td><code class="type">CGFloat?</code></td>
+    <td><p>The spacing to use between this and the next item.</p>
+</td>
+</tr>
+<tr>
+    <th>alignment</th>
+    <td><code class="type">Alignment?</code></td>
+    <td><p>The alignment to use for this grid item.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="griditem.size">
+    <h3>
+        <code>size</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">size</span>: <a href="/GridItem"><span class="type">GridItem</span></a>.<span class="type">Size</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The size of the item, which is the width of a column item or the
+height of a row item.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="griditem.spacing">
+    <h3>
+        <code>spacing</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">spacing</span>: <span class="type">CGFloat</span>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The spacing to the next item.</p>
+
+</div>
+<div class="discussion">
+    <p>If this value is <code>nil</code>, the item uses a reasonable default for the
+current platform.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="griditem.alignment">
+    <h3>
+        <code>alignment</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">alignment</span>: <a href="/Alignment"><span class="type">Alignment</span></a>?</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The alignment to use when placing each view.</p>
+
+</div>
+<div class="discussion">
+    <p>Use this property to anchor the view's relative position to the same
+relative position in the view's assigned grid space.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:12-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

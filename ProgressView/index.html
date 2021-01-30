@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ProgressView</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#nested type aliases">Nested Type Aliases</a><ul><li class="typealias"><a href="#progressview.body">Body</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#progressview.init(value:total:)">init(value:​total:​)</a></li><li class="initializer"><a href="#progressview.init(value:total:label:)">init(value:​total:​label:​)</a></li><li class="initializer"><a href="#progressview.init(value:total:label:currentvaluelabel:)">init(value:​total:​label:​current​Value​Label:​)</a></li><li class="initializer"><a href="#progressview.init(_:value:total:)">init(_:​value:​total:​)</a></li><li class="initializer"><a href="#progressview.init(_:value:total:)">init(_:​value:​total:​)</a></li><li class="initializer"><a href="#progressview.init(_:)">init(_:​)</a></li><li class="initializer"><a href="#progressview.init(_:)">init(_:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#progressview.body">body</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Progress​View</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">14.0</span>, <span class="keyword">macOS</span> <span class="number literal">11.0</span>, <span class="keyword">tvOS</span> <span class="number literal">14.0</span>, <span class="keyword">watchOS</span> <span class="number literal">7.0</span>, *) <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">ProgressView</span>&lt;<span class="variable">Label</span>, <span class="variable">CurrentValueLabel</span>&gt;: <a href="/View"><span class="type">View</span></a> <span class="keyword">where</span> <a href="/Label"><span class="type">Label</span></a>: <a href="/View"><span class="type">View</span></a>, <span class="type">CurrentValueLabel</span>: <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A view that shows the progress towards completion of a task.</p>
+
+</div>
+<div class="discussion">
+    <p>Use a progress view to show that a task is making progress towards
+completion. A progress view can show both determinate (percentage complete)
+and indeterminate (progressing or not) types of progress.</p>
+
+<p>Create a determinate progress view by initializing a <code>ProgressView</code> with
+a binding to a numeric value that indicates the progress, and a <code>total</code>
+value that represents completion of the task. By default, the progress is
+<code>0.0</code> and the total is <code>1.0</code>.</p>
+
+<p>The example below uses the state property <code>progress</code> to show progress in
+a determinate <code>ProgressView</code>. The progress view uses its default total of
+<code>1.0</code>, and because <code>progress</code> starts with an initial value of <code>0.5</code>,
+the progress view begins half-complete. A &quot;More&quot; button below the progress
+view allows the user to increment the progress in 5% increments:</p>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><a href="/State"><span class="type">State</span></a> <span class="keyword">private</span> <span class="keyword">var</span> <span class="variable">progress</span> = <span class="number literal">0.5</span>
+
+<span class="variable">VStack</span> {
+    <span class="variable">ProgressView</span>(<span class="variable">value</span>: <span class="type">progress</span>)
+    <span class="variable">Button</span>(<span class="string literal">"</span><span class="string literal">More</span><span class="string literal">"</span>, <span class="variable">action</span>: { <span class="variable">progress</span> += <span class="number literal">0.05</span> })
+}
+</code></pre></body></html>
+<p>To create an indeterminate progress view, use an initializer that doesn't
+take a progress value:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+    <span class="variable">ProgressView</span>()
+}
+</code></pre></body></html>
+<h3>Styling Progress Views</h3>
+
+<p>You can customize the appearance and interaction of progress views by
+creating styles that conform to the <code>ProgressViewStyle</code> protocol. To set a
+specific style for all progress view instances within a view, use the
+<code>View/progressViewStyle(_:)</code> modifier. In the following example, a custom
+style adds a dark blue shadow to all progress views within the enclosing
+<code>VStack</code>:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">ShadowedProgressViews</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">VStack</span> {
+            <span class="variable">ProgressView</span>(<span class="variable">value</span>: <span class="number literal">0.25</span>)
+            <span class="variable">ProgressView</span>(<span class="variable">value</span>: <span class="number literal">0.75</span>)
+        }
+        .<span class="type">progressViewStyle</span>(<span class="variable">DarkBlueShadowProgressViewStyle</span>())
+    }
+}
+
+<span class="keyword">struct</span> <span class="type">DarkBlueShadowProgressViewStyle</span>: <a href="/ProgressViewStyle"><span class="type">ProgressViewStyle</span></a> {
+    <span class="keyword">func</span> <span class="function">makeBody</span>(<span class="variable">configuration</span>: <span class="type">Configuration</span>) -&gt; <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">ProgressView</span>(<span class="variable">configuration</span>)
+            .<span class="type">shadow</span>(<span class="variable">color</span>: <a href="/Color"><span class="type">Color</span></a>(<span class="variable">red</span>: <span class="number literal">0</span>, <span class="variable">green</span>: <span class="number literal">0</span>, <span class="variable">blue</span>: <span class="number literal">0.6</span>),
+                    <span class="variable">radius</span>: <span class="number literal">4.0</span>, <span class="variable">x</span>: <span class="number literal">1.0</span>, <span class="variable">y</span>: <span class="number literal">2.0</span>)
+    }
+}
+</code></pre></body></html>
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- ProgressView -->
+<g id="node1" class="node structure current">
+<title>ProgressView</title>
+<g id="a_node1"><a xlink:href="/ProgressView" xlink:title="ProgressView">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">ProgressView</text>
+</a>
+</g>
+</g>
+<!-- View -->
+<g id="node2" class="node protocol">
+<title>View</title>
+<g id="a_node2"><a xlink:href="/View" xlink:title="View">
+<path fill="none" stroke="black" d="M528,-36C528,-36 336,-36 336,-36 330,-36 324,-30 324,-24 324,-24 324,-12 324,-12 324,-6 330,0 336,0 336,0 528,0 528,0 534,0 540,-6 540,-12 540,-12 540,-24 540,-24 540,-30 534,-36 528,-36"/>
+<text text-anchor="middle" x="432" y="-14.3" font-family="Menlo" font-size="14.00">View</text>
+</a>
+</g>
+</g>
+<!-- ProgressView&#45;&gt;View -->
+<g id="edge1" class="edge conformsTo">
+<title>ProgressView&#45;&gt;View</title>
+<path fill="none" stroke="black" d="M432,-71.7C432,-63.98 432,-54.71 432,-46.11"/>
+<polygon fill="black" stroke="black" points="435.5,-46.1 432,-36.1 428.5,-46.1 435.5,-46.1"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for ProgressView.</figcaption>
+</figure>
+        <h3>Conforms To</h3>
+<dl>
+    <dt class="protocol"><code><a href="/View">View</a></code></dt>
+<dd><p>A type that represents part of your app's user interface and provides
+modifiers that you use to configure views.</p>
+</dd>
+</dl>
+</section>
+    <section id="nested type aliases">
+        <h2>Nested Type Aliases</h2>
+
+        <div role="article" class="typealias" id="progressview.body">
+    <h3>
+        <code>Body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">typealias</span> <span class="variable">Body</span> = <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The type of view representing the body of this view.</p>
+
+</div>
+<div class="discussion">
+    <p>When you create a custom view, Swift infers this type from your
+implementation of the required <code>body</code> property.</p>
+
+</div>
+</div>
+    </section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="progressview.init(value:total:)">
+    <h3>
+        <code>init(value:​total:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">V</span>&gt;(<span class="variable">value</span>: <span class="type">V</span>?, <span class="variable">total</span>: <span class="type">V</span> = <span class="number literal">1.0</span>) <span class="keyword">where</span> <a href="/Label"><span class="type">Label</span></a> == <a href="/EmptyView"><span class="type">EmptyView</span></a>, <span class="type">CurrentValueLabel</span> == <a href="/EmptyView"><span class="type">EmptyView</span></a>, <span class="type">V</span>: <span class="type">BinaryFloatingPoint</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a progress view for showing determinate progress.</p>
+
+</div>
+<div class="discussion">
+    <p>If the value is non-<code>nil</code>, but outside the range of <code>0.0</code> through
+<code>total</code>, the progress view pins the value to those limits, rounding to
+the nearest possible bound. A value of <code>nil</code> represents indeterminate
+progress, in which case the progress view ignores <code>total</code>.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>value</th>
+    <td><code class="type">V?</code></td>
+    <td><p>The completed amount of the task to this point, in a range of <code>0.0</code> to <code>total</code>, or <code>nil</code> if the progress is indeterminate.</p>
+</td>
+</tr>
+<tr>
+    <th>total</th>
+    <td><code class="type">V</code></td>
+    <td><p>The full amount representing the complete scope of the task, meaning the task is complete if <code>value</code> equals <code>total</code>. The default value is <code>1.0</code>.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="progressview.init(value:total:label:)">
+    <h3>
+        <code>init(value:​total:​label:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">V</span>&gt;(<span class="variable">value</span>: <span class="type">V</span>?, <span class="variable">total</span>: <span class="type">V</span> = <span class="number literal">1.0</span>, <span class="variable">label</span>: () -&gt; <a href="/Label"><span class="type">Label</span></a>) <span class="keyword">where</span> <span class="type">CurrentValueLabel</span> == <a href="/EmptyView"><span class="type">EmptyView</span></a>, <span class="type">V</span>: <span class="type">BinaryFloatingPoint</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a progress view for showing determinate progress, with a
+custom label.</p>
+
+</div>
+<div class="discussion">
+    <p>If the value is non-<code>nil</code>, but outside the range of <code>0.0</code> through
+<code>total</code>, the progress view pins the value to those limits, rounding to
+the nearest possible bound. A value of <code>nil</code> represents indeterminate
+progress, in which case the progress view ignores <code>total</code>.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>value</th>
+    <td><code class="type">V?</code></td>
+    <td><p>The completed amount of the task to this point, in a range of <code>0.0</code> to <code>total</code>, or <code>nil</code> if the progress is indeterminate.</p>
+</td>
+</tr>
+<tr>
+    <th>total</th>
+    <td><code class="type">V</code></td>
+    <td><p>The full amount representing the complete scope of the task, meaning the task is complete if <code>value</code> equals <code>total</code>. The default value is <code>1.0</code>.</p>
+</td>
+</tr>
+<tr>
+    <th>label</th>
+    <td><code class="type">() -&gt; Label</code></td>
+    <td><p>A view builder that creates a view that describes the task in progress.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="progressview.init(value:total:label:currentvaluelabel:)">
+    <h3>
+        <code>init(value:​total:​label:​current​Value​Label:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">V</span>&gt;(<span class="variable">value</span>: <span class="type">V</span>?, <span class="variable">total</span>: <span class="type">V</span> = <span class="number literal">1.0</span>, <span class="variable">label</span>: () -&gt; <a href="/Label"><span class="type">Label</span></a>, <span class="variable">currentValueLabel</span>: () -&gt; <span class="type">CurrentValueLabel</span>) <span class="keyword">where</span> <span class="type">V</span>: <span class="type">BinaryFloatingPoint</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a progress view for showing determinate progress, with a
+custom label.</p>
+
+</div>
+<div class="discussion">
+    <p>If the value is non-<code>nil</code>, but outside the range of <code>0.0</code> through
+<code>total</code>, the progress view pins the value to those limits, rounding to
+the nearest possible bound. A value of <code>nil</code> represents indeterminate
+progress, in which case the progress view ignores <code>total</code>.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>value</th>
+    <td><code class="type">V?</code></td>
+    <td><p>The completed amount of the task to this point, in a range of <code>0.0</code> to <code>total</code>, or <code>nil</code> if the progress is indeterminate.</p>
+</td>
+</tr>
+<tr>
+    <th>total</th>
+    <td><code class="type">V</code></td>
+    <td><p>The full amount representing the complete scope of the task, meaning the task is complete if <code>value</code> equals <code>total</code>. The default value is <code>1.0</code>.</p>
+</td>
+</tr>
+<tr>
+    <th>label</th>
+    <td><code class="type">() -&gt; Label</code></td>
+    <td><p>A view builder that creates a view that describes the task in progress.</p>
+</td>
+</tr>
+<tr>
+    <th>current​Value​Label</th>
+    <td><code class="type">() -&gt; Current​Value​Label</code></td>
+    <td><p>A view builder that creates a view that describes the level of completed progress of the task.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="progressview.init(_:value:total:)">
+    <h3>
+        <code>init(_:​value:​total:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">V</span>&gt;(<span class="keyword">_</span> <span class="variable">titleKey</span>: <a href="/LocalizedStringKey"><span class="type">LocalizedStringKey</span></a>, <span class="variable">value</span>: <span class="type">V</span>?, <span class="variable">total</span>: <span class="type">V</span> = <span class="number literal">1.0</span>) <span class="keyword">where</span> <a href="/Label"><span class="type">Label</span></a> == <a href="/Text"><span class="type">Text</span></a>, <span class="type">CurrentValueLabel</span> == <a href="/EmptyView"><span class="type">EmptyView</span></a>, <span class="type">V</span>: <span class="type">BinaryFloatingPoint</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a progress view for showing determinate progress that generates
+its label from a localized string.</p>
+
+</div>
+<div class="discussion">
+    <p>If the value is non-<code>nil</code>, but outside the range of <code>0.0</code> through
+<code>total</code>, the progress view pins the value to those limits, rounding to
+the nearest possible bound. A value of <code>nil</code> represents indeterminate
+progress, in which case the progress view ignores <code>total</code>.</p>
+
+<p>This initializer creates a <code>Text</code> view on your behalf, and treats the
+localized key similar to <code>Text/init(_:tableName:bundle:comment:)</code>. See
+<code>Text</code> for more information about localizing strings. To initialize a
+determinate progress view with a string variable, use
+the corresponding initializer that takes a <code>StringProtocol</code> instance.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>title​Key</th>
+    <td><code class="type">Localized​String​Key</code></td>
+    <td><p>The key for the progress view's localized title that describes the task in progress.</p>
+</td>
+</tr>
+<tr>
+    <th>value</th>
+    <td><code class="type">V?</code></td>
+    <td><p>The completed amount of the task to this point, in a range of <code>0.0</code> to <code>total</code>, or <code>nil</code> if the progress is indeterminate.</p>
+</td>
+</tr>
+<tr>
+    <th>total</th>
+    <td><code class="type">V</code></td>
+    <td><p>The full amount representing the complete scope of the task, meaning the task is complete if <code>value</code> equals <code>total</code>. The default value is <code>1.0</code>.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="progressview.init(_:value:total:)">
+    <h3>
+        <code>init(_:​value:​total:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>&lt;<span class="variable">S</span>, <span class="variable">V</span>&gt;(<span class="keyword">_</span> <span class="variable">title</span>: <span class="type">S</span>, <span class="variable">value</span>: <span class="type">V</span>?, <span class="variable">total</span>: <span class="type">V</span> = <span class="number literal">1.0</span>) <span class="keyword">where</span> <a href="/Label"><span class="type">Label</span></a> == <a href="/Text"><span class="type">Text</span></a>, <span class="type">CurrentValueLabel</span> == <a href="/EmptyView"><span class="type">EmptyView</span></a>, <span class="type">S</span>: <span class="type">StringProtocol</span>, <span class="type">V</span>: <span class="type">BinaryFloatingPoint</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a progress view for showing determinate progress that generates
+its label from a string.</p>
+
+</div>
+<div class="discussion">
+    <p>If the value is non-<code>nil</code>, but outside the range of <code>0.0</code> through
+<code>total</code>, the progress view pins the value to those limits, rounding to
+the nearest possible bound. A value of <code>nil</code> represents indeterminate
+progress, in which case the progress view ignores <code>total</code>.</p>
+
+<p>This initializer creates a <code>Text</code> view on your behalf, and treats the
+title similar to <code>Text/init(verbatim:)</code>. See <code>Text</code> for more
+information about localizing strings. To initialize a determinate
+progress view with a localized string key, use the corresponding
+initializer that takes a <code>LocalizedStringKey</code> instance.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>title</th>
+    <td><code class="type">S</code></td>
+    <td><p>The string that describes the task in progress.</p>
+</td>
+</tr>
+<tr>
+    <th>value</th>
+    <td><code class="type">V?</code></td>
+    <td><p>The completed amount of the task to this point, in a range of <code>0.0</code> to <code>total</code>, or <code>nil</code> if the progress is indeterminate.</p>
+</td>
+</tr>
+<tr>
+    <th>total</th>
+    <td><code class="type">V</code></td>
+    <td><p>The full amount representing the complete scope of the task, meaning the task is complete if <code>value</code> equals <code>total</code>. The default value is <code>1.0</code>.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="progressview.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">progress</span>: <span class="type">Progress</span>) <span class="keyword">where</span> <a href="/Label"><span class="type">Label</span></a> == <a href="/EmptyView"><span class="type">EmptyView</span></a>, <span class="type">CurrentValueLabel</span> == <a href="/EmptyView"><span class="type">EmptyView</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a progress view for visualizing the given progress instance.</p>
+
+</div>
+<div class="discussion">
+    <p>The progress view synthesizes a default label using the
+<code>localizedDescription</code> of the given progress instance.</p>
+
+</div>
+</div>
+<div role="article" class="initializer" id="progressview.init(_:)">
+    <h3>
+        <code>init(_:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="keyword">_</span> <span class="variable">configuration</span>: <a href="/ProgressViewStyleConfiguration"><span class="type">ProgressViewStyleConfiguration</span></a>) <span class="keyword">where</span> <a href="/Label"><span class="type">Label</span></a> == <a href="/ProgressViewStyleConfiguration"><span class="type">ProgressViewStyleConfiguration</span></a>.<a href="/Label"><span class="type">Label</span></a>, <span class="type">CurrentValueLabel</span> == <a href="/ProgressViewStyleConfiguration"><span class="type">ProgressViewStyleConfiguration</span></a>.<span class="type">CurrentValueLabel</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a progress view based on a style configuration.</p>
+
+</div>
+<div class="discussion">
+    <p>You can use this initializer within the
+<code>ProgressViewStyle/makeBody(configuration:)</code> method of a
+<code>ProgressViewStyle</code> to create an instance of the styled progress view.
+This is useful for custom progress view styles that only modify the
+current progress view style, as opposed to implementing a brand new
+style.</p>
+
+<p>For example, the following style adds a dark blue shadow to the progress
+view, but otherwise preserves the progress view's current style:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">DarkBlueShadowProgressViewStyle</span>: <a href="/ProgressViewStyle"><span class="type">ProgressViewStyle</span></a> {
+    <span class="keyword">func</span> <span class="function">makeBody</span>(<span class="variable">configuration</span>: <span class="type">Configuration</span>) -&gt; <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">ProgressView</span>(<span class="variable">configuration</span>)
+            .<span class="type">shadow</span>(<span class="variable">color</span>: <a href="/Color"><span class="type">Color</span></a>(<span class="variable">red</span>: <span class="number literal">0</span>, <span class="variable">green</span>: <span class="number literal">0</span>, <span class="variable">blue</span>: <span class="number literal">0.6</span>),
+                    <span class="variable">radius</span>: <span class="number literal">4.0</span>, <span class="variable">x</span>: <span class="number literal">1.0</span>, <span class="variable">y</span>: <span class="number literal">2.0</span>)
+    }
+}
+</code></pre></body></html>
+</div>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="progressview.body">
+    <h3>
+        <code>body</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The content and behavior of the view.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:08-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

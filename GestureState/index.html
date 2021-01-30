@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - GestureState</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#relationships">Relationships</a><ul><li><a href="#relationships">Conforms To</a></li></ul></li><li><a href="#initializers">Initializers</a><ul><li class="initializer"><a href="#gesturestate.init(wrappedvalue:)">init(wrapped​Value:​)</a></li><li class="initializer"><a href="#gesturestate.init(initialvalue:)">init(initial​Value:​)</a></li><li class="initializer"><a href="#gesturestate.init(wrappedvalue:resettransaction:)">init(wrapped​Value:​reset​Transaction:​)</a></li><li class="initializer"><a href="#gesturestate.init(initialvalue:resettransaction:)">init(initial​Value:​reset​Transaction:​)</a></li><li class="initializer"><a href="#gesturestate.init(wrappedvalue:reset:)">init(wrapped​Value:​reset:​)</a></li><li class="initializer"><a href="#gesturestate.init(initialvalue:reset:)">init(initial​Value:​reset:​)</a></li></ul></li><li><a href="#properties">Properties</a><ul><li class="variable"><a href="#gesturestate.wrappedvalue">wrapped​Value</a></li><li class="variable"><a href="#gesturestate.projectedvalue">projected​Value</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Structure</small>
+    <code class="name">Gesture​State</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="attribute">@</span><span class="attribute">propertyWrapper</span> <span class="attribute">@</span><span class="attribute">frozen</span> <span class="keyword">public</span> <span class="keyword">struct</span> <span class="type">GestureState</span>&lt;<span class="variable">Value</span>&gt;: <a href="/DynamicProperty"><span class="type">DynamicProperty</span></a></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A property wrapper type that updates a property while the user performs a
+gesture and resets the property back to its initial state when the gesture
+ends.</p>
+
+</div>
+<div class="discussion">
+    <p>Declare a property as <code>@GestureState</code>, pass as a binding to it as a
+parameter to a gesture's <code>Gesture/updating(_:body:)</code> callback, and receive
+updates to it. A property that's declared as <code>@GestureState</code> implicitly
+resets when the gesture becomes inactive, making it suitable for tracking
+transient state.</p>
+
+<p>Add a long-press gesture to a <code>Circle</code>, and update the interface during
+the gesture by declaring a property as <code>@GestureState</code>:</p>
+
+<html><body><pre class="highlight"><code><span class="keyword">struct</span> <span class="type">SimpleLongPressGestureView</span>: <a href="/View"><span class="type">View</span></a> {
+    <span class="attribute">@</span><span class="type">GestureState</span> <span class="keyword">var</span> <span class="variable">isDetectingLongPress</span> = <span class="keyword">false</span>
+
+    <span class="keyword">var</span> <span class="variable">longPress</span>: <span class="keyword">some</span> <a href="/Gesture"><span class="type">Gesture</span></a> {
+        <span class="variable">LongPressGesture</span>(<span class="variable">minimumDuration</span>: <span class="number literal">3</span>)
+            .<span class="type">updating</span>(<span class="variable">$isDetectingLongPress</span>) { <span class="variable">currentstate</span>, <span class="variable">gestureState</span>, <span class="variable">transaction</span> <span class="keyword">in</span>
+                <span class="variable">gestureState</span> = <span class="variable">currentstate</span>
+            }
+    }
+
+    <span class="keyword">var</span> <span class="variable">body</span>: <span class="keyword">some</span> <a href="/View"><span class="type">View</span></a> {
+        <span class="variable">Circle</span>()
+            .<span class="type">fill</span>(<span class="keyword">self</span>.<span class="type">isDetectingLongPress</span> ? <span class="variable">Color</span>.<span class="type">red</span> : <a href="/Color"><span class="type">Color</span></a>.<span class="type">green</span>)
+            .<span class="type">frame</span>(<span class="variable">width</span>: <span class="number literal">100</span>, <span class="variable">height</span>: <span class="number literal">100</span>, <span class="variable">alignment</span>: .<span class="variable">center</span>)
+            .<span class="type">gesture</span>(<span class="variable">longPress</span>)
+    }
+}
+</code></pre></body></html>
+</div>
+<section id="relationships">
+    <h2 hidden>Relationships</h2>
+        <figure>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+ "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Generated by graphviz version 2.46.0 (20210118.1747)
+ -->
+<!-- Pages: 1 -->
+<svg width="872pt" height="116pt"
+ viewBox="0.00 0.00 872.00 116.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 112)">
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-112 868,-112 868,4 -4,4"/>
+<!-- GestureState -->
+<g id="node1" class="node structure current">
+<title>GestureState</title>
+<g id="a_node1"><a xlink:href="/GestureState" xlink:title="GestureState">
+<path fill="none" stroke="black" stroke-width="3" d="M528,-108C528,-108 336,-108 336,-108 330,-108 324,-102 324,-96 324,-96 324,-84 324,-84 324,-78 330,-72 336,-72 336,-72 528,-72 528,-72 534,-72 540,-78 540,-84 540,-84 540,-96 540,-96 540,-102 534,-108 528,-108"/>
+<text text-anchor="middle" x="432" y="-86.3" font-family="Menlo" font-size="14.00">GestureState</text>
+</a>
+</g>
+</g>
+<!-- DynamicProperty -->
+<g id="node2" class="node protocol">
+<title>DynamicProperty</title>
+<g id="a_node2"><a xlink:href="/DynamicProperty" xlink:title="DynamicProperty">
+<path fill="none" stroke="black" d="M528,-36C528,-36 336,-36 336,-36 330,-36 324,-30 324,-24 324,-24 324,-12 324,-12 324,-6 330,0 336,0 336,0 528,0 528,0 534,0 540,-6 540,-12 540,-12 540,-24 540,-24 540,-30 534,-36 528,-36"/>
+<text text-anchor="middle" x="432" y="-14.3" font-family="Menlo" font-size="14.00">DynamicProperty</text>
+</a>
+</g>
+</g>
+<!-- GestureState&#45;&gt;DynamicProperty -->
+<g id="edge1" class="edge conformsTo">
+<title>GestureState&#45;&gt;DynamicProperty</title>
+<path fill="none" stroke="black" d="M432,-71.7C432,-63.98 432,-54.71 432,-46.11"/>
+<polygon fill="black" stroke="black" points="435.5,-46.1 432,-36.1 428.5,-46.1 435.5,-46.1"/>
+</g>
+</g>
+</svg>
+
+
+    <figcaption hidden>Inheritance graph for GestureState.</figcaption>
+</figure>
+        <h3>Conforms To</h3>
+<dl>
+    <dt class="protocol"><code><a href="/DynamicProperty">DynamicProperty</a></code></dt>
+<dd><p>An interface for a stored variable that updates an external property of a
+view.</p>
+</dd>
+</dl>
+</section>
+    <section id="initializers">
+        <h2>Initializers</h2>
+
+        <div role="article" class="initializer" id="gesturestate.init(wrappedvalue:)">
+    <h3>
+        <code>init(wrapped​Value:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">wrappedValue</span>: <span class="type">Value</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a view state that's derived from a gesture.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>wrapped​Value</th>
+    <td><code class="type">Value</code></td>
+    <td><p>A wrapped value for the gesture state property.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="gesturestate.init(initialvalue:)">
+    <h3>
+        <code>init(initial​Value:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">initialValue</span>: <span class="type">Value</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a view state that's derived from a gesture with an initial
+value.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>initial​Value</th>
+    <td><code class="type">Value</code></td>
+    <td><p>An initial value for the gesture state property.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="gesturestate.init(wrappedvalue:resettransaction:)">
+    <h3>
+        <code>init(wrapped​Value:​reset​Transaction:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">wrappedValue</span>: <span class="type">Value</span>, <span class="variable">resetTransaction</span>: <a href="/Transaction"><span class="type">Transaction</span></a>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a view state that's derived from a gesture with a wrapped state
+value and a transaction to reset it.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>wrapped​Value</th>
+    <td><code class="type">Value</code></td>
+    <td><p>A wrapped value for the gesture state property.</p>
+</td>
+</tr>
+<tr>
+    <th>reset​Transaction</th>
+    <td><code class="type">Transaction</code></td>
+    <td><p>A transaction that provides metadata for view updates.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="gesturestate.init(initialvalue:resettransaction:)">
+    <h3>
+        <code>init(initial​Value:​reset​Transaction:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">initialValue</span>: <span class="type">Value</span>, <span class="variable">resetTransaction</span>: <a href="/Transaction"><span class="type">Transaction</span></a>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a view state that's derived from a gesture with an initial state
+value and a transaction to reset it.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>initial​Value</th>
+    <td><code class="type">Value</code></td>
+    <td><p>An initial state value.</p>
+</td>
+</tr>
+<tr>
+    <th>reset​Transaction</th>
+    <td><code class="type">Transaction</code></td>
+    <td><p>A transaction that provides metadata for view updates.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="gesturestate.init(wrappedvalue:reset:)">
+    <h3>
+        <code>init(wrapped​Value:​reset:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">wrappedValue</span>: <span class="type">Value</span>, <span class="variable">reset</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Value</span>, <span class="keyword">inout</span> <a href="/Transaction"><span class="type">Transaction</span></a>) -&gt; <span class="type">Void</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a view state that's derived from a gesture with a wrapped state
+value and a closure that provides a transaction to reset it.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>wrapped​Value</th>
+    <td><code class="type">Value</code></td>
+    <td><p>A wrapped value for the gesture state property.</p>
+</td>
+</tr>
+<tr>
+    <th>reset</th>
+    <td><code class="type">@escaping (Value, inout Transaction) -&gt; Void</code></td>
+    <td><p>A closure that provides a <code>Transaction</code>.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+<div role="article" class="initializer" id="gesturestate.init(initialvalue:reset:)">
+    <h3>
+        <code>init(initial​Value:​reset:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">public</span> <span class="keyword">init</span>(<span class="variable">initialValue</span>: <span class="type">Value</span>, <span class="variable">reset</span>: <span class="attribute">@</span><span class="attribute">escaping</span> (<span class="type">Value</span>, <span class="keyword">inout</span> <a href="/Transaction"><span class="type">Transaction</span></a>) -&gt; <span class="type">Void</span>)</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a view state that's derived from a gesture with an initial state
+value and a closure that provides a transaction to reset it.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>initial​Value</th>
+    <td><code class="type">Value</code></td>
+    <td><p>An initial state value.</p>
+</td>
+</tr>
+<tr>
+    <th>reset</th>
+    <td><code class="type">@escaping (Value, inout Transaction) -&gt; Void</code></td>
+    <td><p>A closure that provides a <code>Transaction</code>.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+    <section id="properties">
+        <h2>Properties</h2>
+
+        <div role="article" class="variable" id="gesturestate.wrappedvalue">
+    <h3>
+        <code>wrapped​Value</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">wrappedValue</span>: <span class="type">Value</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>The wrapped value referenced by the gesture state property.</p>
+
+</div>
+</div>
+<div role="article" class="variable" id="gesturestate.projectedvalue">
+    <h3>
+        <code>projected​Value</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">projectedValue</span>: <a href="/GestureState"><span class="type">GestureState</span></a>&lt;<span class="type">Value</span>&gt;</code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A binding to the gesture state property.</p>
+
+</div>
+</div>
+    </section>
+
+
+
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:06-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

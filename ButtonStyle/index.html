@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ButtonStyle</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol><li><a href="#requirements">Requirements</a><ul><li class="function"><a href="#buttonstyle.makebody(configuration:)">make​Body(configuration:​)</a></li></ul></li></ol>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+    <small>Protocol</small>
+    <code class="name">Button​Style</code>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="attribute">@</span><span class="attribute">available</span>(<span class="keyword">iOS</span> <span class="number literal">13.0</span>, <span class="keyword">macOS</span> <span class="number literal">10.15</span>, <span class="keyword">tvOS</span> <span class="number literal">13.0</span>, <span class="keyword">watchOS</span> <span class="number literal">6.0</span>, *) <span class="keyword">public</span> <span class="keyword">protocol</span> <span class="type">ButtonStyle</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>A type that applies standard interaction behavior and a custom appearance to
+all buttons within a view hierarchy.</p>
+
+</div>
+<div class="discussion">
+    <p>To configure the current button style for a view hierarchy, use the
+<code>View/buttonStyle(_:)-7qx1</code> modifier. Specify a style that conforms to
+<code>ButtonStyle</code> when creating a button that uses the standard button
+interaction behavior defined for each platform. To create a button with
+custom interaction behavior, use <code>PrimitiveButtonStyle</code> instead.</p>
+
+</div>
+
+
+
+
+    <section id="requirements">
+        <h2>Requirements</h2>
+
+        <div role="article" class="function" id="buttonstyle.makebody(configuration:)">
+    <h3>
+        <code>make​Body(configuration:​)</code>
+    </h3>
+    <html><body><pre class="highlight"><code><span class="keyword">func</span> <span class="function">makeBody</span>(<span class="variable">configuration</span>: <span class="keyword">Self</span>.<span class="type">Configuration</span>) -&gt; <span class="keyword">Self</span>.<span class="type">Body</span></code></pre></body></html>
+<div class="summary" role="doc-abstract">
+    <p>Creates a view that represents the body of a button.</p>
+
+</div>
+<div class="discussion">
+    <p>The system calls this method for each <code>Button</code> instance in a view
+hierarchy where this style is the current button style.</p>
+
+</div>
+<h4>Parameters</h4>
+
+<table class="parameters">
+  <thead hidden>
+  <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+    <th>configuration</th>
+    <td><code class="type">Self.​Configuration</code></td>
+    <td><p>The properties of the button.</p>
+</td>
+</tr>
+  </tbody>
+</table>
+</div>
+    </section>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:40:03-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>
