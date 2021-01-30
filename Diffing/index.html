@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - Diffing</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">Diffing</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">Diffing</span> = [
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Diffing.Same</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">diff</span>(<span class="variable">$0</span>, <span class="variable">from</span>: <a href="/longPangram"><span class="type">longPangram</span></a>, <span class="variable">to</span>: <a href="/longPangram"><span class="type">longPangram</span></a>) },
+    <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">longPangram</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Diffing.PangramToAlphabet</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">diff</span>(<span class="variable">$0</span>, <span class="variable">from</span>: <a href="/longPangram"><span class="type">longPangram</span></a>, <span class="variable">to</span>: <a href="/alphabets"><span class="type">alphabets</span></a>) },
+    <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>((<span class="variable">longPangram</span>, <span class="variable">alphabets</span>)) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Diffing.Pangrams</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">diff</span>(<span class="variable">$0</span>, <span class="variable">from</span>:<a href="/typingPangram"><span class="type">typingPangram</span></a>, <span class="variable">to</span>: <a href="/longPangram"><span class="type">longPangram</span></a>) },
+    <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>((<span class="variable">longPangram</span>, <span class="variable">typingPangram</span>)) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Diffing.ReversedAlphabets</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">diff</span>(<span class="variable">$0</span>, <span class="variable">from</span>:<a href="/alphabets"><span class="type">alphabets</span></a>, <span class="variable">to</span>: <a href="/alphabetsReversed"><span class="type">alphabetsReversed</span></a>) },
+    <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>((<span class="variable">alphabets</span>, <span class="variable">alphabetsReversed</span>)) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Diffing.ReversedLorem</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">diff</span>(<span class="variable">$0</span>, <span class="variable">from</span>: <span class="type">loremIpsum</span>, <span class="variable">to</span>: <a href="/loremReversed"><span class="type">loremReversed</span></a>) },
+    <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>((<span class="variable">loremIpsum</span>, <span class="variable">loremReversed</span>)) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Diffing.Disparate</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">diff</span>(<span class="variable">$0</span>, <span class="variable">from</span>: <a href="/numbersAndSymbols"><span class="type">numbersAndSymbols</span></a>, <span class="variable">to</span>: <a href="/alphabets"><span class="type">alphabets</span></a>) },
+    <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>((<span class="variable">numbersAndSymbols</span>, <span class="variable">alphabets</span>)) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Diffing.Similar</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">diff</span>(<span class="variable">$0</span>, <span class="variable">from</span>: <span class="type">unabridgedLorem</span>, <span class="variable">to</span>: <span class="type">loremIpsum</span>) },
+    <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>((<span class="variable">unabridgedLorem</span>, <span class="variable">loremIpsum</span>)) }),
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:02-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

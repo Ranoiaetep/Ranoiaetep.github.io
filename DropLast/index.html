@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - DropLast</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">Drop​Last</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">DropLast</span> = [
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastCountableRange</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastCountableRange</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastSequence</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastSequence</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastAnySequence</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastAnySequence</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastAnySeqCntRange</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastAnySeqCntRange</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastAnySeqCRangeIter</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastAnySeqCRangeIter</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastAnyCollection</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastAnyCollection</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastArray</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastArray</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Array</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">array</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastCountableRangeLazy</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastCountableRangeLazy</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastSequenceLazy</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastSequenceLazy</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastAnySequenceLazy</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastAnySequenceLazy</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastAnySeqCntRangeLazy</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastAnySeqCntRangeLazy</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastAnySeqCRangeIterLazy</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastAnySeqCRangeIterLazy</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastAnyCollectionLazy</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastAnyCollectionLazy</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>]),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DropLastArrayLazy</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DropLastArrayLazy</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Array</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">array</span>) }),
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:02-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

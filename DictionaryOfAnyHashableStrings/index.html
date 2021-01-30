@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - DictionaryOfAnyHashableStrings</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">Dictionary​OfAny​Hashable​Strings</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">var</span> <span class="variable">DictionaryOfAnyHashableStrings</span> = [
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DictionaryOfAnyHashableStrings_insert</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DictionaryOfAnyHashableStrings_insert</span>,
+    <span class="variable">tags</span>: [.<span class="variable">abstraction</span>, .<span class="variable">runtime</span>, .<span class="variable">cpubench</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">keys</span> = <span class="variable">buildKeys</span>(<span class="number literal">50</span>) },
+    <span class="variable">legacyFactor</span>: <span class="number literal">14</span>
+  ),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">DictionaryOfAnyHashableStrings_lookup</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_DictionaryOfAnyHashableStrings_lookup</span>,
+    <span class="variable">tags</span>: [.<span class="variable">abstraction</span>, .<span class="variable">runtime</span>, .<span class="variable">cpubench</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">keys</span> = <span class="variable">buildKeys</span>(<span class="number literal">50</span>); <span class="variable">workload</span> = <span class="variable">buildWorkload</span>() },
+    <span class="variable">legacyFactor</span>: <span class="number literal">24</span>
+  ),
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:02-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

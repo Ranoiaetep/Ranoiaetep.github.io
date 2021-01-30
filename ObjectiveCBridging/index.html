@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ObjectiveCBridging</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">Objective​CBridging</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">ObjectiveCBridging</span> = [
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSString</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSString</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">5</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSStringForced</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSStringForced</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">5</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeToNSString</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeToNSString</span>, <span class="variable">tags</span>: <span class="type">t</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSArrayAnyObject</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSArrayAnyObject</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">100</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSArrayAnyObjectForced</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSArrayAnyObjectForced</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">20</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeToNSArray</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeToNSArray</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">50</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSArrayAnyObjectToString</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSArrayAnyObjectToString</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">100</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSArrayAnyObjectToStringForced</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSArrayAnyObjectToStringForced</span>,
+    <span class="variable">tags</span>: <span class="type">ts</span>, <span class="variable">legacyFactor</span>: <span class="number literal">200</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSDictionaryAnyObject</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSDictionaryAnyObject</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">100</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSDictionaryAnyObjectForced</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSDictionaryAnyObjectForced</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">50</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeToNSDictionary</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeToNSDictionary</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">50</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSDictionaryAnyObjectToString</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSDictionaryAnyObjectToString</span>,
+    <span class="variable">tags</span>: <span class="type">ts</span>, <span class="variable">legacyFactor</span>: <span class="number literal">500</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSDictionaryAnyObjectToStringForced</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSDictionaryAnyObjectToStringForced</span>,
+    <span class="variable">tags</span>: <span class="type">ts</span>, <span class="variable">legacyFactor</span>: <span class="number literal">500</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSSetAnyObject</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSSetAnyObject</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">200</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSSetAnyObjectForced</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSSetAnyObjectForced</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">20</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeToNSSet</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeToNSSet</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">50</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSSetAnyObjectToString</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSSetAnyObjectToString</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">500</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSSetAnyObjectToStringForced</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSSetAnyObjectToStringForced</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">500</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeFromNSDateComponents</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeFromNSDateComponents</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_dateComponents</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeASCIIStringFromFile</span><span class="string literal">"</span>,
+                <span class="variable">runFunction</span>: <span class="type">run_ASCIIStringFromFile</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+                <span class="variable">setUpFunction</span>: <span class="type">setup_ASCIIStringFromFile</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">UnicodeStringFromCodable</span><span class="string literal">"</span>,
+                 <span class="variable">runFunction</span>: <span class="type">run_UnicodeStringFromCodable</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+                 <span class="variable">setUpFunction</span>: <span class="type">setup_UnicodeStringFromCodable</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NSArray.bridged.objectAtIndex</span><span class="string literal">"</span>,
+                  <span class="variable">runFunction</span>: <span class="type">run_BridgedNSArrayObjectAtIndex</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+                  <span class="variable">setUpFunction</span>: <span class="type">setup_bridgedArrays</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NSArray.bridged.mutableCopy.objectAtIndex</span><span class="string literal">"</span>,
+                  <span class="variable">runFunction</span>: <span class="type">run_BridgedNSArrayMutableCopyObjectAtIndex</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+                  <span class="variable">setUpFunction</span>: <span class="type">setup_bridgedArrays</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NSArray.nonbridged.objectAtIndex</span><span class="string literal">"</span>,
+                  <span class="variable">runFunction</span>: <span class="type">run_RealNSArrayObjectAtIndex</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+                  <span class="variable">setUpFunction</span>: <span class="type">setup_bridgedArrays</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NSArray.nonbridged.mutableCopy.objectAtIndex</span><span class="string literal">"</span>,
+                  <span class="variable">runFunction</span>: <span class="type">run_RealNSArrayMutableCopyObjectAtIndex</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+                  <span class="variable">setUpFunction</span>: <span class="type">setup_bridgedArrays</span>),
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:02-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

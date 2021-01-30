@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ArrayAppend</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">Array​Append</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">ArrayAppend</span> = [
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppend</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppend</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendArrayOfInt</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendArrayOfInt</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">ones</span>, <span class="variable">tearDownFunction</span>: <span class="type">releaseOnes</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendAscii</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendAscii</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">34</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendAsciiSubstring</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendAsciiSubstring</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">36</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendFromGeneric</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendFromGeneric</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">ones</span>, <span class="variable">tearDownFunction</span>: <span class="type">releaseOnes</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendGenericStructs</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendGenericStructs</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">otherStructs</span> = <span class="variable">Array</span>(<span class="variable">repeating</span>: <span class="type">S</span>(<span class="variable">x</span>: <span class="number literal">3</span>, <span class="variable">y</span>: <span class="number literal">4.2</span>), <span class="variable">count</span>: <span class="number literal">10_000</span>) },
+    <span class="variable">tearDownFunction</span>: {  <span class="variable">otherStructs</span> = <span class="keyword">nil</span> }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendLatin1</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendLatin1</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">34</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendLatin1Substring</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendLatin1Substring</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">36</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendLazyMap</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendLazyMap</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">array</span>) }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendOptionals</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendOptionals</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">otherOptionalOnes</span> = <span class="variable">Array</span>(<span class="variable">repeating</span>: <span class="number literal">1</span>, <span class="variable">count</span>: <span class="number literal">10_000</span>) },
+    <span class="variable">tearDownFunction</span>: {  <span class="variable">otherOptionalOnes</span> = <span class="keyword">nil</span> }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendRepeatCol</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendRepeatCol</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendReserved</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendReserved</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendSequence</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendSequence</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendStrings</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendStrings</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: { <span class="variable">otherStrings</span> = <span class="variable">stride</span>(<span class="variable">from</span>: <span class="number literal">0</span>, <span class="variable">to</span>: <span class="number literal">10_000</span>, <span class="variable">by</span>: <span class="number literal">1</span>).<span class="type">map</span> { <span class="string literal">"</span><span class="string literal"/>\<span class="string literal">(</span><span class="variable">$0</span><span class="string literal">)</span><span class="string literal"/><span class="string literal">"</span> } },
+    <span class="variable">tearDownFunction</span>: {  <span class="variable">otherStrings</span> = <span class="keyword">nil</span> }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendToFromGeneric</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendToFromGeneric</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">ones</span>, <span class="variable">tearDownFunction</span>: <span class="type">releaseOnes</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendToGeneric</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendToGeneric</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">ones</span>, <span class="variable">tearDownFunction</span>: <span class="type">releaseOnes</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendUTF16</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendUTF16</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">34</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayAppendUTF16Substring</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayAppendUTF16Substring</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">36</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayPlusEqualArrayOfInt</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayPlusEqualArrayOfInt</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">ones</span>, <span class="variable">tearDownFunction</span>: <span class="type">releaseOnes</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayPlusEqualFiveElementCollection</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayPlusEqualFiveElementCollection</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">37</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayPlusEqualSingleElementCollection</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayPlusEqualSingleElementCollection</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">47</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayPlusEqualThreeElements</span><span class="string literal">"</span>, <span class="variable">runFunction</span>: <span class="type">run_ArrayPlusEqualThreeElements</span>, <span class="variable">tags</span>: <span class="type">t</span>, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:01-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

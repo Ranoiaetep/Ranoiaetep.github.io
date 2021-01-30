@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - SetTests</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">Set​Tests</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">SetTests</span> = [
+  <span class="comment">// Mnemonic: number after name is percentage of common elements in input sets.</span>
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetInt</span>(<span class="variable">setE</span>, <span class="variable">setAB</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">setAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetInt</span>(<span class="variable">setAB</span>, <span class="variable">setE</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIsSubsetInt0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIsSubsetBox0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIsSubsetInt25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetInt</span>(<span class="variable">setB</span>, <span class="variable">setAB</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setB</span>, <span class="variable">setAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIsSubsetBox25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetBox</span>(<span class="variable">setOB</span>, <span class="variable">setOAB</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOB</span>, <span class="variable">setOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIsSubsetInt50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetInt</span>(<span class="variable">setY</span>, <span class="variable">setXY</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setY</span>, <span class="variable">setXY</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIsSubsetInt100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetInt</span>(<span class="variable">setP</span>, <span class="variable">setQ</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">setQ</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Seq.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetSeqInt</span>(<span class="variable">setE</span>, <span class="variable">arrayAB</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Seq.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayE</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Seq.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayCD</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Seq.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Seq.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetSeqInt</span>(<span class="variable">setB</span>, <span class="variable">arrayBC</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setB</span>, <span class="variable">arrayBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Seq.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetSeqBox</span>(<span class="variable">setOB</span>, <span class="variable">arrayOBC</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOB</span>, <span class="variable">arrayOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Seq.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetSeqInt</span>(<span class="variable">setY</span>, <span class="variable">arrayYZ</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setY</span>, <span class="variable">arrayYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSubset.Seq.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSubsetSeqInt</span>(<span class="variable">setP</span>, <span class="variable">arrayP</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">arrayP</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetInt</span>(<span class="variable">setE</span>, <span class="variable">setAB</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">setAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetInt</span>(<span class="variable">setAB</span>, <span class="variable">setE</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetInt</span>(<span class="variable">setB</span>, <span class="variable">setAB</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setB</span>, <span class="variable">setAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetBox</span>(<span class="variable">setOB</span>, <span class="variable">setOAB</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOB</span>, <span class="variable">setOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetInt</span>(<span class="variable">setY</span>, <span class="variable">setXY</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setY</span>, <span class="variable">setXY</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetInt</span>(<span class="variable">setP</span>, <span class="variable">setQ</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>, .<span class="variable">skip</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">setQ</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Seq.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetSeqInt</span>(<span class="variable">setE</span>, <span class="variable">arrayAB</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>, .<span class="variable">skip</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Seq.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayE</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Seq.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayCD</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Seq.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Seq.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetSeqInt</span>(<span class="variable">setB</span>, <span class="variable">arrayBC</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setB</span>, <span class="variable">arrayBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Seq.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetSeqBox</span>(<span class="variable">setOB</span>, <span class="variable">arrayOBC</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOB</span>, <span class="variable">arrayOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Seq.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetSeqInt</span>(<span class="variable">setY</span>, <span class="variable">arrayYZ</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setY</span>, <span class="variable">arrayYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSubset.Seq.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSubsetSeqInt</span>(<span class="variable">setP</span>, <span class="variable">arrayP</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">arrayP</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSuperset.Seq.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSupersetSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayE</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSuperset.Seq.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSupersetSeqInt</span>(<span class="variable">setE</span>, <span class="variable">arrayAB</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSuperset.Seq.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSupersetSeqInt</span>(<span class="variable">setCD</span>, <span class="variable">arrayAB</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setCD</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSuperset.Seq.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSupersetSeqBox</span>(<span class="variable">setOCD</span>, <span class="variable">arrayOAB</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOCD</span>, <span class="variable">arrayOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSuperset.Seq.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSupersetSeqInt</span>(<span class="variable">setB</span>, <span class="variable">arrayBC</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setB</span>, <span class="variable">arrayBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSuperset.Seq.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSupersetSeqBox</span>(<span class="variable">setOB</span>, <span class="variable">arrayOBC</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOB</span>, <span class="variable">arrayOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSuperset.Seq.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSupersetSeqInt</span>(<span class="variable">setY</span>, <span class="variable">arrayYZ</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setY</span>, <span class="variable">arrayYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isSuperset.Seq.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsSupersetSeqInt</span>(<span class="variable">setP</span>, <span class="variable">arrayP</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">arrayP</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSuperset.Seq.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSupersetSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayE</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSuperset.Seq.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSupersetSeqInt</span>(<span class="variable">setE</span>, <span class="variable">arrayAB</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>, .<span class="variable">skip</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSuperset.Seq.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSupersetSeqInt</span>(<span class="variable">setCD</span>, <span class="variable">arrayAB</span>, <span class="keyword">false</span>, <span class="number literal">500</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setCD</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSuperset.Seq.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSupersetSeqBox</span>(<span class="variable">setOCD</span>, <span class="variable">arrayOAB</span>, <span class="keyword">false</span>, <span class="number literal">500</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOCD</span>, <span class="variable">arrayOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSuperset.Seq.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSupersetSeqInt</span>(<span class="variable">setB</span>, <span class="variable">arrayBC</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setB</span>, <span class="variable">arrayBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSuperset.Seq.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSupersetSeqBox</span>(<span class="variable">setOB</span>, <span class="variable">arrayOBC</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOB</span>, <span class="variable">arrayOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSuperset.Seq.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSupersetSeqInt</span>(<span class="variable">setY</span>, <span class="variable">arrayYZ</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setY</span>, <span class="variable">arrayYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isStrictSuperset.Seq.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsStrictSupersetSeqInt</span>(<span class="variable">setP</span>, <span class="variable">arrayP</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">arrayP</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointInt</span>(<span class="variable">setE</span>, <span class="variable">setAB</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">setAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointInt</span>(<span class="variable">setAB</span>, <span class="variable">setE</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Empty.Box</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointBox</span>(<span class="variable">setOE</span>, <span class="variable">setOAB</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOE</span>, <span class="variable">setOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Box.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOE</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointInt</span>(<span class="variable">setB</span>, <span class="variable">setAB</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setB</span>, <span class="variable">setAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointBox</span>(<span class="variable">setOB</span>, <span class="variable">setOAB</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOB</span>, <span class="variable">setOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointInt</span>(<span class="variable">setY</span>, <span class="variable">setXY</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setY</span>, <span class="variable">setXY</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointInt</span>(<span class="variable">setP</span>, <span class="variable">setQ</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">setQ</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqInt</span>(<span class="variable">setE</span>, <span class="variable">arrayAB</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayE</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Empty.Box</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqBox</span>(<span class="variable">setOE</span>, <span class="variable">arrayOAB</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOE</span>, <span class="variable">arrayOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Box.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOE</span>, <span class="keyword">true</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayCD</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>, <span class="keyword">true</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqInt</span>(<span class="variable">setB</span>, <span class="variable">arrayAB</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setB</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqBox</span>(<span class="variable">setOB</span>, <span class="variable">arrayOAB</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOB</span>, <span class="variable">arrayOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqInt</span>(<span class="variable">setY</span>, <span class="variable">arrayXY</span>, <span class="keyword">false</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setY</span>, <span class="variable">arrayXY</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.isDisjoint.Seq.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIsDisjointSeqInt</span>(<span class="variable">setP</span>, <span class="variable">arrayP</span>, <span class="keyword">false</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">arrayP</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSymmetricDifferenceInt0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSymmetricDifferenceInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="variable">countABCD</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSymmetricDifferenceBox0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSymmetricDifferenceBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="variable">countABCD</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSymmetricDifferenceInt25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSymmetricDifferenceInt</span>(<span class="variable">setAB</span>, <span class="variable">setBC</span>, <span class="variable">countAC</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSymmetricDifferenceBox25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSymmetricDifferenceBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOBC</span>, <span class="variable">countAC</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSymmetricDifferenceInt50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSymmetricDifferenceInt</span>(<span class="variable">setXY</span>, <span class="variable">setYZ</span>, <span class="variable">size</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setXY</span>, <span class="variable">setYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSymmetricDifferenceInt100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSymmetricDifferenceInt</span>(<span class="variable">setP</span>, <span class="variable">setQ</span>, <span class="number literal">0</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">setQ</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIntersectionInt0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="number literal">0</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIntersectionBox0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="number literal">0</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIntersectionInt25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionInt</span>(<span class="variable">setAB</span>, <span class="variable">setBC</span>, <span class="variable">countB</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIntersectionBox25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOBC</span>, <span class="variable">countB</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIntersectionInt50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionInt</span>(<span class="variable">setXY</span>, <span class="variable">setYZ</span>, <span class="variable">half</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setXY</span>, <span class="variable">setYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIntersectionInt100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionInt</span>(<span class="variable">setP</span>, <span class="variable">setQ</span>, <span class="variable">size</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">setQ</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.intersection.Seq.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayCD</span>, <span class="number literal">0</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.intersection.Seq.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>, <span class="number literal">0</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.intersection.Seq.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayBC</span>, <span class="variable">countB</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.intersection.Seq.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOBC</span>, <span class="variable">countB</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.intersection.Seq.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionSeqInt</span>(<span class="variable">setXY</span>, <span class="variable">arrayYZ</span>, <span class="variable">half</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setXY</span>, <span class="variable">arrayYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.intersection.Seq.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionSeqInt</span>(<span class="variable">setP</span>, <span class="variable">arrayP</span>, <span class="variable">size</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">arrayP</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetUnionInt0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetUnionInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="variable">countABCD</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetUnionBox0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetUnionBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="variable">countABCD</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetUnionInt25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetUnionInt</span>(<span class="variable">setAB</span>, <span class="variable">setBC</span>, <span class="variable">countABC</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetUnionBox25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetUnionBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOBC</span>, <span class="variable">countABC</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetUnionInt50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetUnionInt</span>(<span class="variable">setXY</span>, <span class="variable">setYZ</span>, <span class="variable">size</span> + <span class="variable">half</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setXY</span>, <span class="variable">setYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetUnionInt100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetUnionInt</span>(<span class="variable">setP</span>, <span class="variable">setQ</span>, <span class="variable">size</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">setQ</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingInt</span>(<span class="variable">setE</span>, <span class="variable">setAB</span>, <span class="number literal">0</span>, <span class="number literal">1000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">setAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingInt</span>(<span class="variable">setAB</span>, <span class="variable">setE</span>, <span class="variable">countAB</span>, <span class="number literal">1000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Empty.Box</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingBox</span>(<span class="variable">setOE</span>, <span class="variable">setOAB</span>, <span class="number literal">0</span>, <span class="number literal">1000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOE</span>, <span class="variable">setOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Box.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOE</span>, <span class="variable">countAB</span>, <span class="number literal">1000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSubtractingInt0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="variable">countAB</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSubtractingBox0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="variable">countAB</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSubtractingInt25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingInt</span>(<span class="variable">setAB</span>, <span class="variable">setBC</span>, <span class="variable">countA</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSubtractingBox25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOBC</span>, <span class="variable">countA</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSubtractingInt50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingInt</span>(<span class="variable">setXY</span>, <span class="variable">setYZ</span>, <span class="variable">half</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setXY</span>, <span class="variable">setYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetSubtractingInt100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingInt</span>(<span class="variable">setP</span>, <span class="variable">setQ</span>, <span class="number literal">0</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">setQ</span>]) }),
+
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Empty.Int</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqInt</span>(<span class="variable">setE</span>, <span class="variable">arrayAB</span>, <span class="number literal">0</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setE</span>, <span class="variable">arrayAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Int.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayE</span>, <span class="variable">countAB</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Empty.Box</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqBox</span>(<span class="variable">setOE</span>, <span class="variable">arrayOAB</span>, <span class="number literal">0</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOE</span>, <span class="variable">arrayOAB</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Box.Empty</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOE</span>, <span class="variable">countAB</span>, <span class="number literal">5000</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOE</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Int0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayCD</span>, <span class="variable">countAB</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Box0</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>, <span class="variable">countAB</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOCD</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Int25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqInt</span>(<span class="variable">setAB</span>, <span class="variable">arrayBC</span>, <span class="variable">countA</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">arrayBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Box25</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqBox</span>(<span class="variable">setOAB</span>, <span class="variable">arrayOBC</span>, <span class="variable">countA</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">arrayOBC</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Int50</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqInt</span>(<span class="variable">setXY</span>, <span class="variable">arrayYZ</span>, <span class="variable">half</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setXY</span>, <span class="variable">arrayYZ</span>]) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.subtracting.Seq.Int100</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSubtractingSeqInt</span>(<span class="variable">setP</span>, <span class="variable">arrayP</span>, <span class="number literal">0</span>, <span class="number literal">50</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setP</span>, <span class="variable">arrayP</span>]) }),
+
+    <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.filter.Int50.16k</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetFilterInt50</span>(<span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">set</span>(<span class="number literal">16_000</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.filter.Int50.20k</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetFilterInt50</span>(<span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">set</span>(<span class="number literal">20_000</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.filter.Int50.24k</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetFilterInt50</span>(<span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">set</span>(<span class="number literal">24_000</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.filter.Int50.28k</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetFilterInt50</span>(<span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">set</span>(<span class="number literal">28_000</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.filter.Int100.16k</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetFilterInt100</span>(<span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">set</span>(<span class="number literal">16_000</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.filter.Int100.20k</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetFilterInt100</span>(<span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">set</span>(<span class="number literal">20_000</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.filter.Int100.24k</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetFilterInt100</span>(<span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">set</span>(<span class="number literal">24_000</span>) }),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">Set.filter.Int100.28k</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetFilterInt100</span>(<span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">set</span>(<span class="number literal">28_000</span>) }),
+
+  <span class="comment">// Legacy benchmarks, kept for continuity with previous releases.</span>
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetExclusiveOr</span><span class="string literal">"</span>, <span class="comment">// ~"SetSymmetricDifferenceInt0"</span>
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSymmetricDifferenceInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="variable">countABCD</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetExclusiveOr_OfObjects</span><span class="string literal">"</span>, <span class="comment">// ~"SetSymmetricDifferenceBox0"</span>
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetSymmetricDifferenceBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="variable">countABCD</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetIntersect</span><span class="string literal">"</span>, <span class="comment">// ~"SetIntersectionInt0"</span>
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetIntersectionInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="number literal">0</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetUnion</span><span class="string literal">"</span>, <span class="comment">// ~"SetUnionInt0"</span>
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetUnionInt</span>(<span class="variable">setAB</span>, <span class="variable">setCD</span>, <span class="variable">countABCD</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setAB</span>, <span class="variable">setCD</span>]) }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">SetUnion_OfObjects</span><span class="string literal">"</span>, <span class="comment">// ~"SetUnionBox0"</span>
+    <span class="variable">runFunction</span>: { <span class="variable">n</span> <span class="keyword">in</span> <span class="variable">run_SetUnionBox</span>(<span class="variable">setOAB</span>, <span class="variable">setOCD</span>, <span class="variable">countABCD</span>, <span class="number literal">10</span> * <span class="variable">n</span>) },
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Set</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>([<span class="variable">setOAB</span>, <span class="variable">setOCD</span>]) }, <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:01-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

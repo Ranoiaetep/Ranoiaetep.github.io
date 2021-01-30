@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ObjectiveCBridgingStubs</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">Objective​CBridging​Stubs</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">ObjectiveCBridgingStubs</span> = [
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubDataAppend</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubDataAppend</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">20</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubDateAccess</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubDateAccess</span>, <span class="variable">tags</span>: <span class="type">t</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubDateMutation</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubDateMutation</span>, <span class="variable">tags</span>: <span class="type">t</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubFromArrayOfNSString2</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubFromArrayOfNSString</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubFromNSDate</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubFromNSDate</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubFromNSString</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubFromNSString</span>, <span class="variable">tags</span>: <span class="type">t</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubToArrayOfNSString2</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubToArrayOfNSString</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">20</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubToNSDate2</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubToNSDate</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubToNSString</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubToNSString</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStubURLAppendPath2</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStubURLAppendPath</span>, <span class="variable">tags</span>: <span class="type">t</span>,
+    <span class="variable">legacyFactor</span>: <span class="number literal">10</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringIsEqual</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringIsEqual</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringIsEqual2</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringIsEqual2</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringIsEqualAllSwift</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringIsEqualAllSwift</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringCompare</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringCompare</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringCompare2</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringCompare2</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringGetASCIIContents</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringGetASCIIContents</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringGetUTF8Contents</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringGetUTF8Contents</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringRangeOfString</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringRangeOfString</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringHash</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringHash</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringUTF8String</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringUTF8String</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+  <span class="variable">BenchmarkInfo</span>(<span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ObjectiveCBridgeStringCStringUsingEncoding</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ObjectiveCBridgeStringCStringUsingEncoding</span>, <span class="variable">tags</span>: <span class="type">ts</span>,
+    <span class="variable">setUpFunction</span>: <span class="type">setup_StringBridgeBenchmark</span>),
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:01-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

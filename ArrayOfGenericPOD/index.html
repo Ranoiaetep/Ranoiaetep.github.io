@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - ArrayOfGenericPOD</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">Array​OfGeneric​POD</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">ArrayOfGenericPOD</span> = [
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="comment">// Renamed benchmark to "2" when IUO test was removed, which</span>
+    <span class="comment">// effectively changed what we're benchmarking here.</span>
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayOfGenericPOD2</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_ArrayOfGenericPOD</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Array</span>]),
+
+  <span class="comment">// Initialize an array of generic POD from a slice.</span>
+  <span class="comment">// This takes a unique path through stdlib customization points.</span>
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">ArrayInitFromSlice</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_initFromSlice</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">api</span>, .<span class="variable">Array</span>], <span class="variable">setUpFunction</span>: <span class="type">createArrayOfPOD</span>)
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:03-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>

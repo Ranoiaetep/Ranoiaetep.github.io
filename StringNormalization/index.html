@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swift - StringNormalization</title>
+    <link rel="stylesheet" type="text/css" href="/all.css" media="all" />
+</head>
+<body>
+    <header>
+        <a href="/">
+            <strong>
+                Swift
+            </strong>
+            <span>Documentation</span>
+        </a>
+        <sup>Beta</sup>
+    </header>
+
+    <!--
+    <form class="search">
+        <input type="search" placeholder="Search" />
+    </form>
+    -->
+
+    <nav>
+        <div class="wrapper">
+            <h2>On This Page</h2>
+            <ol/>
+        </div>
+    </nav>
+
+    <main>
+        <article>
+            <h1>
+<small>Variable</small>
+<span class="name">String​Normalization</span>
+</h1>
+
+<html><body><pre class="highlight"><code><span class="keyword">let</span> <span class="variable">StringNormalization</span>: [<a href="/BenchmarkInfo"><span class="type">BenchmarkInfo</span></a>] = [
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NormalizedIterator_ascii</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_StringNormalization_ascii</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">String</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">Workload_ascii</span>) }
+  ),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NormalizedIterator_latin1</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_StringNormalization_latin1</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">String</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">Workload_latin1</span>) },
+		<span class="variable">legacyFactor</span>: <span class="number literal">2</span>
+  ),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NormalizedIterator_fastPrenormal</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_StringNormalization_fastPrenormal</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">String</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">Workload_fastPrenormal</span>) },
+		<span class="variable">legacyFactor</span>: <span class="number literal">10</span>
+  ),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NormalizedIterator_slowerPrenormal</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_StringNormalization_slowerPrenormal</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">String</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">Workload_slowerPrenormal</span>) },
+		<span class="variable">legacyFactor</span>: <span class="number literal">10</span>
+  ),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NormalizedIterator_nonBMPSlowestPrenormal</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_StringNormalization_nonBMPSlowestPrenormal</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">String</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">Workload_nonBMPSlowestPrenormal</span>) },
+		<span class="variable">legacyFactor</span>: <span class="number literal">10</span>
+  ),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NormalizedIterator_emoji</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_StringNormalization_emoji</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">String</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">Workload_emoji</span>) },
+		<span class="variable">legacyFactor</span>: <span class="number literal">4</span>
+  ),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NormalizedIterator_abnormal</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_StringNormalization_abnormal</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">String</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">Workload_abnormal</span>) },
+		<span class="variable">legacyFactor</span>: <span class="number literal">20</span>
+  ),
+  <span class="variable">BenchmarkInfo</span>(
+    <span class="variable">name</span>: <span class="string literal">"</span><span class="string literal">NormalizedIterator_zalgo</span><span class="string literal">"</span>,
+    <span class="variable">runFunction</span>: <span class="type">run_StringNormalization_zalgo</span>,
+    <span class="variable">tags</span>: [.<span class="variable">validation</span>, .<span class="variable">String</span>],
+    <span class="variable">setUpFunction</span>: { <span class="variable">blackHole</span>(<span class="variable">Workload_zalgo</span>) },
+		<span class="variable">legacyFactor</span>: <span class="number literal">25</span>
+  ),
+]</code></pre></body></html>
+        </article>
+    </main>
+
+    <footer>
+        <p>
+    Generated on <time datetime="2021-01-30T03:26:01-0800">January 30, 2021</time> using <a href="https://github.com/SwiftDocOrg/swift-doc">swift-doc</a> <span class="version">1.0.0-beta.5</span>.
+</p>
+    </footer>
+</body>
+</html>
